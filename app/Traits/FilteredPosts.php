@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Traits;
 
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use App\Post;
+use App\Models\Post;
+use App\Models\User;
 
 trait FilteredPosts
 {

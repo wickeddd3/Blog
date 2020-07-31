@@ -1,13 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Profile extends Model
+class Profile extends BaseModel
 {
-    protected $guarded = [];
-
     public $timestamps = false;
 
     public function user()

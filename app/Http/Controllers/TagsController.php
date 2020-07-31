@@ -2,100 +2,52 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
-use App\Tag;
+use App\Http\Requests\TagStoreRequest;
+use App\Http\Requests\TagUpdateRequest;
+use App\Repositories\TagRepositoryInterface;
 
 class TagsController extends Controller
 {
-    public function __construct()
+    protected $tagRepository;
+
+    public function __construct(TagRepositoryInterface $tagRepository)
     {
         $this->middleware('auth');
+
+        $this->tagRepository = $tagRepository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('dashboard.tag.index')->with('tags', Tag::latest()->simplePaginate(10));
+        $tags = $this->tagRepository->all();
+
+        return view('dashboard.tag.index')->with('tags', $tags);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(TagStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|max:255|unique:tags,name'
-        ]);
-
-        $request->filled('slug') ? $slug = $request->slug : $slug = Str::slug($request->name, '-');
-
-        Tag::create([
-            'name' => $request->name,
-            'slug' => $slug,
-            'description' => $request->description,
-            'created_at' => Carbon::now()
-        ]);
+        $this->tagRepository->create($request);
 
         return redirect()->back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        return view('dashboard.tag.edit')->with('tag', Tag::findOrFail($id));
+        $tag = $this->tagRepository->find($id);
+
+        return view('dashboard.tag.edit')->with('tag', $tag);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(TagUpdateRequest $request, $id)
     {
-        //return dd($request->all());
-        $request->validate([
-            'name' => 'required|max:255|unique:tags,name,'.$id,
-            //'slug' => 'required|max:255|unique:tags,slug,'.$id,
-        ]);
-
-        $request->filled('slug') ? $slug = $request->slug : $slug = Str::slug($request->name, '-');
-
-        $tag = Tag::findOrFail($id);
-
-        $tag->name = $request->name;
-        $tag->slug = $slug;
-        $tag->description = $request->description;
-        $tag->updated_at = Carbon::now();
-        $tag->save();
+        $this->tagRepository->update($request, $id);
 
         return redirect()->route('tags');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        Tag::findOrFail($id)->delete();
+        $this->tagRepository->delete($id);
 
         return redirect()->back();
     }

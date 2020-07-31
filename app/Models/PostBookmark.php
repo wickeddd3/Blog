@@ -1,13 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PostBookmark extends Model
+class PostBookmark extends BaseModel
 {
-    protected $guarded = [];
-
     public function user()
     {
         return $this->belongsTo(User::class);

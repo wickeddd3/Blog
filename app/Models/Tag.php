@@ -1,13 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Tag extends Model
+class Tag extends BaseModel
 {
-    protected $guarded = [];
-
     public $timestamps = false;
 
     public function getRouteKeyName()

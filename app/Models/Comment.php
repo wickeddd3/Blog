@@ -1,13 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Comment extends Model
+class Comment extends BaseModel
 {
-    protected $guarded = [];
-
     public $timestamps = false;
 
     protected $with = ['owner'];

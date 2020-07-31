@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="text-center" v-if="shouldLoadMore">
-        <button class="btn btn-sm btn-primary" @click.prevent="loadMore">
+        <button class="btn btn-sm btn-primary" @click.prevent="loadMore" :disabled="loading">
             <b-spinner small v-if="loading"></b-spinner> Load More
         </button>
     </div>

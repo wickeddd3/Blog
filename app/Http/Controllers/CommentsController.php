@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use App\Category;
-use App\Post;
-use App\Comment;
+use App\Http\Requests\CommentStoreRequest;
+use App\Http\Requests\CommentUpdateRequest;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\Comment;
+use App\Repositories\CommentRepositoryInterface;
 
 class CommentsController extends Controller
 {
-    public function __construct()
+    protected $commentRepository;
+
+    public function __construct(CommentRepositoryInterface $commentRepository)
     {
         $this->middleware('auth')->except('show');
+
+        $this->commentRepository = $commentRepository;
     }
 
     public function index()
@@ -21,17 +25,9 @@ class CommentsController extends Controller
         return view('dashboard.comment.index');
     }
 
-    public function store(Category $category, Post $post, Request $request)
+    public function store(Category $category, Post $post, CommentStoreRequest $request)
     {
-        $request->validate([
-            'message' => 'required'
-        ]);
-
-        $comment = $post->addComment([
-            'message' => $request->message,
-            'user_id' => Auth::id(),
-            'created_at' => Carbon::now()
-        ]);
+        $comment = $this->commentRepository->create($request, $post);
 
         if(request()->expectsJson()) {
             return $comment->load('owner.profile');
@@ -41,24 +37,17 @@ class CommentsController extends Controller
 
     public function show(Category $category, Post $post)
     {
-        return $post->comments()->paginate(8);
+        return $this->commentRepository->show($post);
     }
 
-    public function update(Request $request, Comment $comment)
+    public function update(CommentUpdateRequest $request, Comment $comment)
     {
-        $this->validate($request, [
-            'message' => 'required',
-        ]);
-
-        $comment->update([
-            'message' => $request->message,
-            'updated_at' => Carbon::now()
-        ]);
+        $this->commentRepository->update($request, $comment);
     }
 
     public function destroy(Comment $comment)
     {
-        $comment->delete();
+        $this->commentRepository->delete($comment);
 
         if(request()->expectsJson()) {
             return response(['status' => 'comment deleted']);

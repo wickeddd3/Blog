@@ -27,14 +27,14 @@ Route::post('/posts/{category}/{post}/likes', 'LikesController@like');
 Route::delete('/posts/{category}/{post}/likes', 'LikesController@unlike');
 
 // Profile
-Route::get('/profile/{username}/{filter}', 'ProfilesController@filter');
-Route::get('/profile/{username}', 'ProfilesController@profile');
-Route::get('/profile/{username}/@/edit', 'ProfilesController@edit');
-Route::put('/profile/{username}/@/update', 'ProfilesController@store');
-Route::post('/profile/{username}/followers', 'UserFollowersController@index');
-Route::delete('/profile/{username}/followers', 'UserFollowersController@destroy');
-Route::get('/profile/{username}/all/notifications', 'ProfilesController@notifications');
-Route::post('/profile/{username}/all/notifications/read', 'ProfilesController@markAsRead');
+Route::get('/profile/{user}/{filter}', 'ProfilesController@filter');
+Route::get('/profile/{user}', 'ProfilesController@profile');
+Route::get('/profile/{user}/@/edit', 'ProfilesController@edit');
+Route::put('/profile/{user}/@/update', 'ProfilesController@update');
+Route::post('/profile/{user}/followers', 'UserFollowersController@index');
+Route::delete('/profile/{user}/followers', 'UserFollowersController@destroy');
+Route::get('/profile/{user}/all/notifications', 'ProfilesController@notifications');
+Route::post('/profile/{user}/all/notifications/read', 'ProfilesController@markAsRead');
 
 // Auth Routes
 Auth::routes();
@@ -76,5 +76,5 @@ Route::prefix('dashboard')->middleware('can:dashboard-access')->group(function (
     Route::put('/user/{id}/update', 'UsersController@update')->name('user.update');
     // Profiles Routes
     Route::get('/profile', 'ProfilesController@index')->name('profile');
-    Route::post('/profile', 'ProfilesController@store')->name('profile.store');
+    Route::post('/profile', 'ProfilesController@update')->name('profile.store');
 });

@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Category;
-use App\Tag;
-use App\Post;
-use App\User;
+use App\Models\Category;
+use App\Models\Tag;
+use App\Models\Post;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {

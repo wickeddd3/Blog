@@ -4,12 +4,12 @@
 <div class="container-fluid">
     <h5 style="display: inline-block;">Posts</h5> <a href="{{ route('post.add') }}" class="btn btn-primary btn-sm">Add New</a>
     <p class="pt-2">
-        <a href="/dashboard/posts/all"><b>All</b> ({{ App\Post::published()->count() }})</a>
-        @if(App\Post::drafted()->count() > 0)
-        | <a href="/dashboard/posts/drafted">Draft ({{ App\Post::drafted()->count() }})</a>
+        <a href="/dashboard/posts/all"><b>All</b> ({{ App\Models\Post::published()->count() }})</a>
+        @if(App\Models\Post::drafted()->count() > 0)
+        | <a href="/dashboard/posts/drafted">Draft ({{ App\Models\Post::drafted()->count() }})</a>
         @endif
-        @if(App\Post::onlyTrashed()->count() > 0)
-        | <a href="/dashboard/posts/trashed">Trash ({{ App\Post::onlyTrashed()->count() }})</a>
+        @if(App\Models\Post::onlyTrashed()->count() > 0)
+        | <a href="/dashboard/posts/trashed">Trash ({{ App\Models\Post::onlyTrashed()->count() }})</a>
         @endif
     </p>
 </div>

@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 
 class UserFollowersController extends Controller
 {
-    public function index(User $username)
+    public function index(User $user)
     {
-        $username->follow(auth()->id());
+        $user->follow(auth()->id());
     }
 
-    public function destroy(User $username)
+    public function destroy(User $user)
     {
-        $username->unfollow(auth()->id());
+        $user->unfollow(auth()->id());
     }
 
 }

@@ -9,39 +9,63 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
-                  <label for="username" class="col-sm-4 col-form-label">Username</label>
-                  <div class="col-sm-8">
-                    <input type="text" name="username" value="{{ $user->username }}" class="form-control" id="username">
-                  </div>
+                    <label for="username" class="col-sm-4 col-form-label">Username</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                name="username" value="{{ $user->username }}" id="username" autofocus>
+                        @error('username')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                        @enderror
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label for="email" class="col-sm-4 col-form-label">Email</label>
                     <div class="col-sm-8">
-                      <input type="email" name="email" value="{{ $user->email }}" class="form-control" id="email">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                name="email" value="{{ $user->email }}" id="email">
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="first_name" class="col-sm-4 col-form-label">First Name</label>
                     <div class="col-sm-8">
-                      <input type="text" name="first_name" value="{{ $user->first_name }}" class="form-control" id="first_name">
+                        <input type="text" class="form-control @error('first_name') is-invalid @enderror"
+                                name="first_name" value="{{ $user->first_name }}" id="first_name">
+                        @error('first_name')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="last_name" class="col-sm-4 col-form-label">Last Name</label>
                     <div class="col-sm-8">
-                      <input type="text" name="last_name" value="{{ $user->last_name }}" class="form-control" id="last_name">
+                        <input type="text" class="form-control @error('last_name') is-invalid @enderror"
+                                name="last_name" value="{{ $user->last_name }}" id="last_name">
+                        @error('last_name')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="role" class="col-sm-4 col-form-label">Role</label>
                     <div class="col-sm-8">
-                      <select name="role" id="role" class="form-control">
-                        <option value="administrator" @if($user->role === "administrator") selected @endif> Administrator </option>
-                        <option value="subscriber" @if($user->role === "subscriber") selected @endif> Subscriber </option>
-                        <option value="editor" @if($user->role === "editor") selected @endif> Editor </option>
-                        <option value="author" @if($user->role === "author") selected @endif> Author </option>
-                        <option value="contributor" @if($user->role === "contributor") selected @endif> Contributor </option>
-                      </select>
+                        <select name="role" id="role" class="form-control">
+                            <option value="administrator" @if($user->role === "administrator") selected @endif> Administrator </option>
+                            <option value="subscriber" @if($user->role === "subscriber") selected @endif> Subscriber </option>
+                            <option value="editor" @if($user->role === "editor") selected @endif> Editor </option>
+                            <option value="author" @if($user->role === "author") selected @endif> Author </option>
+                            <option value="contributor" @if($user->role === "contributor") selected @endif> Contributor </option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">

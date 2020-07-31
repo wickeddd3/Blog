@@ -1,14 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Notifications\UserCreatedPost;
 
-class UserFollower extends Model
+class UserFollower extends BaseModel
 {
-    protected $guarded = [];
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

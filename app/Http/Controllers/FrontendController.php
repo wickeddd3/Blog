@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Filters\PostFilters;
 use Carbon\Carbon;
-use App\Tag;
-use App\Category;
-use App\Post;
+use App\Models\Tag;
+use App\Models\Category;
+use App\Models\Post;
 
 class FrontendController extends Controller
 {

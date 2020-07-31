@@ -1,17 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use App\Likable;
+use App\Traits\Likable;
+use App\Traits\FilteredPosts;
 
-class Post extends Model
+class Post extends BaseModel
 {
     use SoftDeletes, Likable, FilteredPosts;
-
-    protected $guarded = [];
 
     public $timestamps = false;
 

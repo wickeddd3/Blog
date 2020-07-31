@@ -2,117 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use App\Post;
-use App\Category;
-use App\Tag;
-use App\User;
+use App\Models\User;
+use App\Repositories\ProfileRepositoryInterface;
 
 class ProfilesController extends Controller
 {
-    public function __construct()
+    protected $profileRepository;
+
+    public function __construct(ProfileRepositoryInterface $profileRepository)
     {
         $this->middleware('auth');
+
+        $this->profileRepository = $profileRepository;
     }
 
     public function index()
     {
-        return view('dashboard.profile.index')->with('profile', Auth::user());
+        $authUser = $this->profileRepository->authUser();
+
+        return view('dashboard.profile.index')->with('profile', $authUser);
     }
 
-    public function store(Request $request)
+    public function update(ProfileUpdateRequest $request)
     {
-        $user = Auth::user();
-
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'role' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,'.$user->id,
-            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
-        ]);
-
-        if($request->hasFile('avatar'))
-        {
-            $avatar = $request->avatar;
-            $avatar_new_name = time().$avatar->getClientOriginalName();
-            $avatar->move('storage/uploads/avatars', $avatar_new_name);
-            if($user->profile->avatar != 'uploads/avatars/default_avatar.png'){
-                $user->deleteAvatar();
-            }
-            $avatar = 'uploads/avatars/'.$avatar_new_name;
-            $user->profile->avatar = $avatar;
-            $user->push();
-        }
-
-        if($request->has('bio'))
-        {
-            $user->profile->bio = $request->bio;
-            $user->push();
-        }
-
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->role = $request->role;
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->updated_at = Carbon::now();
-
-        $user->save();
+        $this->profileRepository->update($request);
 
         return redirect()->back();
     }
 
-    public function filter($username, $filter)
+    public function filter($user, $filter)
     {
-        $posts = Post::latest();
-        $header = "Posts";
-
-        switch($filter)
-        {
-            case "posts":
-                $posts = Post::userPosts($username);
-                $header = strtoupper($username)." Posts";
-            break;
-            case "likes":
-                $posts = Post::likedPosts();
-                $header = "Liked Posts";
-            break;
-            case "bookmarks":
-                $posts = Post::bookmarkedPosts();
-                $header = "Bookmarked Posts";
-            break;
-        }
-
-        $posts = $posts->paginate(8);
+        $profile = $this->profileRepository->filter($user, $filter);
 
         if(request()->wantsJson()) {
             return response()->json([
-                'posts' => $posts,
-                'header' => $header
+                'posts' => $profile['posts'],
+                'header' => $profile['header']
             ]);
         }
 
-        return view('profile.post.posts')->with('header', $header);
+        return view('profile.post.posts')->with('header', $profile['header']);
     }
 
-    public function profile($username)
+    public function profile(User $user)
     {
-        $user = User::where('username', $username)->firstOrFail();
-
         return view('profile.index')->with('profile', $user);
     }
 
-    public function edit($username)
+    public function edit(User $user)
     {
-        return view('profile.edit')->with('profile', Auth::user());
+        return view('profile.edit')->with('profile', $user);
     }
 
-    public function notifications($username)
+    public function notifications($user)
     {
-        $notifications = auth()->user()->notifications;
+        $notifications = $this->profileRepository->notifications();
 
         if(request()->wantsJson()) {
             return response()->json([
@@ -123,9 +69,9 @@ class ProfilesController extends Controller
         return view('profile.notification.index');
     }
 
-    public function markAsRead($username, Request $request)
+    public function markAsRead($user, Request $request)
     {
-        return auth()->user()->unreadNotifications->where('id', $request->notificationId)->markAsRead();
+        return $this->profileRepository->markAsRead($user, $request);
     }
 
 }

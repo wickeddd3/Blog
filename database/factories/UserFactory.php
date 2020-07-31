@@ -2,8 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
-use App\Profile;
+use App\Models\User;
+use App\Models\Profile;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +24,7 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'first_name' => $faker->firstName($gender = 'male'|'female'),
         'last_name' => $faker->lastName,
-        'role' => $faker->randomElement($array = array('administrator', 'subscriber', 'writer', 'editor')),
+        'role' => $faker->randomElement($array = array('administrator', 'subscriber', 'author', 'editor', 'contributor')),
         'username' => $faker->unique()->userName,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),

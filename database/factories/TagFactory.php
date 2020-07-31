@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Tag;
+use App\Models\Tag;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
