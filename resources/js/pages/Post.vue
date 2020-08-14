@@ -8,6 +8,7 @@ export default {
     props:[
         'initialCommentsCount',
         'initialLikesCount',
+        'initialViewsCount',
         'createdAt'
     ],
 
@@ -21,6 +22,7 @@ export default {
         return {
             commentsCount: this.initialCommentsCount,
             likesCount: this.initialLikesCount,
+            viewsCount: this.initialViewsCount,
             created_at: this.createdAt
         }
     },

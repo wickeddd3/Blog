@@ -9,16 +9,34 @@ use App\Repositories\TagRepositoryInterface;
 
 class TagRepository implements TagRepositoryInterface
 {
-    public function all()
+    protected $model;
+
+    public function __construct(Tag $tag)
     {
-        return Tag::latest()->simplePaginate(10);
+        $this->model = $tag;
+    }
+
+    public function all($search)
+    {
+        $tags = $this->model->latest();
+        $tags_count = $tags->count();
+        $tags = $tags->paginate(10);
+
+        if($search) {
+            $tags = $this->model->where('name', 'LIKE', "%{$search}%");
+            $tags_count = $tags->count();
+            $tags = $tags->paginate(10);
+            $tags->appends(['search' => $search]);
+        }
+
+        return ['tags' => $tags, 'tags_count' => $tags_count];
     }
 
     public function create($request)
     {
         $request->filled('slug') ? $slug = $request->slug : $slug = Str::slug($request->name, '-');
 
-        Tag::create([
+        $this->model->create([
             'name' => $request->name,
             'slug' => $slug,
             'description' => $request->description,
@@ -28,7 +46,7 @@ class TagRepository implements TagRepositoryInterface
 
     public function find($id)
     {
-        return Tag::findOrFail($id);
+        return $this->model->findOrFail($id);
     }
 
     public function update($request, $id)

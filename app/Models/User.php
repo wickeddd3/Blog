@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -49,7 +49,8 @@ class User extends Authenticatable
     protected $appends = [
         'full_name',
         'isFollowedTo',
-        'isAdmin'
+        'isAdmin',
+        'posts_count'
     ];
 
 
@@ -119,6 +120,11 @@ class User extends Authenticatable
     public function getIsAdminAttribute()
     {
         return $this->role === 'administrator';
+    }
+
+    public function getPostsCountAttribute()
+    {
+        return $this->hasMany(Post::class)->count();
     }
 
 }

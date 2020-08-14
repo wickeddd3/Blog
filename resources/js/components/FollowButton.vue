@@ -1,7 +1,8 @@
 <template>
-    <span @click="follow">
-        <i :class="icon"></i>
-    </span>
+    <button class="btn btn-primary btn-block"
+            @click="follow">
+            {{ activeButton ? 'Unfollow' : 'Follow' }}
+    </button>
 </template>
 
 <script>
@@ -12,12 +13,6 @@ export default {
         return {
             activeButton: this.active
         }
-    },
-
-    computed: {
-        icon() {
-            return this.activeButton ? 'fa fa-plus-square fa-fw' : 'far fa-plus-square fa-fw';
-        },
     },
 
     methods: {

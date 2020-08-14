@@ -52,3 +52,10 @@ Vue.use(BootstrapVue)
 
 // Fontawesome
 import '@fortawesome/fontawesome-free/css/all.css'
+
+// AdminLTE
+require('../../vendor/almasaeed2010/adminlte/dist/js/adminlte');
+
+// OverlayScrollbars
+require('overlayscrollbars/js/OverlayScrollbars.min.js');
+

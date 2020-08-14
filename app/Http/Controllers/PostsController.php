@@ -14,16 +14,23 @@ class PostsController extends Controller
 
     public function __construct(PostRepositoryInterface $postRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
 
         $this->postRepository = $postRepository;
     }
 
-    public function index($filter = null)
+    public function index()
     {
-        $posts = $this->postRepository->all($filter);
+        $result = $this->postRepository->all(request()->query('search'));
 
-        return view('dashboard.post.index')->with('posts', $posts)->with('categories', Category::all());
+        if(request()->wantsJson()) {
+            return response()->json([
+                'posts' => $result['posts'],
+                'posts_count' => $result['posts_count']
+            ]);
+        }
+
+        return view('dashboard.post.index');
     }
 
     public function create()
@@ -62,6 +69,13 @@ class PostsController extends Controller
     public function feature($id)
     {
         $this->postRepository->feature($id);
+
+        return redirect()->back();
+    }
+
+    public function unfeature($id)
+    {
+        $this->postRepository->unfeature($id);
 
         return redirect()->back();
     }

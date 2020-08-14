@@ -15,7 +15,7 @@ class CommentsController extends Controller
 
     public function __construct(CommentRepositoryInterface $commentRepository)
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware(['auth', 'verified'])->except('show');
 
         $this->commentRepository = $commentRepository;
     }

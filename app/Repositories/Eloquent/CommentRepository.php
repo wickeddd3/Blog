@@ -21,7 +21,7 @@ class CommentRepository implements CommentRepositoryInterface
 
     public function show($post)
     {
-        return $post->comments()->paginate(8);
+        return $post->comments()->paginate(10);
     }
 
     public function update($request, $comment)

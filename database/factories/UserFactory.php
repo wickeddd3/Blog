@@ -29,11 +29,11 @@ $factory->define(User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => Hash::make('password'),
-        'remember_token' => Str::random(10),
+        // 'remember_token' => Str::random(10),
         'created_at' => Carbon::now()
     ];
 });
 
-$factory->afterCreating(App\User::class, function ($user, $faker) {
+$factory->afterCreating(User::class, function ($user, $faker) {
     Profile::create(['user_id' => $user->id, 'created_at' => Carbon::now() ]);
 });

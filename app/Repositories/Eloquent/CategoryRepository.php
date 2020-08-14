@@ -9,23 +9,34 @@ use Illuminate\Support\Str;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
-    protected $category;
+    protected $model;
 
     public function __construct(Category $category)
     {
-        $this->category = $category;
+        $this->model = $category;
     }
 
-    public function all()
+    public function all($search)
     {
-        return Category::latest()->simplePaginate(10);
+        $categories =  $this->model->latest();
+        $categories_count = $categories->count();
+        $categories = $categories->paginate(10);
+
+        if($search) {
+            $categories = $this->model->where('name', 'LIKE', "%{$search}%");
+            $categories_count = $categories->count();
+            $categories = $categories->paginate(10);
+            $categories->appends(['search' => $search]);
+        }
+
+        return ['categories' => $categories, 'categories_count' => $categories_count];
     }
 
     public function create($request)
     {
         $request->filled('slug') ? $slug = $request->slug : $slug = Str::slug($request->name, '-');
 
-        Category::create([
+        $this->model->create([
             'name' => $request->name,
             'slug' => $slug,
             'description' => $request->description,
@@ -35,14 +46,14 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function find($id)
     {
-        return Category::findOrFail($id);
+        return $this->model->findOrFail($id);
     }
 
     public function update($request, $id)
     {
         $request->filled('slug') ? $slug = $request->slug : $slug = Str::slug($request->name, '-');
 
-        $category = Category::findOrFail($id);
+        $category = $this->find($id);
 
         $category->name = $request->name;
         $category->slug = $slug;
@@ -53,7 +64,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function delete($id)
     {
-        Category::findOrFail($id)->delete();
+        $this->find($id)->delete();
     }
 
 }

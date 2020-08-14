@@ -15,14 +15,14 @@ class BlogsController extends Controller
 
     public function __construct(BlogRepositoryInterface $blogRepository)
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware(['auth', 'verified'])->except(['index', 'show']);
 
         $this->blogRepository = $blogRepository;
     }
 
     public function index($category = null)
     {
-        $result = $this->blogRepository->all($category);
+        $result = $this->blogRepository->all($category, request()->query('archive'));
 
         if(request()->wantsJson()) {
             return response()->json([
@@ -43,6 +43,8 @@ class BlogsController extends Controller
 
     public function show(Category $category, Post $post)
     {
+        $this->blogRepository->view($post);
+
         return view('blogs.show')->with('post', $post);
     }
 

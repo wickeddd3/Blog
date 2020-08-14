@@ -9,9 +9,27 @@ use App\Repositories\UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function all()
+    protected $model;
+
+    public function __construct(User $user)
     {
-        return User::latest()->simplePaginate(10);
+        $this->model = $user;
+    }
+
+    public function all($search)
+    {
+        $users = $this->model->latest();
+        $users_count = $users->count();
+        $users = $users->paginate(10);
+
+        if($search) {
+            $users = $this->model->where('first_name', 'LIKE', "%{$search}%")->orWhere('last_name', 'LIKE', "%{$search}%");
+            $users_count = $users->count();
+            $users = $users->paginate(10);
+            $users->appends(['search' => $search]);
+        }
+
+        return ['users' => $users, 'users_count' => $users_count];
     }
 
     public function create($request)
@@ -26,7 +44,7 @@ class UserRepository implements UserRepositoryInterface
             $avatar = 'uploads/avatars/'.$avatar_new_name;
         }
 
-        $user = User::create([
+        $user = $this->model->create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'username' => $request->username,
@@ -45,7 +63,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function find($id)
     {
-        return User::findOrFail($id);
+        return $this->model->findOrFail($id);
     }
 
     public function update($request, $id)

@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->text('content');
             $table->unsignedBigInteger('comments_count')->default(0);
+            $table->unsignedBigInteger('views_count')->default(0);
             $table->string('featured')->default('uploads/posts/default_featured.png');
             $table->dateTime('published_at')->nullable();
             $table->dateTime('featured_at')->nullable();

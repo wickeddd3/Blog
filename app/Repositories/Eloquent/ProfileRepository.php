@@ -9,6 +9,13 @@ use App\Repositories\ProfileRepositoryInterface;
 
 class ProfileRepository implements ProfileRepositoryInterface
 {
+    protected $post;
+
+    public function __construct(Post $post)
+    {
+        $this->post = $post;
+    }
+
     public function authUser()
     {
         return Auth::user();
@@ -49,21 +56,21 @@ class ProfileRepository implements ProfileRepositoryInterface
 
     public function filter($user, $filter)
     {
-        $posts = Post::latest();
+        $posts = $this->post->latest();
         $header = "Posts";
 
         switch($filter)
         {
             case "posts":
-                $posts = Post::userPosts($user);
+                $posts = $this->post->userPosts($user);
                 $header = strtoupper($user)." Posts";
             break;
             case "likes":
-                $posts = Post::likedPosts();
+                $posts = $this->post->likedPosts();
                 $header = "Liked Posts";
             break;
             case "bookmarks":
-                $posts = Post::bookmarkedPosts();
+                $posts = $this->post->bookmarkedPosts();
                 $header = "Bookmarked Posts";
             break;
         }

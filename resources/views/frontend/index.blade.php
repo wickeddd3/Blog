@@ -141,7 +141,7 @@
                 <div class="pb-4">
                     <ol class="list-unstyled mb-0">
                         @forelse($archives as $key => $value)
-                            <li><a class="text-dark" href="/">{{ $key }}</a></li>
+                            <li><a class="text-dark" href="/posts/archived?archive={{ $key }}">{{ $key }}</a></li>
                         @empty
                             <li>No archives found</li>
                         @endif

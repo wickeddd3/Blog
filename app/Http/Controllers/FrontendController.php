@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Filters\PostFilters;
-use Carbon\Carbon;
-use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Post;
 
@@ -15,11 +11,11 @@ class FrontendController extends Controller
     {
         return view('frontend.index')
                 ->with('categories', Category::all())
-                ->with('featuredOne', Post::published()->featuredPosts()->first())
-                ->with('featuredTwo', Post::published()->featuredPosts()->skip(1)->take(1)->first())
-                ->with('editorsChoice', Post::published()->featuredPosts()->skip(2)->take(3)->get())
-                ->with('popular', Post::published()->popularPosts()->take(8)->get())
-                ->with('archives', Post::archivedPosts());
+                ->with('featuredOne', Post::featuredPosts()->first())
+                ->with('featuredTwo', Post::featuredPosts()->skip(1)->take(1)->first())
+                ->with('editorsChoice', Post::featuredPosts()->skip(2)->take(3)->get())
+                ->with('popular', Post::popularPosts()->take(8)->get())
+                ->with('archives', Post::archive());
     }
 
 }

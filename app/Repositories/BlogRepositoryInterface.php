@@ -4,7 +4,9 @@ namespace App\Repositories;
 
 interface BlogRepositoryInterface
 {
-    public function all(string $category);
+    public function all(string $category, string $archive);
+
+    public function view(object $post);
 
     public function create(object $request);
 

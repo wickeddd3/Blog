@@ -12,17 +12,14 @@
             <a class="mr-3 text-dark" href="/search">
                 <i class="fa fa-search fa-lg"></i>
             </a>
-            <a class="mr-3 text-dark" href="/profile/{{ auth()->user()->username }}/bookmarks">
-                <i class="fa fa-bookmark fa-lg"></i>
-            </a>
             <a class="mr-3 text-dark" href="/profile/{{ Auth::user()->username }}/post/create">
-                <i class="fa fa-plus-circle fa-lg"></i>
+                <i class="far fa-plus-square fa-lg"></i>
             </a>
             <a class="mr-3 text-dark" href="/profile/{{ Auth::user()->username }}/all/notifications">
-                <i class="fa fa-bell fa-lg"></i>
+                <i class="far fa-bell fa-lg"></i>
             </a>
             <a class="mr-3 text-dark" href="/profile/{{ Auth::user()->username }}">
-                <i class="fa fa-user-circle fa-lg"></i>
+                <i class="far fa-user-circle fa-lg"></i>
             </a>
             @if(Auth::user()->isAdmin)
             <a class="text-dark" href="{{ route('dashboard') }}">

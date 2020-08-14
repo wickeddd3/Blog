@@ -10,23 +10,29 @@ use App\Repositories\PostRepositoryInterface;
 
 class PostRepository implements PostRepositoryInterface
 {
-    public function all($filter)
-    {
-        $posts = Post::published();
+    protected $model;
 
-        switch($filter)
-        {
-            case "drafted":
-                $posts = Post::drafted();
-            break;
-            case "trashed":
-                $posts = Post::onlyTrashed();
-            break;
+    public function __construct(Post $post)
+    {
+        $this->model = $post;
+    }
+
+    public function all($search)
+    {
+        $posts = $this->model->published()->orderBy('published_at', 'asc');
+        $posts_count = $posts->count();
+        $posts = $posts->paginate(10);
+
+        if($search) {
+            $posts = $this->model->published()->where('title', 'LIKE', "%{$search}%");
+            $posts_count = $posts->count();
+            $posts = $posts->paginate(10);
+            $posts->appends(['search' => $search]);
         }
 
-        $posts = $posts->simplePaginate(10);
+        $result =  ["posts" => $posts, "posts_count" => $posts_count];
 
-        return $posts;
+        return $result;
     }
 
     public function create($request)
@@ -35,14 +41,15 @@ class PostRepository implements PostRepositoryInterface
         $featured_new_name = time().$featured->getClientOriginalName();
         $featured->move('storage/uploads/posts', $featured_new_name);
 
-        $post = Post::create([
+        $post = $this->model->create([
             'title' => $request->title,
             'content' => $request->content,
             'featured' => 'uploads/posts/'.$featured_new_name,
             'category_id' => $request->category,
             'slug' => Str::slug($request->title, '-'),
             'user_id' => Auth::id(),
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now(),
+            'published_at' => Carbon::now()
         ]);
 
         $post->tags()->attach($request->tags);
@@ -52,12 +59,12 @@ class PostRepository implements PostRepositoryInterface
 
     public function find($id)
     {
-        return Post::findOrFail($id);
+        return $this->model->findOrFail($id);
     }
 
     public function update($request, $id)
     {
-        $post = Post::findOrFail($id);
+        $post = $this->model->find($id);
 
         if($request->hasFile('featured'))
         {
@@ -83,35 +90,42 @@ class PostRepository implements PostRepositoryInterface
 
     public function publish($id)
     {
-        $post = Post::drafted()->where('id', $id)->first();
+        $post = $this->model->drafted()->where('id', $id)->first();
 
         $post->update(['published_at' => Carbon::now()]);
     }
 
     public function feature($id)
     {
-        $post = Post::published()->where('id', $id)->first();
+        $post = $this->model->published()->where('id', $id)->first();
 
         $post->update(['featured_at' => Carbon::now()]);
     }
 
+    public function unfeature($id)
+    {
+        $post = $this->model->published()->where('id', $id)->first();
+
+        $post->update(['featured_at' => null]);
+    }
+
     public function trash($id)
     {
-        $post = Post::withTrashed()->where('id', $id)->first();
+        $post = $this->model->withTrashed()->where('id', $id)->first();
 
         $post->delete();
     }
 
     public function restore($id)
     {
-        $post = Post::onlyTrashed()->where('id', $id)->first();
+        $post = $this->model->onlyTrashed()->where('id', $id)->first();
 
         $post->restore();
     }
 
     public function delete($id)
     {
-        $post = Post::onlyTrashed()->where('id', $id)->first();
+        $post = $this->model->onlyTrashed()->where('id', $id)->first();
 
         if($post->trashed()) {
             $post->forceDelete();

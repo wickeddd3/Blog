@@ -12,16 +12,23 @@ class UsersController extends Controller
 
     public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
 
         $this->userRepository = $userRepository;
     }
 
     public function index()
     {
-        $users = $this->userRepository->all();
+        $result = $this->userRepository->all(request()->query('search'));
 
-        return view('dashboard.user.index')->with('users', $users);
+        if(request()->wantsJson()) {
+            return response()->json([
+                'users' => $result['users'],
+                'users_count' => $result['users_count']
+            ]);
+        }
+
+        return view('dashboard.user.index');
     }
 
     public function create()

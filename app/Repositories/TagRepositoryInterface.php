@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 interface TagRepositoryInterface
 {
-    public function all();
+    public function all(string $search);
 
     public function create(object $request);
 

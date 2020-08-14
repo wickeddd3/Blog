@@ -14,57 +14,37 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
     </head>
-    <body>
+    <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
-    <div id="app">
-
+    <div class="wrapper">
         <!-- NAVBAR -->
         @include('dashboard.layouts.navbar')
 
         <!-- SIDEBAR -->
         @include('dashboard.layouts.sidebar');
 
-        <!-- Overlay effect when opening sidebar on small screens -->
-        <div class="overlay animate-opacity" onclick="closeSidebar();" title="close side menu" id="myOverlay"></div>
-
         <!-- MAIN CONTENT -->
-        <div class="main-content">
-            @yield('content')
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="main-content" id="app">
+                        @yield('content')
+                    </div>
+                </div>
+            </section>
         </div>
 
+        <!-- FOOTER -->
+        {{-- @include('dashboard.layouts.footer') --}}
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
-
-    <script>
-        // Get the Sidebar
-        var mySidebar = document.getElementById("mySidebar");
-
-        // Get the DIV with overlay effect
-        var overlayBg = document.getElementById("myOverlay");
-
-        // Toggle between showing and hiding the sidebar, and add overlay effect
-        function openSidebar() {
-        if (mySidebar.style.display === 'block') {
-            mySidebar.style.display = 'none';
-            overlayBg.style.display = "none";
-        } else {
-            mySidebar.style.display = 'block';
-            overlayBg.style.display = "block";
-        }
-        }
-
-        // Close the sidebar with the close button
-        function closeSidebar() {
-        mySidebar.style.display = "none";
-        overlayBg.style.display = "none";
-        }
-    </script>
 
     </body>
 </html>

@@ -1,7 +1,5 @@
 <template>
-    <span @click="like">
-        <i :class="icon"></i>
-    </span>
+    <a href="" class="text-dark ml-1" @click.prevent="like">{{ text }}</a>
 </template>
 
 <script>
@@ -15,8 +13,8 @@ export default {
     },
 
     computed: {
-        icon() {
-            return this.activeButton ? 'fa fa-thumbs-up fa-lg pr-1' : 'far fa-thumbs-up fa-lg pr-1';
+        text() {
+            return this.activeButton ? 'Unlike' : 'Like';
         },
     },
 

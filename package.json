@@ -27,6 +27,7 @@
         "@fortawesome/fontawesome-free": "^5.13.0",
         "bootstrap-vue": "^2.15.0",
         "moment": "^2.25.3",
+        "overlayscrollbars": "^1.13.0",
         "vue-carousel": "^0.18.0"
     }
 }

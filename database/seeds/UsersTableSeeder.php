@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
                     'email' => 'wicked@wicked.com',
                     'password' => Hash::make('password'),
                     'role' => 'administrator',
+                    'email_verified_at' => now(),
                     'created_at' => Carbon::now()
                 ]);
 

@@ -13,7 +13,7 @@ class ProfilesController extends Controller
 
     public function __construct(ProfileRepositoryInterface $profileRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
 
         $this->profileRepository = $profileRepository;
     }
@@ -42,8 +42,6 @@ class ProfilesController extends Controller
                 'header' => $profile['header']
             ]);
         }
-
-        return view('profile.post.posts')->with('header', $profile['header']);
     }
 
     public function profile(User $user)

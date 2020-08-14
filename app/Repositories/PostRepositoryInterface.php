@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 interface PostRepositoryInterface
 {
-    public function all(string $filter);
+    public function all(string $search);
 
     public function create(object $request);
 
@@ -15,6 +15,8 @@ interface PostRepositoryInterface
     public function publish(int $id);
 
     public function feature(int $id);
+
+    public function unfeature(int $id);
 
     public function trash(int $id);
 

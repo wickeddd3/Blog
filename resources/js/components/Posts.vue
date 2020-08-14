@@ -18,11 +18,11 @@
                     · {{ post.category.name }}
                 </p>
                 <span class="text-muted">
-                    {{ published(post.created_at) }} ·
-                    {{ post.comments_count }} <i class="fa fa-comments fa-fw"></i> ·
-                    {{ post.likesCount }} <i class="fa fa-thumbs-up fa-fw"></i>
+                    {{ published(post.published_at) }} ·
+                    {{ post.comments_count }} <i class="far fa-comments fa-fw"></i> ·
+                    {{ post.likesCount }} <i class="far fa-thumbs-up fa-fw"></i>
                 </span>
-                <span class="float-right" v-if="signedIn">
+                <span class="float-right" v-if="signedIn && verified">
                     <bookmark-button :post="post"></bookmark-button>
                 </span>
             </div>
@@ -65,6 +65,9 @@ export default {
         signedIn() {
             return window.App.signedIn;
         },
+        verified() {
+            return window.App.verified;
+        }
     },
 
     methods: {

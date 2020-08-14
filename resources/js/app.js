@@ -27,6 +27,11 @@ Vue.component('profile-view', require('./pages/Profile.vue').default);
 Vue.component('notifications-view', require('./pages/Notifications.vue').default);
 Vue.component('search-post-view', require('./pages/SearchPost.vue').default);
 
+Vue.component('dashboard-posts-view', require('./pages/dashboard/Posts.vue').default);
+Vue.component('dashboard-categories-view', require('./pages/dashboard/Categories.vue').default);
+Vue.component('dashboard-tags-view', require('./pages/dashboard/Tags.vue').default);
+Vue.component('dashboard-users-view', require('./pages/dashboard/Users.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

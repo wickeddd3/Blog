@@ -4,48 +4,67 @@
 <div class="container-fluid">
     <h5>Dashboard</h5>
     <div class="pt-2">
+        <!-- Info boxes -->
         <div class="row">
-            <div class="col-md-3 mb-2">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <i class="fa fa-book fa-fw"></i> Posts
-                    </div>
-                    <div class="card-body text-center">
-                        <h5>{{ $postsCount }}</h5>
-                    </div>
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fa fa-book"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Posts</span>
+                    <span class="info-box-number">{{ $postsCount }}</span>
                 </div>
-            </div>
-            <div class="col-md-3 mb-2">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <i class="fa fa-users fa-fw"></i> Users
-                    </div>
-                    <div class="card-body text-center">
-                        <h5>{{ $usersCount }}</h5>
-                    </div>
+                <!-- /.info-box-content -->
                 </div>
+                <!-- /.info-box -->
             </div>
-            <div class="col-md-3 mb-2">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <i class="fa fa-archive fa-fw"></i> Categories
-                    </div>
-                    <div class="card-body text-center">
-                        <h5>{{ $categoriesCount }}</h5>
-                    </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-users"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Users</span>
+                    <span class="info-box-number">{{ $usersCount }}</span>
                 </div>
-            </div>
-            <div class="col-md-3 mb-2">
-                <div class="card">
-                    <div class="card-header text-center">
-                        <i class="fa fa-tags fa-fw"></i> Tags
-                    </div>
-                    <div class="card-body text-center">
-                        <h5>{{ $tagsCount }}</h5>
-                    </div>
+                <!-- /.info-box-content -->
                 </div>
+                <!-- /.info-box -->
             </div>
+            <!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fa fa-archive"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Categories</span>
+                    <span class="info-box-number">{{ $categoriesCount }}</span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                <span class="info-box-icon bg-secondary elevation-1"><i class="fa fa-tags"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Tags</span>
+                    <span class="info-box-number">{{ $tagsCount }}</span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
         </div>
+        <!-- /.row -->
+
 
         <div class="pt-2">
             <div class="jumbotron">

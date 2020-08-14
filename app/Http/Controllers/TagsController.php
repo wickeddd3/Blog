@@ -12,16 +12,22 @@ class TagsController extends Controller
 
     public function __construct(TagRepositoryInterface $tagRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
 
         $this->tagRepository = $tagRepository;
     }
 
     public function index()
     {
-        $tags = $this->tagRepository->all();
+        $result = $this->tagRepository->all(request()->query('search'));
 
-        return view('dashboard.tag.index')->with('tags', $tags);
+        if(request()->wantsJson()) {
+            return response()->json([
+                'tags' => $result['tags'],
+                'tags_count' => $result['tags_count']
+            ]);
+        }
+        return view('dashboard.tag.index');
     }
 
     public function store(TagStoreRequest $request)

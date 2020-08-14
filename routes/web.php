@@ -37,14 +37,13 @@ Route::get('/profile/{user}/all/notifications', 'ProfilesController@notification
 Route::post('/profile/{user}/all/notifications/read', 'ProfilesController@markAsRead');
 
 // Auth Routes
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Admin Dashboard Routes
 Route::prefix('dashboard')->middleware('can:dashboard-access')->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
     // Posts Routes
     Route::get('/posts', 'PostsController@index');
-    Route::get('/posts/{filter}', 'PostsController@index');
     Route::get('/post/add', 'PostsController@create')->name('post.add');
     Route::post('/post', 'PostsController@store')->name('post.store');
     Route::get('/post/{id}/edit', 'PostsController@edit')->name('post.edit');
@@ -54,8 +53,7 @@ Route::prefix('dashboard')->middleware('can:dashboard-access')->group(function (
     Route::get('/post/{id}/delete', 'PostsController@destroy')->name('post.delete');
     Route::get('/post/{id}/publish', 'PostsController@publish')->name('post.publish');
     Route::get('/post/{id}/feature', 'PostsController@feature')->name('post.feature');
-    // Comments Routes
-    Route::get('/comments', 'CommentsController@index')->name('comments');
+    Route::get('/post/{id}/unfeature', 'PostsController@unfeature')->name('post.unfeature');
     // Categories Routes
     Route::get('/categories', 'CategoriesController@index')->name('categories');
     Route::post('/category', 'CategoriesController@store')->name('category.store');

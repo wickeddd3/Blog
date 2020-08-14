@@ -12,16 +12,23 @@ class CategoriesController extends Controller
 
     public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
 
         $this->categoryRepository = $categoryRepository;
     }
 
     public function index()
     {
-        $categories = $this->categoryRepository->all();
+        $result = $this->categoryRepository->all(request()->query('search'));
 
-        return view('dashboard.category.index')->with('categories', $categories);
+        if(request()->wantsJson()) {
+            return response()->json([
+                'categories' => $result['categories'],
+                'categories_count' => $result['categories_count']
+            ]);
+        }
+
+        return view('dashboard.category.index');
     }
 
     public function store(CategoryStoreRequest $request)
