@@ -27,7 +27,7 @@ Route::post('/posts/{category}/{post}/likes', 'LikesController@like');
 Route::delete('/posts/{category}/{post}/likes', 'LikesController@unlike');
 
 // Profile
-Route::get('/profile/{user}/{filter}', 'ProfilesController@filter');
+Route::get('/profile/{user}/posts/{filter}', 'ProfilesController@filter');
 Route::get('/profile/{user}', 'ProfilesController@profile');
 Route::get('/profile/{user}/@/edit', 'ProfilesController@edit');
 Route::put('/profile/{user}/@/update', 'ProfilesController@update');

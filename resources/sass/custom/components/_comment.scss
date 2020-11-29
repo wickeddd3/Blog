@@ -1,0 +1,150 @@
+.comment {
+    width: 100%;
+    display: flex;
+
+    &__left {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__right {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__author {
+        display: flex;
+
+        &-img {
+            width: 4.3rem;
+            height: 4.5rem;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+
+        &-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &-name {
+            font-size: 1.5rem;
+        }
+
+        &-published {
+            font-size: 1.2rem;
+            color: $gray;
+        }
+    }
+
+    &__option {
+        display: flex;
+        justify-content: flex-end;
+
+        &-btn {
+            width: 3rem;
+            height: 3rem;
+            border: 1px solid #e6ebee;
+            outline: none;
+            background-color: $white;
+            border-radius: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: .6rem;
+            cursor: pointer;
+        }
+
+        &-icon {
+            font-size: 1.1rem;
+            color: $blue;
+        }
+    }
+
+    &__body {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    &__message {
+        font-size: 1.6rem;
+        font-weight: 300;
+        text-align: justify;
+    }
+
+    &__box {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        margin-top: 2rem;
+
+        &-input {
+            width: 100%;
+            border: 1px solid #e6ebee;
+            outline: none;
+            font-size: 1.6rem;
+            margin: 0 .5rem;
+            padding: .8rem;
+            border-radius: .5rem;
+            resize: none;
+        }
+
+        &-btn {
+            width: 5.5rem;
+            height: 5rem;
+            border: 1px solid #e6ebee;
+            outline: none;
+            background-color: $white;
+            border-radius: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        &-icon {
+            color: $blue;
+            font-size: 2rem;
+        }
+
+    }
+
+    &__edit {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+
+        &-option {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &-input {
+            width: 100%;
+            border: 1px solid #e6ebee;
+            outline: none;
+            font-size: 1.6rem;
+            padding: .8rem;
+            border-radius: .5rem;
+            resize: none;
+        }
+
+        &-btn {
+            border: 1px solid #e6ebee;
+            outline: none;
+            background-color: $white;
+            cursor: pointer;
+            padding: .5rem 1rem;
+            margin: .2rem .5rem;
+        }
+    }
+}

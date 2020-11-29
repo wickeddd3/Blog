@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Post;
+use App\Models\Tag;
+use App\Models\User;
 
 class FrontendController extends Controller
 {
@@ -11,11 +12,8 @@ class FrontendController extends Controller
     {
         return view('frontend.index')
                 ->with('categories', Category::all())
-                ->with('featuredOne', Post::featuredPosts()->first())
-                ->with('featuredTwo', Post::featuredPosts()->skip(1)->take(1)->first())
-                ->with('editorsChoice', Post::featuredPosts()->skip(2)->take(3)->get())
-                ->with('popular', Post::popularPosts()->take(8)->get())
-                ->with('archives', Post::archive());
+                ->with('tags', Tag::all())
+                ->with('bloggers', User::take(8)->get());
     }
 
 }

@@ -1,0 +1,57 @@
+.card {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: $white;
+    border-radius: .5rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    margin-bottom: .5rem;
+    padding: .5rem;
+
+    &__content {
+        display: flex;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding: 4px;
+    }
+
+    &__img {
+        height: 5rem;
+        width: 5rem;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: .3rem;
+    }
+
+    &__btn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &-icon {
+            height: 1.6rem;
+            width: 1.6rem;
+            fill: $white;
+        }
+
+        &-text {
+            padding-left: .3rem;
+        }
+    }
+}

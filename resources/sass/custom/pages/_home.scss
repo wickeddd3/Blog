@@ -1,0 +1,54 @@
+.home {
+    margin: .5rem;
+}
+
+.content {
+    padding: .6rem 0;
+
+    &__navigation {
+        padding: 0 .4rem;
+    }
+
+    &__main {
+        padding: 0 .4rem;
+    }
+
+    &__sidebar {
+        padding: 0 .4rem;
+    }
+}
+
+.write {
+    display: flex;
+    align-items: center;
+    background-color: $white;
+    padding: 1.6rem 2rem;
+    border-radius: 8px;
+    border: 1px solid #e6ebee;
+    margin-bottom: 1rem;
+    cursor: pointer;
+
+    &:hover {
+        border: 1px solid $blue;
+    }
+
+    &__user {
+        height: 4rem;
+        width: 4rem;
+        fill: $blue;
+        margin-right: 1.5rem;
+    }
+
+    &__add {
+        height: 2.5rem;
+        width: 2.5rem;
+        fill: $light-gray;
+        margin-right: 1rem;
+    }
+
+    &__text {
+        font-family: inherit;
+        font-size: 1.8rem;
+        color: $gray;
+    }
+}

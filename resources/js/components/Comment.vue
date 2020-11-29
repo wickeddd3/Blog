@@ -1,36 +1,41 @@
 <template>
-<div class="media p-2">
-    <img :src="'/storage/'+data.owner.profile.avatar" class="mr-3 rounded-circle img-fluid" style="width:50px;height:50px;object-fit:cover;" alt="...">
-    <div class="media-body pt-1">
-        <h6 class="mt-0">
-            <span class="font-weight-bold">
-                {{ data.owner.full_name }}
-            </span>
-            {{ ago }}
-            <p class="comment-owner-option pt-2 float-right">
-                <span v-if="canUpdate">
-                    <span @click="editing = true">
-                        <i class="fa fa-edit fa-fw"></i>
-                    </span>
-                </span>
-                <span v-if="canUpdate">
-                    <span @click="destroy">
-                        <i class="fa fa-trash fa-fw"></i>
-                    </span>
-                </span>
-            </p>
-        </h6>
-
-        <span>
-            <div class="text-muted" v-if="editing">
-                <div class="form-group">
-                    <textarea class="form-control form-control-sm" cols="5" rows="5" v-model="message"></textarea>
+<div class="comment">
+    <div class="comment__left">
+        <img :src="'/storage/'+data.owner.profile.avatar"
+                :alt="'/storage/'+data.owner.profile.avatar"
+                class="comment__author-img">
+    </div>
+    <div class="comment__right">
+        <div class="comment__header">
+            <div class="comment__author">
+                <div class="comment__author-details">
+                    <span class="comment__author-name">{{ data.owner.full_name }}</span>
+                    <span class="comment__author-published">{{ ago }}</span>
                 </div>
-                <button class="btn btn-sm btn-primary" @click="update">Update</button>
-                <button class="btn btn-sm btn-link" @click="editing = false">Cancel</button>
             </div>
-            <div class="text-muted" v-text="message" v-else></div>
-        </span>
+            <div class="comment__option">
+                <template v-if="canUpdate">
+                    <button class="comment__option-btn" @click="editing = true">
+                        <i class="fa fa-edit comment__option-icon"></i>
+                    </button>
+                </template>
+                <template v-if="canUpdate">
+                    <button class="comment__option-btn" @click="destroy">
+                        <i class="fa fa-trash comment__option-icon"></i>
+                    </button>
+                </template>
+            </div>
+        </div>
+        <div class="comment__body">
+            <div class="comment__edit" v-if="editing">
+                <textarea class="comment__edit-input" cols="30" rows="5" v-model="message"></textarea>
+                <div class="comment__edit-option">
+                    <button type="submit" class="comment__edit-btn" @click="update">Update</button>
+                    <button type="submit" class="comment__edit-btn" @click="editing = false">Cancel</button>
+                </div>
+            </div>
+            <div class="comment__message" v-text="message" v-else></div>
+        </div>
     </div>
 </div>
 </template>

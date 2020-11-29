@@ -1,38 +1,55 @@
 <template>
 <div v-if="all_posts.length > 0">
     <div v-for="(post, index) in all_posts" :key="index">
-        <div class="media pb-4">
-            <div class="media-body">
-                <h5 class="mt-0 mb-1">
-                    <a class="text-dark" :href="post.path">
-                        {{ post.title }}
-                    </a>
-                </h5>
-                <p class="font-weight-light text-secondary">
-                    <span v-html="limitContent(post.content)"></span>
-                </p>
-                <p style="margin:0;padding:0;">
-                    <a class="text-dark" :href="'/profile/'+post.author.username">
-                        {{ post.author.full_name }}
-                    </a>
-                    · {{ post.category.name }}
-                </p>
-                <span class="text-muted">
-                    {{ published(post.published_at) }} ·
-                    {{ post.comments_count }} <i class="far fa-comments fa-fw"></i> ·
-                    {{ post.likesCount }} <i class="far fa-thumbs-up fa-fw"></i>
-                </span>
-                <span class="float-right" v-if="signedIn && verified">
-                    <bookmark-button :post="post"></bookmark-button>
-                </span>
+        <div class="media">
+            <div class="media__header">
+                <div class="media__author">
+                    <img class="media__author--avatar"
+                        :src="`/storage/${post.author.profile.avatar}`"
+                        :alt="`/storage/${post.author.profile.avatar}`">
+                    <div class="media__author--details">
+                        <a class="media__author--name" :href="'/profile/'+post.author.username">
+                            {{ post.author.full_name }}
+                        </a>
+                        <p class="media__author--date">
+                            {{ published(post.published_at) }}
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <span class="media__category">
+                        {{ post.category.name }}
+                    </span>
+                </div>
             </div>
-            <img :src="'/storage/'+post.featured" style="width:160px;height:150px;object-fit:cover;" class="ml-3" alt="...">
+            <div class="media__body">
+                <div class="media__content">
+                    <a class="heading-title" :href="post.path">{{ post.title }}</a>
+                    <p class="paragraph" v-html="limitContent(post.content)"></p>
+                </div>
+                <img class="media__img" :src="'/storage/'+post.featured" :alt="'/storage/'+post.featured">
+            </div>
+            <div class="media__footer">
+                <div class="m-r-1">
+                    <i class="far fa-thumbs-up media__icon"></i>
+                    <span class="heading-secondary">{{ post.likesCount }}</span>
+                </div>
+                <div class="m-r-3">
+                    <i class="far fa-comments media__icon"></i>
+                    <span class="heading-secondary">{{ post.comments_count }}</span>
+                </div>
+                <div>
+                    <span v-if="signedIn && verified">
+                        <bookmark-button :post="post"></bookmark-button>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
     <load-more :dataSet="dataSet" :loading="loading" @changed="fetch"></load-more>
 </div>
 <div v-else>
-    <p class="text-center">
+    <p class="heading-secondary center">
         No posts found.
     </p>
 </div>
@@ -44,6 +61,8 @@ import BookmarkButton from '../components/BookmarkButton'
 import LoadMore from '../components/LoadMore'
 
 export default {
+    props: ['active_tab'],
+
     components: {
         BookmarkButton,
         LoadMore,
@@ -61,6 +80,14 @@ export default {
         this.fetch();
     },
 
+    watch: {
+        active_tab() {
+            this.all_posts = [];
+            this.dataSet = [];
+            this.fetch(1);
+        }
+    },
+
     computed: {
         signedIn() {
             return window.App.signedIn;
@@ -72,10 +99,10 @@ export default {
 
     methods: {
         published(date) {
-            return moment(date).format('MMM D');
+            return moment(date).format('MMM D, YYYY');
         },
         limitContent(content) {
-            return content.substr(0, 100) + '...';
+            return content.substr(0, 300) + '...';
         },
         fetch(page) {
             this.loading = true;
@@ -85,8 +112,8 @@ export default {
             }
             let url;
             (location.pathname == "/")
-            ? url = `${location.pathname}posts/newest?page=${page}`
-            : url = `${location.pathname}?page=${page}`
+            ? url = `${location.pathname}posts/${this.active_tab}?page=${page}`
+            : url = `${location.pathname}/posts/${this.active_tab}?page=${page}`
             axios.get(url)
                  .then(({data}) => {
                     let items = data.posts.data;

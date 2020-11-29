@@ -6,7 +6,7 @@
         </div>
         <load-more :dataSet="dataSet" @changed="fetch"></load-more>
     </div>
-    <div class="text-center" v-else>
+    <div class="center" v-else>
         <p>No comments yet.</p>
     </div>
     <new-comment @created="add"></new-comment>

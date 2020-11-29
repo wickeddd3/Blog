@@ -1,0 +1,19 @@
+.tab {
+    width: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+
+    &__item {
+        padding: 1rem 1rem;
+        cursor: pointer;
+
+        &--active {
+            border-bottom: 2px solid $blue;
+        }
+    }
+
+    &__name {
+        font-size: 1.5rem;
+        font-weight: 400;
+    }
+}

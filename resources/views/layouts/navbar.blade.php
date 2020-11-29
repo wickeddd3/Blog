@@ -1,31 +1,66 @@
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white shadow-sm">
-    <h5 class="my-0 mr-md-auto pb-1 font-weight-normal">
-        <a class="text-dark" href="/">
-            B L O G
-        </a>
-    </h5>
-    <span>
-        @guest
-            <a class="font-weight-light text-dark mr-4" href="{{ route('login') }}">Sign in</a>
-            <a class="font-weight-light text-dark" href="{{ route('register') }}">Sign up</a>
-        @else
-            <a class="mr-3 text-dark" href="/search">
-                <i class="fa fa-search fa-lg"></i>
-            </a>
-            <a class="mr-3 text-dark" href="/profile/{{ Auth::user()->username }}/post/create">
-                <i class="far fa-plus-square fa-lg"></i>
-            </a>
-            <a class="mr-3 text-dark" href="/profile/{{ Auth::user()->username }}/all/notifications">
-                <i class="far fa-bell fa-lg"></i>
-            </a>
-            <a class="mr-3 text-dark" href="/profile/{{ Auth::user()->username }}">
-                <i class="far fa-user-circle fa-lg"></i>
-            </a>
-            @if(Auth::user()->isAdmin)
-            <a class="text-dark" href="{{ route('dashboard') }}">
-                <i class="fa fa-tachometer-alt fa-lg"></i>
-            </a>
-            @endif
-        @endguest
-    </span>
+<navbar-view inline-template>
+<div class="navbar">
+    <div class="nav">
+        <div class="nav-left">
+            <div class="nav__item">
+                <a class="nav__link" href="/">
+                    <span class="nav__name--title"><b>B</b> L O G</span>
+                </a>
+            </div>
+        </div>
+        <div class="nav-right">
+            @guest
+                <div class="nav__item">
+                    <a class="nav__link" href="{{ route('login') }}">
+                        <span class="nav__name">Sign in</span>
+                    </a>
+                </div>
+                <div class="nav__item">
+                    <a class="nav__link" href="{{ route('register') }}">
+                        <span class="nav__name">Sign up</span>
+                    </a>
+                </div>
+            @else
+                <div class="nav__item">
+                    <a class="nav__link--rounded" href="/search">
+                        <svg class="nav__icon">
+                            <use xlink:href="{{ asset('icons/sprite.svg#icon-magnifying-glass') }}"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="nav__item">
+                    <a class="nav__link--rounded" href="/profile/{{ Auth::user()->username }}/post/create">
+                        <svg class="nav__icon">
+                            <use xlink:href="{{ asset('icons/sprite.svg#icon-add-to-list') }}"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="nav__item nav__item--menu">
+                    <a class="nav__link--rounded">
+                        <svg class="nav__icon">
+                            <use xlink:href="{{ asset('icons/sprite.svg#icon-bell') }}"></use>
+                        </svg>
+                    </a>
+                    <notification :auth_user="{{ json_encode(Auth::user()->username) }}"></notification>
+                </div>
+                <div class="nav__item">
+                    <a class="nav__link--rounded" href="/profile/{{ Auth::user()->username }}">
+                        <svg class="nav__icon">
+                            <use xlink:href="{{ asset('icons/sprite.svg#icon-user') }}"></use>
+                        </svg>
+                    </a>
+                </div>
+                @if(Auth::user()->isAdmin)
+                    <div class="nav__item">
+                        <a class="nav__link--rounded" href="{{ route('dashboard') }}">
+                            <svg class="nav__icon">
+                                <use xlink:href="{{ asset('icons/sprite.svg#icon-gauge') }}"></use>
+                            </svg>
+                        </a>
+                    </div>
+                @endif
+            @endguest
+        </div>
+    </div>
 </div>
+</navbar-view>

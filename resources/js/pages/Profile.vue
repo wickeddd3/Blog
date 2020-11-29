@@ -1,15 +1,23 @@
 <script>
 import FollowButton from '../components/FollowButton'
-import Posts from '../components/profile/Posts'
-import BookmarkedPosts from '../components/profile/BookmarkedPosts'
-import LikedPosts from '../components/profile/LikedPosts'
+import Posts from '../components/Posts'
 
 export default {
     components: {
         FollowButton,
-        Posts,
-        BookmarkedPosts,
-        LikedPosts
+        Posts
+    },
+
+    data() {
+        return {
+            active_tab: "posts"
+        }
+    },
+
+    methods: {
+        active(active_tab) {
+            return (this.active_tab == active_tab) ? true : false;
+        }
     }
 }
 </script>

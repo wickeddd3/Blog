@@ -1,77 +1,67 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container pt-4">
-        <h5>Add New Post</h5>
+<div class="container">
+    <div class="addpost">
+        <h1 class="addpost__title">Add New Post</h1>
         <form method="POST" action="/posts" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror"
-                       name="title" value="{{ old('title') }}" id="title" autofocus>
+            <div class="addpost__item">
+                <span class="addpost__label">Title</span>
+                <input type="text" class="addpost__input @error('title') is-invalid @enderror"
+                        name="title" value="{{ old('title') }}" id="title" autofocus>
                 @error('title')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    <span class="addpost__error" role="alert">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="form-group">
-                <label for="content">Content</label>
+            <div class="addpost__item">
+                <label class="addpost__label">Content</label>
                 <textarea name="content" id="content" cols="5" rows="5"
-                          class="form-control @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
+                            class="addpost__textarea @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
                 @error('content')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    <span class="addpost__error" role="alert">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="row">
-                <div class="col form-group">
-                    <label for="featured">Featured Image</label>
-                    <input type="file" class="form-control @error('featured') is-invalid @enderror"
-                           name="featured" id="featured">
-                    @error('featured')
-                    <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="col form-group">
-                    <label for="category">Category</label>
-                    <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
-                        <option value="">Choose category</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}">
-                                {{ $category->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('category')
-                    <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="col form-group">
-                    <label for="tags">Tags</label>
-                    <select name="tags[]" id="tags"
-                            class="form-control tags-selector @error('tags') is-invalid @enderror" multiple>
-                        @foreach($tags as $tag)
-                            <option value="{{ $tag->id }}">
-                                {{ $tag->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('tags')
-                    <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
+            <div class="addpost__item">
+                <label class="addpost__label">Featured Image</label>
+                <input type="file" class="addpost__input @error('featured') is-invalid @enderror"
+                        name="featured" id="featured">
+                @error('featured')
+                    <span class="addpost__error" role="alert">{{ $message }}</span>
+                @enderror
             </div>
-            <button type="submit" class="btn btn-sm btn-primary">Publish</button>
+            <div class="addpost__item">
+                <label class="addpost__label">Category</label>
+                <select name="category" id="category" class="addpost__select @error('category') is-invalid @enderror">
+                    <option value="">Choose category</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('category')
+                    <span class="addpost__error" role="alert">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="addpost__item">
+                <label class="addpost__label">Tags</label>
+                <select name="tags[]" id="tags"
+                        class="addpost__input tags-selector @error('tags') is-invalid @enderror" multiple>
+                    @foreach($tags as $tag)
+                        <option value="{{ $tag->id }}">
+                            {{ $tag->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('tags')
+                    <span class="addpost__error" role="alert">{{ $message }}</span>
+                @enderror
+            </div>
+            <button type="submit" class="btn btn-primary addpost__btn">Publish</button>
         </form>
     </div>
+</div>
 @endsection
 
 @section('scripts')

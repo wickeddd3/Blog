@@ -1,0 +1,47 @@
+.addpost {
+    width: 100%;
+    padding: 1rem;
+
+    &__item {
+        width: 100%;
+        padding: .5rem 0;
+    }
+
+    &__label {
+        font-size: 1.5rem;
+    }
+
+    &__input {
+        width: 100%;
+        border: 1px solid #e6ebee;
+        outline: none;
+        font-size: 1.5rem;
+        padding: .5rem 1rem;
+    }
+
+    &__select {
+        border: 1px solid #e6ebee;
+        outline: none;
+        font-size: 1.5rem;
+        padding: .5rem 1rem;
+    }
+
+    &__textarea {
+        width: 100%;
+        border: 1px solid #e6ebee;
+        outline: none;
+        font-size: 1.5rem;
+        padding: .5rem 1rem;
+    }
+
+    &__btn {
+        width: 100%;
+        font-size: 1.8rem;
+        padding: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    &__error {
+
+    }
+}

@@ -1,55 +1,78 @@
 <template>
 <div>
     <form @submit.prevent="fetch()">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <button class="btn btn-primary" type="submit">
-                    <i class="fa fa-search fa-fw"></i>
-                </button>
-            </div>
-            <input type="text" name="search" v-model="search" class="form-control">
+        <div class="search__bar">
+            <button class="search__bar-btn" type="submit">
+                <i class="fa fa-search search__bar-icon"></i>
+            </button>
+            <input type="text"
+                    name="search"
+                    v-model="search"
+                    class="search__bar-input">
         </div>
     </form>
 
     <template v-if="all_posts.length > 0">
-        <p> Total of {{ all_posts.length }} results for <b>{{ beforeSearch }}</b> </p>
+        <div class="heading-secondary m-t-1 m-b-1">
+            Total of {{ all_posts.length }} results for <b>{{ beforeSearch }}</b>
+        </div>
         <div v-for="(post, index) in all_posts" :key="index">
-            <div class="media pb-4">
-                <div class="media-body">
-                    <h5 class="mt-0 mb-1">
-                        <a class="text-dark" :href="post.path">
-                            {{ post.title }}
-                        </a>
-                    </h5>
-                    <p class="font-weight-light text-secondary">
-                        <span v-html="limitContent(post.content)"></span>
-                    </p>
-                    <p style="margin:0;padding:0;">
-                        <a class="text-dark" :href="'/profile/'+post.author.username">
-                            {{ post.author.full_name }}
-                        </a>
-                        · {{ post.category.name }}
-                    </p>
-                    <span class="text-muted">
-                        {{ published(post.published_at) }} ·
-                        {{ post.comments_count }} <i class="far fa-comments fa-fw"></i> ·
-                        {{ post.likesCount }} <i class="far fa-thumbs-up fa-fw"></i>
-                    </span>
-                    <span class="float-right" v-if="signedIn">
-                        <bookmark-button :post="post"></bookmark-button>
-                    </span>
+            <div class="media">
+                <div class="media__header">
+                    <div class="media__author">
+                        <img class="media__author--avatar"
+                            :src="`/storage/${post.author.profile.avatar}`"
+                            :alt="`/storage/${post.author.profile.avatar}`">
+                        <div class="media__author--details">
+                            <a class="media__author--name" :href="'/profile/'+post.author.username">
+                                {{ post.author.full_name }}
+                            </a>
+                            <p class="media__author--date">
+                                {{ published(post.published_at) }}
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="media__category">
+                            {{ post.category.name }}
+                        </span>
+                    </div>
                 </div>
-                <img :src="'/storage/'+post.featured" style="width:160px;height:150px;object-fit:cover;" class="ml-3" alt="...">
+                <div class="media__body">
+                    <div class="media__content">
+                        <a class="heading-title" :href="post.path">{{ post.title }}</a>
+                        <p class="paragraph" v-html="limitContent(post.content)"></p>
+                    </div>
+                    <img class="media__img" :src="'/storage/'+post.featured" :alt="'/storage/'+post.featured">
+                </div>
+                <div class="media__footer">
+                    <div class="m-r-1">
+                        <i class="far fa-thumbs-up media__icon"></i>
+                        <span class="heading-secondary">{{ post.likesCount }}</span>
+                    </div>
+                    <div class="m-r-3">
+                        <i class="far fa-comments media__icon"></i>
+                        <span class="heading-secondary">{{ post.comments_count }}</span>
+                    </div>
+                    <div>
+                        <span v-if="signedIn">
+                            <bookmark-button :post="post"></bookmark-button>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
         <load-more :dataSet="dataSet" :loading="loading" @changed="fetch"></load-more>
     </template>
     <template v-else>
-        <div class="text-center" v-if="result">
+        <div class="heading-secondary m-t-1 m-b-1" v-if="result">
             No search results for <b>{{ beforeSearch }}</b>
         </div>
+        <div class="search__noresult">
+            <i class="fas fa-exclamation-circle search__noresult-icon"></i>
+            <span class="heading-secondary m-t-1">No results</span>
+        </div>
     </template>
-
 </div>
 </template>
 

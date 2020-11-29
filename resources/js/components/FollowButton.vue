@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-primary btn-block"
+    <button class="btn btn-primary m-t-1"
             @click="follow">
             {{ activeButton ? 'Unfollow' : 'Follow' }}
     </button>

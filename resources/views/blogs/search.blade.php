@@ -2,12 +2,10 @@
 
 @section('content')
 <search-post-view inline-template>
-<div class="container pt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-9 col-sm-12">
-            <h3>Search Posts</h3>
-            <search-result></search-result>
-        </div>
+<div class="container">
+    <div class="search">
+        <h3 class="search__title">Search Posts</h3>
+        <search-result></search-result>
     </div>
 </div>
 </search-post-view>

@@ -58,4 +58,3 @@ require('../../vendor/almasaeed2010/adminlte/dist/js/adminlte');
 
 // OverlayScrollbars
 require('overlayscrollbars/js/OverlayScrollbars.min.js');
-

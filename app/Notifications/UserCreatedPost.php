@@ -43,7 +43,9 @@ class UserCreatedPost extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => $this->author->full_name . ' posted ' . $this->post->title,
+            'author' => $this->author->full_name,
+            'title' => $this->post->title,
+            'featured' => $this->post->featured,
             'link' => $this->post->path()
         ];
     }
