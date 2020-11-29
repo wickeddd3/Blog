@@ -9,11 +9,13 @@
 
     &-primary {
         background-color: $blue;
+        cursor: pointer;
     }
 
     &-follow {
         background-color: $blue;
         border-radius: .5rem;
         font-size: 1.3rem;
+        padding: .7rem .9rem;
     }
 }

@@ -23,14 +23,9 @@
                         </div>
                     </div>
                     <div class="card__footer">
-                        <a href="" class="card__btn btn btn-follow">
-                            <svg class="card__btn-icon">
-                                <use xlink:href="icons/sprite.svg#icon-circle-with-plus"></use>
-                            </svg>
-                            <span class="card__btn-text">
-                                Follow
-                            </span>
-                        </a>
+                        @if(Auth::id() !== $blogger->id)
+                            <follow-button :blogger="{{ json_encode($blogger) }}"></follow-button>
+                        @endif
                     </div>
                 </div>
             @endforeach

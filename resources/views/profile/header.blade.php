@@ -20,7 +20,7 @@
         </span>
         @endif
         @if(Auth::id() !== $profile->id)
-            <follow-button :active="{{ json_encode($profile->isFollowedTo) }}"></follow-button>
+            <follow-button :blogger="{{ json_encode($profile) }}"></follow-button>
         @endif
     </div>
     <div class="profile__header-footer">

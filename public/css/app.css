@@ -140,12 +140,14 @@ ol {
 
 .btn-primary {
   background-color: #3762ff;
+  cursor: pointer;
 }
 
 .btn-follow {
   background-color: #3762ff;
   border-radius: 0.5rem;
   font-size: 1.3rem;
+  padding: 0.7rem 0.9rem;
 }
 
 .card {

@@ -1,23 +1,31 @@
 <template>
-    <button class="btn btn-primary m-t-1"
-            @click="follow">
-            {{ activeButton ? 'Unfollow' : 'Follow' }}
+    <button class="btn btn-follow" @click="follow">
+        <template v-if="activeButton">
+            <i class="fas fa-minus-circle"></i> &nbsp; Unfollow
+        </template>
+        <template v-else>
+            <i class="fas fa-plus-circle"></i> &nbsp; Follow
+        </template>
     </button>
 </template>
 
 <script>
 export default {
-    props: ['active'],
+    props: ['blogger'],
 
     data() {
         return {
-            activeButton: this.active
+            activeButton: this.blogger.isFollowedTo
         }
     },
 
     methods: {
         follow() {
-            axios[(this.activeButton ? 'delete' : 'post')](location.pathname + '/followers')
+            let url;
+            (location.pathname == '/')
+                ? url = `/profile/${this.blogger.username}/followers`
+                : url = `${location.pathname}/followers`;
+            axios[(this.activeButton ? 'delete' : 'post')](url)
             .then((response) => {
                 this.activeButton = ! this.activeButton;
             });

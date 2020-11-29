@@ -1,9 +1,11 @@
 <script>
 import Posts from '../components/Posts'
+import FollowButton from '../components/FollowButton'
 
 export default {
     components: {
-        Posts
+        Posts,
+        FollowButton,
     },
 
     data() {
