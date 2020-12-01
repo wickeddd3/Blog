@@ -1,33 +1,31 @@
-<div>
+<div class="addcategory">
     <form method="POST" action="{{ route('category.store') }}">
         @csrf
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror"
+        <div class="addcategory__item">
+            <span class="addcategory__label">Name</span>
+            <input type="text" class="addcategory__input @error('name') is-invalid @enderror"
                         name="name" value="{{ old('name') }}" id="name" autofocus>
             @error('name')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                <span class="addcategory__error" role="alert">{{ $message }}</span>
             @enderror
-            <small id="name" class="form-text text-muted">
+            <p class="heading-tertiary">
                 The name is how it appears on your site.
-            </small>
+            </p>
         </div>
-        <div class="form-group">
-            <label for="slug">Slug</label>
-            <input type="text" name="slug" class="form-control" id="slug">
-            <small id="slug" class="form-text text-muted">
+        <div class="addcategory__item">
+            <span class="addcategory__label">Slug</span>
+            <input type="text" name="slug" class="addcategory__input" id="slug">
+            <p class="heading-tertiary">
                 The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.
-            </small>
+            </p>
         </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea name="description" id="description" cols="5" rows="5" class="form-control"></textarea>
-            <small id="description" class="form-text text-muted">
+        <div class="addcategory__item">
+            <span class="addcategory__label">Description</span>
+            <textarea name="description" id="description" cols="5" rows="5" class="addcategory__input"></textarea>
+            <p class="heading-tertiary">
                 The description is not prominent by default; however, some themes may show it.
-            </small>
+            </p>
         </div>
-        <button type="submit" class="btn btn-sm btn-primary">Add New Category</button>
+        <button type="submit" class="btn btn--primary addcategory__btn">Add New Category</button>
     </form>
 </div>

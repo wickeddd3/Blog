@@ -1,78 +1,59 @@
 <template>
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Posts</h3>
-                <div class="card-tools">
-                    <search-bar @filter="filter"></search-bar>
+<div class="posts">
+    <div class="posts__header">
+        <search-bar @filter="filter"></search-bar>
+    </div>
+    <div class="posts__body">
+        <template v-if="all_posts.length > 0">
+            <template v-for="post in all_posts">
+                <div class="posts__item" :key="post.id">
+                    <div class="posts__content">
+                        <div class="posts__content-item posts__title">{{ limitContent(post.title) }}</div>
+                        <div class="posts__content-item posts__category">{{ post.category.name }}</div>
+                        <div class="posts__content-item posts__details">
+                            <span>
+                                <i class="far fa-comments fa-fw"></i> {{ post.comments_count }}
+                            </span>
+                            <span>
+                                <i class="far fa-thumbs-up fa-fw"></i> {{ post.likesCount }}
+                            </span>
+                            <span>
+                                <i class="far fa-eye fa-fw"></i> {{ post.views_count }}
+                            </span>
+                        </div>
+                        <div class="posts__content-item posts__date">{{ published(post.published_at) }}</div>
+                        <div class="posts__content-item posts__featured">
+                            <a class="btn btn--primary" :href="`/dashboard/post/${post.id}/unfeature`" v-if="post.featured_at">
+                                <i class="fas fa-star fa-fw"></i>
+                            </a>
+                            <a class="btn btn--primary" :href="`/dashboard/post/${post.id}/feature`" v-else>
+                                <i class="far fa-star fa-fw"></i>
+                            </a>
+                        </div>
+                        <div class="posts__content-item posts__edit">
+                            <a :href="`/dashboard/post/${post.id}/edit`">
+                                <i class="fa fa-edit fa-fw"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
                 </div>
+            </template>
+        </template>
+        <template v-else>
+            <div class="center">
+                <span class="heading-secondary">No post results</span>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0" style="height: 410px;">
-                <table class="table table-sm table-head-fixed">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Published</th>
-                            <th><i class="far fa-star fa-fw"></i></th>
-                            <th><i class="far fa-comments fa-fw"></i></th>
-                            <th><i class="far fa-thumbs-up fa-fw"></i></th>
-                            <th><i class="far fa-eye fa-fw"></i></th>
-                            <th><i class="far fa-star fa-fw"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <template v-if="all_posts.length > 0">
-                            <template v-for="post in all_posts">
-                                <tr :key="post.id">
-                                    <td>
-                                        <a :href="`/dashboard/post/${post.id}/edit`">
-                                            <i class="fa fa-edit fa-fw"></i>
-                                        </a>
-                                        {{ limitContent(post.title) }}
-                                    </td>
-                                    <td> {{ post.category.name }} </td>
-                                    <td> {{ published(post.published_at) }} </td>
-                                    <td>
-                                        <i class="fas fa-star fa-fw" v-if="post.featured_at"></i>
-                                        <i class="far fa-star fa-fw" v-else></i>
-                                    </td>
-                                    <td> {{ post.comments_count }} </td>
-                                    <td> {{ post.likesCount }} </td>
-                                    <td> {{ post.views_count }} </td>
-                                    <td>
-                                        <a class="btn btn-sm btn-primary" :href="`/dashboard/post/${post.id}/unfeature`" v-if="post.featured_at">
-                                            <i class="fas fa-star fa-fw"></i>
-                                        </a>
-                                        <a class="btn btn-sm btn-outline-primary" :href="`/dashboard/post/${post.id}/feature`" v-else>
-                                            <i class="far fa-star fa-fw"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </template>
-                        </template>
-                        <template v-else>
-                            <tr>
-                                <td colspan="8" class="text-center">No posts found.</td>
-                            </tr>
-                        </template>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                {{ posts_count }} Posts
-                <span class="float-right">
-                    <load-more :dataSet="dataSet" :loading="loading" @changed="fetch"></load-more>
-                </span>
-            </div>
+        </template>
+    </div>
+    <div class="posts__footer">
+        <div class="center">
+            <load-more :dataSet="dataSet" :loading="loading" @changed="fetch"></load-more>
         </div>
-        <!-- /.card -->
     </div>
 </div>
-<!-- /.row -->
 </template>
 
 <script>
@@ -102,7 +83,7 @@ export default {
 
     methods: {
         limitContent(content) {
-            return content.substr(0, 30) + '...';
+            return content.substr(0, 50) + '...';
         },
         published(date) {
             return moment(date).format('MMM D Y');

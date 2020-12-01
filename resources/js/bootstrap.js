@@ -40,21 +40,5 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     encrypted: true
 // });
 
-import Vue from 'vue';
-
-// Vue Carousel
-import VueCarousel from 'vue-carousel';
-Vue.use(VueCarousel);
-
-// Bootstrap-Vue
-import { BootstrapVue } from 'bootstrap-vue'
-Vue.use(BootstrapVue)
-
 // Fontawesome
 import '@fortawesome/fontawesome-free/css/all.css'
-
-// AdminLTE
-require('../../vendor/almasaeed2010/adminlte/dist/js/adminlte');
-
-// OverlayScrollbars
-require('overlayscrollbars/js/OverlayScrollbars.min.js');

@@ -1,10 +1,13 @@
 <template>
     <form @submit.prevent="filter()">
-        <div class="input-group input-group-sm" style="width: 250px;">
-            <input type="text" v-model="search" name="table_search" class="form-control float-right" placeholder="Search">
-            <div class="input-group-append">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
-            </div>
+        <div class="searchbar">
+            <button type="submit" class="searchbar__btn">
+                <i class="fas fa-search"></i>
+            </button>
+            <input type="text"
+                   v-model="search"
+                   name="table_search"
+                   class="searchbar__input">
         </div>
     </form>
 </template>

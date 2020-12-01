@@ -1,62 +1,42 @@
 <template>
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Users</h3>
-                <div class="card-tools">
-                    <search-bar @filter="filter"></search-bar>
+<div class="users">
+    <div class="users__header">
+        <search-bar @filter="filter"></search-bar>
+    </div>
+    <div class="users__body">
+        <template v-if="all_users.length > 0">
+            <template v-for="user in all_users">
+                <div class="users__item" :key="user.id">
+                    <div class="users__content">
+                        <div class="users__content-item users__name">{{ user.full_name }}</div>
+                        <div class="users__content-item users__username">{{ user.username }}</div>
+                        <div class="users__content-item users__email">{{ user.email }}</div>
+                        <div class="users__content-item users__role">{{ user.role }}</div>
+                        <div class="users__content-item users__date">{{ published(user.verified_at) }}</div>
+                        <div class="users__content-item users__edit">
+                            <a :href="`/dashboard/user/${user.id}/edit`" v-if="user.role != 'administrator'">
+                                <i class="fa fa-edit fa-fw"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
                 </div>
+            </template>
+        </template>
+        <template v-else>
+            <div class="center">
+                <span class="heading-secondary">No user results</span>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0" style="height: 410px;">
-                <table class="table table-sm table-head-fixed">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th><i class="fa fa-book fa-fw"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <template v-if="all_users.length > 0">
-                            <template v-for="user in all_users">
-                                <tr :key="user.id">
-                                    <td>
-                                        <a :href="`/dashboard/user/${user.id}/edit`" v-if="user.role != 'administrator'">
-                                            <i class="fa fa-edit fa-fw"></i>
-                                        </a>
-                                        {{ user.full_name }}
-                                    </td>
-                                    <td> {{ user.username }} </td>
-                                    <td> {{ user.email }} </td>
-                                    <td> {{ user.role }} </td>
-                                    <td> {{ user.posts_count }} </td>
-                                </tr>
-                            </template>
-                        </template>
-                        <template v-else>
-                            <tr>
-                                <td colspan="5" class="text-center">No users found.</td>
-                            </tr>
-                        </template>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                {{ users_count }} Users
-                <span class="float-right">
-                    <load-more :dataSet="dataSet" :loading="loading" @changed="fetch"></load-more>
-                </span>
-            </div>
+        </template>
+    </div>
+    <div class="users__footer">
+        <div class="center">
+            <load-more :dataSet="dataSet" :loading="loading" @changed="fetch"></load-more>
         </div>
-        <!-- /.card -->
     </div>
 </div>
-<!-- /.row -->
 </template>
 
 <script>

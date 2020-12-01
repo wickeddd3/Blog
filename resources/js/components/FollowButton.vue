@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-follow" @click="follow">
+    <button class="btn btn__follow" @click="follow">
         <template v-if="activeButton">
             <i class="fas fa-minus-circle"></i> &nbsp; Unfollow
         </template>

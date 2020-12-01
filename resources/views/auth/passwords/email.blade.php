@@ -33,7 +33,7 @@
                             @enderror
                         </div>
                         <div class="reset__item">
-                            <button type="submit" class="btn btn-primary reset__btn">Send Password Reset Link</button>
+                            <button type="submit" class="btn btn--primary reset__btn">Send Password Reset Link</button>
                         </div>
                     </form>
                 </div>

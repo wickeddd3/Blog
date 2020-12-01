@@ -1,75 +1,46 @@
 <template>
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Categories</h3>
-                <div class="card-tools">
-                    <search-bar @filter="filter"></search-bar>
+<div class="categories">
+    <div class="categories__header">
+        <search-bar @filter="filter"></search-bar>
+    </div>
+    <div class="categories__body">
+        <template v-if="all_categories.length > 0">
+            <template v-for="category in all_categories">
+                <div class="categories__item" :key="category.id">
+                    <div class="categories__content">
+                        <div class="categories__content-item categories__name">{{ category.name }}</div>
+                        <div class="categories__content-item categories__slug">{{ category.slug }}</div>
+                        <div class="categories__content-item categories__description">{{ category.description }}</div>
+                        <div class="categories__content-item categories__posts">
+                            <i class="fa fa-book fa-fw"></i>
+                            {{ category.posts_count }}
+                        </div>
+                        <div class="categories__content-item categories__edit">
+                            <a :href="`/dashboard/category/${category.id}/edit`">
+                                <i class="fa fa-edit fa-fw"></i>
+                            </a>
+                        </div>
+                        <div class="categories__content-item categories__trash">
+                            <a :href="`/dashboard/category/${category.id}/delete`">
+                                <i class="fa fa-trash fa-fw"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+            </template>
+        </template>
+        <template v-else>
+            <div class="center">
+                <span class="heading-secondary">No category results</span>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0" style="height: 360px;">
-                <table class="table table-sm table-head-fixed">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Slug</th>
-                            <th>Description</th>
-                            <th><i class="fa fa-book fa-fw"></i></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <template v-if="all_categories.length > 0">
-                            <template v-for="category in all_categories">
-                                <tr :key="category.id">
-                                    <td>
-                                        <a :href="`/dashboard/category/${category.id}/edit`">
-                                            <i class="fa fa-edit fa-fw"></i>
-                                        </a>
-                                        {{ category.name }}
-                                    </td>
-                                    <td> {{ category.slug }} </td>
-                                    <td> {{ category.description }} </td>
-                                    <td> {{ category.posts_count }} </td>
-                                    <td>
-                                        <template v-if="category.id != 1">
-                                            <a :href="`/dashboard/category/${category.id}/delete`">
-                                                <i class="fa fa-trash fa-fw"></i>
-                                            </a>
-                                        </template>
-                                    </td>
-                                </tr>
-                            </template>
-                        </template>
-                        <template v-else>
-                            <tr>
-                                <td colspan="5" class="text-center">No categories found.</td>
-                            </tr>
-                        </template>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                {{ categories_count }} Categories
-                <span class="float-right">
-                    <load-more :dataSet="dataSet" :loading="loading" @changed="fetch"></load-more>
-                </span>
-            </div>
+        </template>
+    </div>
+    <div class="categories__footer">
+        <div class="center">
+            <load-more :dataSet="dataSet" :loading="loading" @changed="fetch"></load-more>
         </div>
-        <!-- /.card -->
-
-        <small id="list" class="form-text text-muted">
-            Deleting a category does not delete the posts in that category.
-            Instead, posts that were only assigned to the deleted category are set to the default category Uncategorized.
-            The default category cannot be deleted.
-            Categories can be selectively converted to tags using the category to tag converter.
-        </small>
     </div>
 </div>
-<!-- /.row -->
 </template>
 
 <script>

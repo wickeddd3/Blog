@@ -1,5 +1,8 @@
 <template>
-    <a href="" class="text-dark ml-1" @click.prevent="like">{{ text }}</a>
+    <button class="btn btn__like"
+            @click.prevent="like">
+            {{ text }}
+    </button>
 </template>
 
 <script>
@@ -14,7 +17,7 @@ export default {
 
     computed: {
         text() {
-            return this.activeButton ? 'Unlike' : 'Like';
+            return this.activeButton ? 'Liked' : 'Like';
         },
     },
 

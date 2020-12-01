@@ -58,7 +58,7 @@
                     <span class="addpost__error" role="alert">{{ $message }}</span>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary addpost__btn">Publish</button>
+            <button type="submit" class="btn btn--primary addpost__btn">Publish</button>
         </form>
     </div>
 </div>

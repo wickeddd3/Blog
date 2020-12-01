@@ -39,7 +39,7 @@
                             </label>
                         </div>
                         <div class="login__item">
-                            <button type="submit" class="btn btn-primary login__btn">Sign In</button>
+                            <button type="submit" class="btn btn--primary login__btn">Sign In</button>
                         </div>
                     </form>
                 </div>

@@ -7,15 +7,41 @@
     cursor: pointer;
     font-family: inherit;
 
-    &-primary {
+    &--primary {
         background-color: $blue;
-        cursor: pointer;
     }
 
-    &-follow {
+    &__loadmore {
         background-color: $blue;
         border-radius: .5rem;
         font-size: 1.3rem;
         padding: .7rem .9rem;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    }
+
+    &__follow {
+        background-color: $blue;
+        border-radius: .5rem;
+        font-size: 1.3rem;
+        padding: .7rem .9rem;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    }
+
+    &__like {
+        background-color: $blue;
+        border-radius: .5rem;
+        font-size: 1.3rem;
+        padding: .7rem .9rem;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    }
+
+    &__bookmark {
+        background-color: $white;
+        border-radius: 50%;
+        padding: .6rem .9rem;
+
+        &:hover {
+            background-color: #e6ebee;
+        }
     }
 }

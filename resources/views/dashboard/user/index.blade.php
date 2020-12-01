@@ -2,7 +2,7 @@
 
 @section('content')
 <dashboard-users-view inline-template>
-<div>
+<div class="container">
     <users></users>
 </div>
 </dashboard-users-view>

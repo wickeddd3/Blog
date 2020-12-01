@@ -12,6 +12,8 @@
 @import "components/media";
 @import "components/comment";
 @import "components/tabs";
+@import "components/searchbar";
+@import "components/table";
 
 @import "layouts/grid";
 @import "layouts/navbar";
@@ -28,3 +30,12 @@
 @import "pages/search";
 @import "pages/addpost";
 @import "pages/editprofile";
+
+
+// ADMIN PANEL
+@import "layouts/admin/adminpanel";
+@import "layouts/admin/sidebar";
+
+@import "pages/admin/posts";
+@import "pages/admin/categories";
+@import "pages/admin/users";

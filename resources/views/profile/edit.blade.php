@@ -45,7 +45,7 @@
                 <label for="bio" class="editprofile__label">Bio</label>
                 <textarea name="bio" id="bio" cols="5" rows="5" class="editprofile__textarea">{{ $profile->profile->bio }}</textarea>
             </div>
-            <button type="submit" class="btn btn-primary editprofile__btn">Update Profile</button>
+            <button type="submit" class="btn btn--primary editprofile__btn">Update Profile</button>
         </form>
     </div>
 </div>

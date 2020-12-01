@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container-fluid">
-    <h5>Dashboard</h5>
-    <div class="pt-2">
-        <!-- Info boxes -->
+    <h5 class="heading-primary">Dashboard</h5>
+    {{-- <div class="pt-2">
+
         <div class="row">
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box">
@@ -14,11 +14,11 @@
                     <span class="info-box-text">Posts</span>
                     <span class="info-box-number">{{ $postsCount }}</span>
                 </div>
-                <!-- /.info-box-content -->
+
                 </div>
-                <!-- /.info-box -->
+
             </div>
-            <!-- /.col -->
+
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
                 <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-users"></i></span>
@@ -27,13 +27,12 @@
                     <span class="info-box-text">Users</span>
                     <span class="info-box-number">{{ $usersCount }}</span>
                 </div>
-                <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
 
-            <!-- fix for small devices only -->
+                </div>
+
+            </div>
+
+
             <div class="clearfix hidden-md-up"></div>
 
             <div class="col-12 col-sm-6 col-md-3">
@@ -44,11 +43,11 @@
                     <span class="info-box-text">Categories</span>
                     <span class="info-box-number">{{ $categoriesCount }}</span>
                 </div>
-                <!-- /.info-box-content -->
+
                 </div>
-                <!-- /.info-box -->
+
             </div>
-            <!-- /.col -->
+
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
                 <span class="info-box-icon bg-secondary elevation-1"><i class="fa fa-tags"></i></span>
@@ -57,13 +56,13 @@
                     <span class="info-box-text">Tags</span>
                     <span class="info-box-number">{{ $tagsCount }}</span>
                 </div>
-                <!-- /.info-box-content -->
+
                 </div>
-                <!-- /.info-box -->
+
             </div>
-            <!-- /.col -->
+
         </div>
-        <!-- /.row -->
+
 
 
         <div class="pt-2">
@@ -75,6 +74,6 @@
                 <a class="btn btn-primary btn-lg" href="{{ route('post.add') }}" role="button">Create new post</a>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection

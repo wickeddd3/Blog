@@ -19,6 +19,7 @@
 
     &__footer {
         display: flex;
+        align-items: center;
     }
 
     &__content {
@@ -35,7 +36,8 @@
     }
 
     &__icon {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+        color: $black;
         cursor: pointer;
 
         &--active {

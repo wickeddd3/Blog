@@ -2,7 +2,7 @@
 
 @section('content')
 <dashboard-posts-view inline-template>
-<div>
+<div class="container">
     <posts></posts>
 </div>
 </dashboard-posts-view>

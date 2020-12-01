@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="card__footer">
-                        @if(Auth::id() !== $blogger->id)
+                        @if(Auth::check() && Auth::id() !== $blogger->id)
                             <follow-button :blogger="{{ json_encode($blogger) }}"></follow-button>
                         @endif
                     </div>

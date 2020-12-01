@@ -1,7 +1,7 @@
 <template>
-    <span @click="bookmark">
+    <button class="btn btn__bookmark" @click="bookmark">
         <i :class="icon"></i>
-    </span>
+    </button>
 </template>
 
 <script>

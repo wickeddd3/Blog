@@ -1,4 +1,4 @@
-.editprofile {
+.editprofile, .adduser, .edituser {
     width: 100%;
     padding: 1rem;
 
@@ -45,5 +45,10 @@
         width: 100%;
         padding: .5rem 1rem;
         font-size: 1.4rem;
+    }
+
+    &__error {
+        font-size: 1.3rem;
+        color: $red;
     }
 }

@@ -10,7 +10,9 @@ export default {
 
     data() {
         return {
-            active_tab: "popular"
+            active_tab: "popular",
+            categories_collapse: false,
+            tags_collapse: false
         }
     },
 

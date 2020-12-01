@@ -67,7 +67,7 @@
                             <input type="password" class="register__input" name="password_confirmation" placeholder="Retype password">
                         </div>
                         <div class="login__item">
-                            <button type="submit" class="btn btn-primary register__btn">Sign Up</button>
+                            <button type="submit" class="btn btn--primary register__btn">Sign Up</button>
                         </div>
                     </form>
                 </div>

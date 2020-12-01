@@ -1,66 +1,45 @@
 <template>
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Tags</h3>
-                <div class="card-tools">
-                    <search-bar @filter="filter"></search-bar>
+<div class="tags">
+    <div class="tags__header">
+        <search-bar @filter="filter"></search-bar>
+    </div>
+    <div class="tags__body">
+        <template v-if="all_tags.length > 0">
+            <template v-for="tag in all_tags">
+                <div class="tags__item" :key="tag.id">
+                    <div class="tags__content">
+                        <div class="tags__content-item tags__slug">{{ tag.slug }}</div>
+                        <div class="tags__content-item tags__description">{{ tag.description }}</div>
+                        <div class="tags__content-item tags__posts">
+                            <i class="fa fa-book fa-fw"></i>
+                            {{ tag.posts_count }}
+                        </div>
+                        <div class="tags__content-item tags__edit">
+                            <a :href="`/dashboard/tag/${tag.id}/edit`">
+                                <i class="fa fa-edit fa-fw"></i>
+                            </a>
+                        </div>
+                        <div class="tags__content-item tags__trash">
+                             <a :href="`/dashboard/tag/${tag.id}/delete`">
+                                <i class="fa fa-trash fa-fw"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+            </template>
+        </template>
+        <template v-else>
+            <div class="center">
+                <span class="heading-secondary">No tag results</span>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive p-0" style="height: 360px;">
-                <table class="table table-sm table-head-fixed">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Slug</th>
-                            <th>Description</th>
-                            <th><i class="fa fa-book fa-fw"></i></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <template v-if="all_tags.length > 0">
-                            <template v-for="tag in all_tags">
-                                <tr :key="tag.id">
-                                    <td>
-                                        <a :href="`/dashboard/tag/${tag.id}/edit`">
-                                            <i class="fa fa-edit fa-fw"></i>
-                                        </a>
-                                        {{ tag.name }}
-                                    </td>
-                                    <td> {{ tag.slug }} </td>
-                                    <td> {{ tag.description }} </td>
-                                    <td> {{ tag.posts_count }} </td>
-                                    <td>
-                                        <a :href="`/dashboard/tag/${tag.id}/delete`">
-                                            <i class="fa fa-trash fa-fw"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </template>
-                        </template>
-                        <template v-else>
-                            <tr>
-                                <td colspan="5" class="text-center">No tags found.</td>
-                            </tr>
-                        </template>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                {{ tags_count }} Tags
-                <span class="float-right">
-                    <load-more :dataSet="dataSet" :loading="loading" @changed="fetch"></load-more>
-                </span>
-            </div>
+        </template>
+    </div>
+    <div class="tags__footer">
+        <div class="center">
+            <load-more :dataSet="dataSet" :loading="loading" @changed="fetch"></load-more>
         </div>
-        <!-- /.card -->
     </div>
 </div>
-<!-- /.row -->
 </template>
 
 <script>

@@ -1,0 +1,37 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    &__head {
+        width: 100%;
+        background-color: #f6f9fc;
+        color: #8898aa;
+        border-top: 1px solid $light-gray;
+        border-bottom: 1px solid $light-gray;
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+
+    &__body {
+        width: 100%;
+    }
+
+    &__row {
+        width: 100%;
+    }
+
+    &__heading {
+        width: 100%;
+        height: 3rem;
+        padding: 1rem;
+        vertical-align: center;
+    }
+
+    &__data {
+        width: 100%;
+        font-size: 1.5rem;
+        padding: .5rem;
+        vertical-align: center;
+    }
+}
