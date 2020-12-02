@@ -61,63 +61,78 @@ ol {
   color: #3762ff !important;
 }
 
-.m-1 {
+.m-1,
+.p-1 {
   margin: 1rem !important;
 }
 
-.m-2 {
+.m-2,
+.p-2 {
   margin: 2rem !important;
 }
 
-.m-3 {
+.m-3,
+.p-3 {
   margin: 3rem !important;
 }
 
-.m-t-1 {
+.m-t-1,
+.p-t-1 {
   margin-top: 1rem !important;
 }
 
-.m-t-2 {
+.m-t-2,
+.p-t-2 {
   margin-top: 2rem !important;
 }
 
-.m-t-3 {
+.m-t-3,
+.p-t-3 {
   margin-top: 3rem !important;
 }
 
-.m-r-1 {
+.m-r-1,
+.p-r-1 {
   margin-right: 1rem !important;
 }
 
-.m-r-2 {
+.m-r-2,
+.p-r-2 {
   margin-right: 2rem !important;
 }
 
-.m-r-3 {
+.m-r-3,
+.p-r-3 {
   margin-right: 3rem !important;
 }
 
-.m-b-1 {
+.m-b-1,
+.p-b-1 {
   margin-bottom: 1rem !important;
 }
 
-.m-b-2 {
+.m-b-2,
+.p-b-2 {
   margin-bottom: 2rem !important;
 }
 
-.m-b-3 {
+.m-b-3,
+.p-b-3 {
   margin-bottom: 3rem !important;
 }
 
-.m-l-1 {
+.m-l-1,
+.p-l-1 {
   margin-left: 1rem !important;
 }
 
-.m-l-2 {
+.m-l-2,
+.p-l-2 {
   margin-left: 2rem !important;
 }
 
-.m-l-3 {
+.m-l-3,
+.p-l-3 {
   margin-left: 3rem !important;
 }
 
@@ -569,6 +584,55 @@ ol {
   font-size: 1.5rem;
   padding: 0.5rem;
   vertical-align: center;
+}
+
+.widget {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.widget__content {
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  border-radius: 0.5rem;
+}
+
+.widget__body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.widget__footer {
+  padding: 1rem;
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+
+.widget__total {
+  padding: 0.5rem;
+}
+
+.widget__title {
+  padding: 0.5rem;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: #777777;
+}
+
+.widget__number {
+  padding: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.widget__icon {
+  font-size: 1.6rem;
+  color: #fff;
+  background-color: #3762ff;
+  padding: 1.5rem;
+  border-radius: 50%;
 }
 
 @media screen and (max-width: -1px) {
@@ -2176,7 +2240,7 @@ ol {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-right: 1px solid #e6ebee;
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
   padding: 1.4rem 2rem;
   position: fixed;
   background-color: #fff;
@@ -2561,5 +2625,9 @@ ol {
 
 .users__edit {
   width: 6rem;
+}
+
+.dashboard {
+  padding: 1rem;
 }
 
