@@ -2,23 +2,22 @@
 
 namespace App\Providers;
 
+use App\Repositories\CommentRepository;
+use App\Repositories\BlogRepository;
+use App\Repositories\PostRepository;
+use App\Repositories\TagRepository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\ProfileRepository;
+use App\Repositories\UserRepository;
 
+use App\Interfaces\CommentRepositoryInterface;
+use App\Interfaces\BlogRepositoryInterface;
+use App\Interfaces\PostRepositoryInterface;
+use App\Interfaces\TagRepositoryInterface;
+use App\Interfaces\CategoryRepositoryInterface;
+use App\Interfaces\ProfileRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 
-use App\Repositories\Eloquent\CommentRepository;
-use App\Repositories\Eloquent\BlogRepository;
-use App\Repositories\Eloquent\PostRepository;
-use App\Repositories\Eloquent\TagRepository;
-use App\Repositories\Eloquent\CategoryRepository;
-use App\Repositories\Eloquent\ProfileRepository;
-use App\Repositories\Eloquent\UserRepository;
-
-use App\Repositories\CommentRepositoryInterface;
-use App\Repositories\BlogRepositoryInterface;
-use App\Repositories\PostRepositoryInterface;
-use App\Repositories\TagRepositoryInterface;
-use App\Repositories\CategoryRepositoryInterface;
-use App\Repositories\ProfileRepositoryInterface;
-use App\Repositories\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider

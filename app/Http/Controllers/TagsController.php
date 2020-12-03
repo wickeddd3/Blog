@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TagStoreRequest;
 use App\Http\Requests\TagUpdateRequest;
-use App\Repositories\TagRepositoryInterface;
+use App\Interfaces\TagRepositoryInterface;
 
 class TagsController extends Controller
 {

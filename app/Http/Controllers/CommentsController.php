@@ -7,7 +7,7 @@ use App\Http\Requests\CommentUpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Comment;
-use App\Repositories\CommentRepositoryInterface;
+use App\Interfaces\CommentRepositoryInterface;
 
 class CommentsController extends Controller
 {

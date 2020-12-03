@@ -7,7 +7,7 @@ use App\Http\Requests\BlogStoreRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
-use App\Repositories\BlogRepositoryInterface;
+use App\Interfaces\BlogRepositoryInterface;
 
 class BlogsController extends Controller
 {

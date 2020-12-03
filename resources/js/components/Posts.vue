@@ -12,7 +12,7 @@
                             {{ post.author.full_name }}
                         </a>
                         <p class="media__author--date">
-                            {{ published(post.published_at) }}
+                            {{ publishedDate(post.published_at) }}
                         </p>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
             <div class="media__body">
                 <div class="media__content">
                     <a class="heading-title" :href="post.path">{{ post.title }}</a>
-                    <p class="paragraph" v-html="limitContent(post.content)"></p>
+                    <p class="paragraph" v-html="limitContent(post.content, 300)"></p>
                 </div>
                 <img class="media__img" :src="'/storage/'+post.featured" :alt="'/storage/'+post.featured">
             </div>
@@ -56,9 +56,10 @@
 </template>
 
 <script>
-import moment from 'moment'
 import BookmarkButton from '../components/BookmarkButton'
 import LoadMore from '../components/LoadMore'
+import dateFormat from '../mixins/dateFormat'
+import stringTransform from '../mixins/stringTransform'
 
 export default {
     props: ['active_tab'],
@@ -67,6 +68,11 @@ export default {
         BookmarkButton,
         LoadMore,
     },
+
+    mixins:[
+        dateFormat,
+        stringTransform
+    ],
 
     data() {
         return {
@@ -98,12 +104,6 @@ export default {
     },
 
     methods: {
-        published(date) {
-            return moment(date).format('MMM D, YYYY');
-        },
-        limitContent(content) {
-            return content.substr(0, 300) + '...';
-        },
         fetch(page) {
             this.loading = true;
             if(! page) {

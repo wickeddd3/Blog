@@ -1,8 +1,8 @@
 <template>
-    <button class="btn btn__like"
-            @click.prevent="like">
-            {{ text }}
-    </button>
+<button class="btn btn__like"
+        @click.prevent="like">
+        {{ text }}
+</button>
 </template>
 
 <script>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Repositories\ProfileRepositoryInterface;
+use App\Interfaces\ProfileRepositoryInterface;
 
 class ProfilesController extends Controller
 {

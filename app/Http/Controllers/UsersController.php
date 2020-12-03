@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Repositories\UserRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 
 class UsersController extends Controller
 {

@@ -42,10 +42,12 @@
 </template>
 
 <script>
-import moment from 'moment'
+import dateFormat from '../mixins/dateFormat'
 
 export default {
-    props: ['auth_user'],
+    props:['auth_user'],
+
+    mixins:[dateFormat],
 
     data() {
         return {
@@ -72,9 +74,6 @@ export default {
         },
         read(read_at) {
             return (read_at) ? false : true;
-        },
-        ago(created_at) {
-            return moment(created_at).fromNow();
         }
     }
 }

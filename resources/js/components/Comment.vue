@@ -10,7 +10,7 @@
             <div class="comment__author">
                 <div class="comment__author-details">
                     <span class="comment__author-name">{{ data.owner.full_name }}</span>
-                    <span class="comment__author-published">{{ ago }}</span>
+                    <span class="comment__author-published">{{ ago(data.created_at) }}</span>
                 </div>
             </div>
             <div class="comment__option">
@@ -41,10 +41,12 @@
 </template>
 
 <script>
-import moment from 'moment'
+import dateFormat from '../mixins/dateFormat'
 
 export default {
     props:['data'],
+
+    mixins:[dateFormat],
 
     data() {
         return {
@@ -55,9 +57,6 @@ export default {
     },
 
     computed: {
-        ago() {
-            return moment(this.data.created_at).fromNow() + '...';
-        },
         signedIn() {
             return window.App.signedIn;
         },
@@ -71,24 +70,12 @@ export default {
             axios.patch('/comments/' + this.data.id, {
                 message: this.message
             });
-
             this.editing = false;
         },
         destroy() {
             axios.delete('/comments/' + this.data.id);
-
             this.$emit('deleted', this.data.id);
         }
     }
 }
 </script>
-
-<style scoped>
-.comment-owner-option {
-    display: none;
-}
-
-.media:hover .comment-owner-option {
-    display: block;
-}
-</style>

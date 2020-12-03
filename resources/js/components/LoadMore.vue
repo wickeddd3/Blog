@@ -1,12 +1,10 @@
 <template>
-<div>
-    <div class="container m-t-1 center" v-if="shouldLoadMore">
-        <button class="btn btn__loadmore"
-                @click.prevent="loadMore"
-                :disabled="loading">
-            Load More
-        </button>
-    </div>
+<div class="container m-t-1 center" v-if="shouldLoadMore">
+    <button class="btn btn__loadmore"
+            @click.prevent="loadMore"
+            :disabled="loading">
+        Load More
+    </button>
 </div>
 </template>
 

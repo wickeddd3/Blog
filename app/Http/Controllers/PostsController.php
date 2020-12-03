@@ -6,7 +6,7 @@ use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\Tag;
-use App\Repositories\PostRepositoryInterface;
+use App\Interfaces\PostRepositoryInterface;
 
 class PostsController extends Controller
 {
