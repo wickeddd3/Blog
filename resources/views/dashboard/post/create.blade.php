@@ -4,7 +4,7 @@
 <div class="container">
     <div class="addpost">
         <h1 class="addpost__title">Add New Post</h1>
-        <form method="POST" action="{{ route('dashboard.post.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('dashboard.posts.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="addpost__item">
                 <span class="addpost__label">Title</span>

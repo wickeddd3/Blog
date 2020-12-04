@@ -44,17 +44,12 @@ Route::prefix('dashboard')->middleware('can:dashboard-access')->group(function (
     Route::name('dashboard.')->group(function () {
         Route::get('/', 'DashboardController@index')->name('index');
         // Posts Routes
-        Route::get('/posts', 'PostsController@index');
-        Route::get('/post/add', 'PostsController@create')->name('post.add');
-        Route::post('/post', 'PostsController@store')->name('post.store');
-        Route::get('/post/{id}/edit', 'PostsController@edit')->name('post.edit');
-        Route::put('/post/{id}/update', 'PostsController@update')->name('post.update');
-        Route::get('/post/{id}/trash', 'PostsController@trash')->name('post.trash');
-        Route::get('/post/{id}/restore', 'PostsController@restore')->name('post.restore');
-        Route::get('/post/{id}/delete', 'PostsController@destroy')->name('post.delete');
-        Route::get('/post/{id}/publish', 'PostsController@publish')->name('post.publish');
-        Route::get('/post/{id}/feature', 'PostsController@feature')->name('post.feature');
-        Route::get('/post/{id}/unfeature', 'PostsController@unfeature')->name('post.unfeature');
+        Route::resource('posts', PostsController::Class);
+        Route::get('/posts/{id}/trash', 'PostsController@trash')->name('posts.trash');
+        Route::get('/posts/{id}/restore', 'PostsController@restore')->name('posts.restore');
+        Route::get('/posts/{id}/publish', 'PostsController@publish')->name('posts.publish');
+        Route::get('/posts/{id}/feature', 'PostsController@feature')->name('posts.feature');
+        Route::get('/posts/{id}/unfeature', 'PostsController@unfeature')->name('posts.unfeature');
         // Categories Routes
         Route::resource('categories', CategoriesController::class);
         // Tags Routes

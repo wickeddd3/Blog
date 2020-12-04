@@ -23,9 +23,9 @@ class PostUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->route('id');
+        $post = $this->route('post');
         return [
-            'title' => 'required|unique:posts,title,'.$id,
+            'title' => 'required|unique:posts,title,'.$post,
             'content' => 'required',
             'category' => 'required',
             'tags' => 'required'

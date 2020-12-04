@@ -5,7 +5,7 @@
     <div class="addpost">
         <h1 class="addpost__title">Edit Post</h1>
         <form method="POST"
-              action="{{ route('dashboard.post.update', ['id' => $post->id]) }}"
+              action="{{ route('dashboard.posts.update', ['post' => $post->id]) }}"
               enctype="multipart/form-data">
             @csrf
             @method('PUT')

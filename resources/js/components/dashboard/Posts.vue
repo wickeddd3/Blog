@@ -8,7 +8,7 @@
             <template v-for="post in all_posts">
                 <div class="posts__item" :key="post.id">
                     <div class="posts__content">
-                        <div class="posts__content-item posts__title">{{ limitContent(post.title) }}</div>
+                        <div class="posts__content-item posts__title">{{ limitContent(post.title, 50) }}</div>
                         <div class="posts__content-item posts__category">{{ post.category.name }}</div>
                         <div class="posts__content-item posts__details">
                             <span>
@@ -21,17 +21,17 @@
                                 <i class="far fa-eye fa-fw"></i> {{ post.views_count }}
                             </span>
                         </div>
-                        <div class="posts__content-item posts__date">{{ published(post.published_at) }}</div>
+                        <div class="posts__content-item posts__date">{{ publishedDate(post.published_at) }}</div>
                         <div class="posts__content-item posts__featured">
                             <a class="btn btn--primary" :href="`/dashboard/post/${post.id}/unfeature`" v-if="post.featured_at">
                                 <i class="fas fa-star fa-fw"></i>
                             </a>
-                            <a class="btn btn--primary" :href="`/dashboard/post/${post.id}/feature`" v-else>
+                            <a class="btn btn--primary" :href="`/dashboard/posts/${post.id}/feature`" v-else>
                                 <i class="far fa-star fa-fw"></i>
                             </a>
                         </div>
                         <div class="posts__content-item posts__edit">
-                            <a :href="`/dashboard/post/${post.id}/edit`">
+                            <a :href="`/dashboard/posts/${post.id}/edit`">
                                 <i class="fa fa-edit fa-fw"></i>
                             </a>
                         </div>
@@ -57,15 +57,21 @@
 </template>
 
 <script>
-import moment from 'moment'
 import SearchBar from '../../components/SearchBar'
 import LoadMore from '../../components/dashboard/LoadMore'
+import stringTransform from '../../mixins/stringTransform'
+import dateFormat from '../../mixins/dateFormat'
 
 export default {
     components: {
         SearchBar,
         LoadMore,
     },
+
+    mixins:[
+        stringTransform,
+        dateFormat
+    ],
 
     data() {
         return {
@@ -82,12 +88,6 @@ export default {
     },
 
     methods: {
-        limitContent(content) {
-            return content.substr(0, 50) + '...';
-        },
-        published(date) {
-            return moment(date).format('MMM D Y');
-        },
         filter(search) {
             history.pushState(null, null, '?search='+search);
             this.search = search;
