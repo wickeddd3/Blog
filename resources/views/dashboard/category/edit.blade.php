@@ -5,7 +5,7 @@
 <div class="container__row m-t-2">
     <div class="container__col-xl-6 container__col-12">
         <div class="addcategory">
-            <form method="POST" action="{{ route('category.update', ['id' => $category->id]) }}">
+            <form method="POST" action="{{ route('dashboard.categories.update', ['category' => $category->id]) }}">
                 @csrf
                 @method('PUT')
                 <div class="addcategory__item">

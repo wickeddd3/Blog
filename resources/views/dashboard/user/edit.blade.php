@@ -4,7 +4,7 @@
 <div class="container">
     <div class="edituser">
         <h1 class="edituser__title">Edit User</h1>
-        <form method="POST" action="{{ route('user.update', ['id' => $user->id]) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('dashboard.users.update', ['user' => $user->id]) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="edituser__item">

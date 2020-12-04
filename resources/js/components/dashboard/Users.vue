@@ -12,9 +12,9 @@
                         <div class="users__content-item users__username">{{ user.username }}</div>
                         <div class="users__content-item users__email">{{ user.email }}</div>
                         <div class="users__content-item users__role">{{ user.role }}</div>
-                        <div class="users__content-item users__date">{{ published(user.verified_at) }}</div>
+                        <div class="users__content-item users__date">{{ publishedDate(user.verified_at) }}</div>
                         <div class="users__content-item users__edit">
-                            <a :href="`/dashboard/user/${user.id}/edit`" v-if="user.role != 'administrator'">
+                            <a :href="`/dashboard/users/${user.id}/edit`" v-if="user.role != 'administrator'">
                                 <i class="fa fa-edit fa-fw"></i>
                             </a>
                         </div>
@@ -40,15 +40,17 @@
 </template>
 
 <script>
-import moment from 'moment'
 import SearchBar from '../../components/SearchBar'
 import LoadMore from '../../components/dashboard/LoadMore'
+import dateFormat from '../../mixins/dateFormat'
 
 export default {
     components: {
         SearchBar,
         LoadMore,
     },
+
+    mixins:[dateFormat],
 
     data() {
         return {
@@ -65,12 +67,6 @@ export default {
     },
 
     methods: {
-        limitContent(content) {
-            return content.substr(0, 30) + '...';
-        },
-        published(date) {
-            return moment(date).format('MMM D');
-        },
         filter(search) {
             history.pushState(null, null, '?search='+search);
             this.search = search;

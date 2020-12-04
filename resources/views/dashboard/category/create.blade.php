@@ -1,5 +1,5 @@
 <div class="addcategory">
-    <form method="POST" action="{{ route('category.store') }}">
+    <form method="POST" action="{{ route('dashboard.categories.store') }}">
         @csrf
         <div class="addcategory__item">
             <span class="addcategory__label">Name</span>

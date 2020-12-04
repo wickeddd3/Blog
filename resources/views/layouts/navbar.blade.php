@@ -52,7 +52,7 @@
                 </div>
                 @if(Auth::user()->isAdmin)
                     <div class="nav__item">
-                        <a class="nav__link--rounded" href="{{ route('dashboard') }}">
+                        <a class="nav__link--rounded" href="{{ route('dashboard.index') }}">
                             <svg class="nav__icon">
                                 <use xlink:href="{{ asset('icons/sprite.svg#icon-gauge') }}"></use>
                             </svg>

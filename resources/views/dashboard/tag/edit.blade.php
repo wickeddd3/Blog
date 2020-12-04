@@ -5,7 +5,7 @@
 <div class="container__row m-t-2">
     <div class="container__col-xl-6 container__col-12">
         <div class="addtag">
-            <form method="POST" action="{{ route('tag.update', ['id' => $tag->id]) }}">
+            <form method="POST" action="{{ route('dashboard.tags.update', ['tag' => $tag->id]) }}">
                 @csrf
                 @method('PUT')
                 <div class="addtag__item">

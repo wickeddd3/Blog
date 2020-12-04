@@ -4,7 +4,7 @@
 <div class="container">
     <div class="adduser">
         <h1 class="adduser__title">Add New User</h1>
-        <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('dashboard.users.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="adduser__item">
                 <label for="username" class="adduser__label">Username</label>

@@ -22,16 +22,15 @@ class BlogsController extends Controller
 
     public function index($category = null)
     {
-        $result = $this->blogRepository->all($category, request()->query('archive'));
+        $posts = $this->blogRepository->all($category, request()->query('filter'));
 
         if(request()->wantsJson()) {
             return response()->json([
-                'posts' => $result['posts'],
-                'header' => $result['header']
+                'posts' => $posts
             ]);
         }
 
-        return view('blogs.index')->with('header', $result['header']);
+        return view('blogs.index');
     }
 
     public function store(BlogStoreRequest $request)

@@ -1,5 +1,5 @@
 <div class="addtag">
-    <form method="POST" action="{{ route('tag.store') }}">
+    <form method="POST" action="{{ route('dashboard.tags.store') }}">
         @csrf
         <div class="addtag__item">
             <span class="addtag__label">Name</span>

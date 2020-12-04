@@ -8,6 +8,7 @@
             <template v-for="tag in all_tags">
                 <div class="tags__item" :key="tag.id">
                     <div class="tags__content">
+                        <div class="tags__content-item tags__name">{{ tag.name }}</div>
                         <div class="tags__content-item tags__slug">{{ tag.slug }}</div>
                         <div class="tags__content-item tags__description">{{ tag.description }}</div>
                         <div class="tags__content-item tags__posts">
@@ -15,12 +16,12 @@
                             {{ tag.posts_count }}
                         </div>
                         <div class="tags__content-item tags__edit">
-                            <a :href="`/dashboard/tag/${tag.id}/edit`">
+                            <a :href="`/dashboard/tags/${tag.id}/edit`">
                                 <i class="fa fa-edit fa-fw"></i>
                             </a>
                         </div>
                         <div class="tags__content-item tags__trash">
-                             <a :href="`/dashboard/tag/${tag.id}/delete`">
+                             <a @click="deleteItem(tag.id)">
                                 <i class="fa fa-trash fa-fw"></i>
                             </a>
                         </div>
@@ -99,6 +100,16 @@ export default {
                     this.loading = false;
                 })
         },
+        deleteItem(id) {
+            axios.delete(`${location.pathname}/${id}`)
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
+            location.reload();
+        }
     }
 }
 </script>

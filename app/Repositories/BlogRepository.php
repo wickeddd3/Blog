@@ -21,43 +21,32 @@ class BlogRepository implements BlogRepositoryInterface
         $this->category = $category;
     }
 
-    public function all($category, $archive)
+    public function all($category, $filter)
     {
         $cat = $this->category->where('slug', $category)->first();
 
         $posts = $this->post->latestPosts();
-        $header = "Latest Posts";
 
         if($cat) {
             $posts = $posts->where('category_id', $cat->id);
-            $header = ucfirst($cat->name)." Posts";
         }
 
-        switch($category)
+        switch($filter)
         {
             case "latest":
                 $posts = $this->post->latestPosts();
-                $header = "Latest Posts";
                 break;
             case "popular":
                 $posts = $this->post->popularPosts();
-                $header = "Popular Posts";
                 break;
             case "featured":
                 $posts = $this->post->featuredPosts();
-                $header = "Featured Posts";
-                break;
-            case "archived":
-                $posts = $this->post->archivedPosts($archive);
-                $header = "$archive Posts";
                 break;
         }
 
         $posts = $posts->paginate(10);
 
-        $result =  ["posts" => $posts, "header" => $header];
-
-        return $result;
+        return $posts;
     }
 
     public function view($post)

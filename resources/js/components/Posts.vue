@@ -111,9 +111,10 @@ export default {
                 page = query ? query[1] : 1;
             }
             let url;
+            let filter = `?filter=${this.active_tab}`;
             (location.pathname == "/")
-            ? url = `${location.pathname}posts/${this.active_tab}?page=${page}`
-            : url = `${location.pathname}/posts/${this.active_tab}?page=${page}`
+            ? url = `${location.pathname}posts${filter}&page=${page}`
+            : url = `${location.pathname}/posts${filter}&page=${page}`
             axios.get(url)
                  .then(({data}) => {
                     let items = data.posts.data;

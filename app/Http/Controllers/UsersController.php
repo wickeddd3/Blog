@@ -40,7 +40,7 @@ class UsersController extends Controller
     {
         $this->userRepository->create($request);
 
-        return redirect()->route('users');
+        return redirect()->back();
     }
 
     public function edit($id)
@@ -54,7 +54,7 @@ class UsersController extends Controller
     {
         $this->userRepository->update($request, $id);
 
-        return redirect()->route('users');
+        return redirect()->route('dashboard.users.index');
     }
 
 }

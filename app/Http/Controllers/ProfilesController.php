@@ -32,14 +32,13 @@ class ProfilesController extends Controller
         return redirect()->back();
     }
 
-    public function filter($user, $filter)
+    public function posts($user)
     {
-        $profile = $this->profileRepository->filter($user, $filter);
+        $posts = $this->profileRepository->filter($user, request()->query('filter'));
 
         if(request()->wantsJson()) {
             return response()->json([
-                'posts' => $profile['posts'],
-                'header' => $profile['header']
+                'posts' => $posts
             ]);
         }
     }

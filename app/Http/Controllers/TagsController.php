@@ -48,7 +48,7 @@ class TagsController extends Controller
     {
         $this->tagRepository->update($request, $id);
 
-        return redirect()->route('tags');
+        return redirect()->route('dashboard.tags.index');
     }
 
     public function destroy($id)

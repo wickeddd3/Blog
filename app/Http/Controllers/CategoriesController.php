@@ -49,7 +49,7 @@ class CategoriesController extends Controller
     {
         $this->categoryRepository->update($request, $id);
 
-        return redirect()->route('categories');
+        return redirect()->route('dashboard.categories.index');
     }
 
     public function destroy($id)

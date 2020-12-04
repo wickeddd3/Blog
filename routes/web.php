@@ -27,7 +27,7 @@ Route::post('/posts/{category}/{post}/likes', 'LikesController@like');
 Route::delete('/posts/{category}/{post}/likes', 'LikesController@unlike');
 
 // Profile
-Route::get('/profile/{user}/posts/{filter}', 'ProfilesController@filter');
+Route::get('/profile/{user}/posts', 'ProfilesController@posts');
 Route::get('/profile/{user}', 'ProfilesController@profile');
 Route::get('/profile/{user}/@/edit', 'ProfilesController@edit');
 Route::put('/profile/{user}/@/update', 'ProfilesController@update');
@@ -41,38 +41,28 @@ Auth::routes(['verify' => true]);
 
 // Admin Dashboard Routes
 Route::prefix('dashboard')->middleware('can:dashboard-access')->group(function () {
-    Route::get('/', 'DashboardController@index')->name('dashboard');
-    // Posts Routes
-    Route::get('/posts', 'PostsController@index');
-    Route::get('/post/add', 'PostsController@create')->name('post.add');
-    Route::post('/post', 'PostsController@store')->name('post.store');
-    Route::get('/post/{id}/edit', 'PostsController@edit')->name('post.edit');
-    Route::put('/post/{id}/update', 'PostsController@update')->name('post.update');
-    Route::get('/post/{id}/trash', 'PostsController@trash')->name('post.trash');
-    Route::get('/post/{id}/restore', 'PostsController@restore')->name('post.restore');
-    Route::get('/post/{id}/delete', 'PostsController@destroy')->name('post.delete');
-    Route::get('/post/{id}/publish', 'PostsController@publish')->name('post.publish');
-    Route::get('/post/{id}/feature', 'PostsController@feature')->name('post.feature');
-    Route::get('/post/{id}/unfeature', 'PostsController@unfeature')->name('post.unfeature');
-    // Categories Routes
-    Route::get('/categories', 'CategoriesController@index')->name('categories');
-    Route::post('/category', 'CategoriesController@store')->name('category.store');
-    Route::get('/category/{id}/edit', 'CategoriesController@edit')->name('category.edit');
-    Route::put('/category/{id}/update', 'CategoriesController@update')->name('category.update');
-    Route::get('/category/{id}/delete', 'CategoriesController@destroy')->name('category.delete');
-    // Tags Routes
-    Route::get('/tags', 'TagsController@index')->name('tags');
-    Route::post('/tag', 'TagsController@store')->name('tag.store');
-    Route::get('/tag/{id}/edit', 'TagsController@edit')->name('tag.edit');
-    Route::put('/tag/{id}/update', 'TagsController@update')->name('tag.update');
-    Route::get('/tag/{id}/delete', 'TagsController@destroy')->name('tag.delete');
-    // Users Routes
-    Route::get('/users', 'UsersController@index')->name('users');
-    Route::get('/user/add', 'UsersController@create')->name('user.add');
-    Route::post('/user', 'UsersController@store')->name('user.store');
-    Route::get('/user/{id}/edit', 'UsersController@edit')->name('user.edit');
-    Route::put('/user/{id}/update', 'UsersController@update')->name('user.update');
-    // Profiles Routes
-    Route::get('/profile', 'ProfilesController@index')->name('profile');
-    Route::post('/profile', 'ProfilesController@update')->name('profile.store');
+    Route::name('dashboard.')->group(function () {
+        Route::get('/', 'DashboardController@index')->name('index');
+        // Posts Routes
+        Route::get('/posts', 'PostsController@index');
+        Route::get('/post/add', 'PostsController@create')->name('post.add');
+        Route::post('/post', 'PostsController@store')->name('post.store');
+        Route::get('/post/{id}/edit', 'PostsController@edit')->name('post.edit');
+        Route::put('/post/{id}/update', 'PostsController@update')->name('post.update');
+        Route::get('/post/{id}/trash', 'PostsController@trash')->name('post.trash');
+        Route::get('/post/{id}/restore', 'PostsController@restore')->name('post.restore');
+        Route::get('/post/{id}/delete', 'PostsController@destroy')->name('post.delete');
+        Route::get('/post/{id}/publish', 'PostsController@publish')->name('post.publish');
+        Route::get('/post/{id}/feature', 'PostsController@feature')->name('post.feature');
+        Route::get('/post/{id}/unfeature', 'PostsController@unfeature')->name('post.unfeature');
+        // Categories Routes
+        Route::resource('categories', CategoriesController::class);
+        // Tags Routes
+        Route::resource('tags', TagsController::class);
+        // Users Routes
+        Route::resource('users', UsersController::class)->except('destroy');
+        // Profiles Routes
+        Route::get('/profile', 'ProfilesController@index')->name('profile');
+        Route::post('/profile', 'ProfilesController@update')->name('profile.store');
+    });
 });

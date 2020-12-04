@@ -52,28 +52,24 @@ class ProfileRepository implements ProfileRepositoryInterface
 
     public function filter($user, $filter)
     {
-        $posts = $this->post->latest();
-        $header = "Posts";
+        $posts = $this->post->userPosts($user);
 
         switch($filter)
         {
             case "posts":
                 $posts = $this->post->userPosts($user);
-                $header = strtoupper($user)." Posts";
             break;
             case "likes":
                 $posts = $this->post->likedPosts();
-                $header = "Liked Posts";
             break;
             case "bookmarks":
                 $posts = $this->post->bookmarkedPosts();
-                $header = "Bookmarked Posts";
             break;
         }
 
         $posts = $posts->paginate(8);
 
-        return ["posts" => $posts, "header" => $header];
+        return $posts;
     }
 
     public function notifications()
