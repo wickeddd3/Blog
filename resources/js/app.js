@@ -20,6 +20,9 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 Vue.component('navbar-view', require('./layouts/Navbar.vue').default);
 
+Vue.component('create-post', require('./components/CreatePost.vue').default);
+Vue.component('edit-post', require('./components/EditPost.vue').default);
+
 Vue.component('post-view', require('./pages/Post.vue').default);
 Vue.component('frontend-view', require('./pages/Frontend.vue').default);
 Vue.component('posts-view', require('./pages/Posts.vue').default);

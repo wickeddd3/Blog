@@ -17,7 +17,7 @@
                             class="post__avatar">
                         <div class="post__author-details">
                             <div class="post__author-name">
-                                <a class="heading-secondary" href="/profile/{{ $post->author->username }}">
+                                <a class="heading-secondary" href="/@/{{ $post->author->username }}/profile">
                                     {{ $post->author->full_name }}
                                 </a>
                                 <span class="media__author--date" v-text="published"></span>
@@ -40,7 +40,7 @@
                         @if(auth()->id() === $post->user_id && isset(auth()->user()->email_verified_at))
                             <span>
                                 <a class="post__title-option"
-                                    href="/posts/{{ $post->category->slug }}/{{ $post->slug }}/edit">
+                                    href="/{{ $post->category->slug }}/{{ $post->slug }}/edit">
                                     <i class="fa fa-edit post__title-icon"></i>
                                 </a>
                             </span>

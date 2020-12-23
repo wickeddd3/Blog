@@ -4,7 +4,7 @@
 <div class="container">
     <div class="editprofile">
         <h1 class="editprofile__title">Profile</h1>
-        <form method="POST" action="/profile/{{$profile->username}}/@/update" enctype="multipart/form-data">
+        <form method="POST" action="/@/{{$profile->username}}/profile/update" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="editprofile__item">

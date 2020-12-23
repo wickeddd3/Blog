@@ -29,7 +29,7 @@
                     </a>
                 </div>
                 <div class="nav__item">
-                    <a class="nav__link--rounded" href="/profile/{{ Auth::user()->username }}/post/create">
+                    <a class="nav__link--rounded" href="/@/{{ Auth::user()->username }}/post/create">
                         <svg class="nav__icon">
                             <use xlink:href="{{ asset('icons/sprite.svg#icon-add-to-list') }}"></use>
                         </svg>
@@ -44,7 +44,7 @@
                     <notification :auth_user="{{ json_encode(Auth::user()->username) }}"></notification>
                 </div>
                 <div class="nav__item">
-                    <a class="nav__link--rounded" href="/profile/{{ Auth::user()->username }}">
+                    <a class="nav__link--rounded" href="/@/{{ Auth::user()->username }}/profile">
                         <svg class="nav__icon">
                             <use xlink:href="{{ asset('icons/sprite.svg#icon-user') }}"></use>
                         </svg>

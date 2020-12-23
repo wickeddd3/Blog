@@ -40,9 +40,9 @@ class PostsController extends Controller
 
     public function store(PostStoreRequest $request)
     {
-        $this->postRepository->create($request);
+        $this->postRepository->create($request->form);
 
-        return redirect()->back();
+        return "saved";
     }
 
     public function edit($id)

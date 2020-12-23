@@ -24,11 +24,23 @@ class PostStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:posts,title',
-            'content' => 'required',
-            'featured' => 'required|image',
-            'category' => 'required',
-            'tags' => 'required'
+            'form.title' => 'required|unique:posts,title',
+            'form.content' => 'required',
+            'form.category' => 'required|exists:categories,id',
+        ];
+    }
+
+    /**
+     * Custom message for validation
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'Title is required.',
+            'content.required' => 'Content is required.',
+            'category.required' => 'Category is required.',
         ];
     }
 }

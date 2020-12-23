@@ -8,7 +8,7 @@
         <h2 class="profile__name">{{ $profile->full_name }}</h2>
         @if(Auth::id() === $profile->id)
         <span class="profile__option">
-            <a class="profile__link" href="/profile/{{ $profile->username }}/@/edit">
+            <a class="profile__link" href="/@/{{ $profile->username }}/profile/edit">
                 <i class="fa fa-user-edit profile__icon"></i> Edit Profile
             </a>
             <a class="profile__link" href="{{ route('logout') }}" title="" onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();">

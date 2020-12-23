@@ -6,12 +6,12 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-try {
-    window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('jquery');
+// try {
+//     window.Popper = require('popper.js').default;
+//     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap');
-} catch (e) {}
+//     require('bootstrap');
+// } catch (e) {}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -40,5 +40,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     encrypted: true
 // });
 
+//Vue
+import Vue from 'vue'
+
 // Fontawesome
 import '@fortawesome/fontawesome-free/css/all.css'
+
+// Vue2Editor
+import Vue2Editor from "vue2-editor";
+Vue.use(Vue2Editor);

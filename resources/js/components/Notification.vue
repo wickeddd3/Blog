@@ -61,13 +61,13 @@ export default {
 
     methods: {
         fetchNotifications() {
-            axios.get(`/profile/${this.auth_user}/all/notifications`)
+            axios.get(`/@/${this.auth_user}/profile/notifications`)
                  .then((response) => {
                     this.notifications = response.data.notifications
                  });
         },
         markAsRead(notification) {
-            axios.post(`/profile/${this.auth_user}/all/notifications/read`, { notificationId: notification.id })
+            axios.post(`/@/${this.auth_user}/profile/notifications`, { notificationId: notification.id })
                  .then((response) => {
 
                  })

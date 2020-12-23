@@ -11,7 +11,7 @@
         </div>
         <div class="content__main m-b-1 container__col-xl-7 container__col-lg-7 container__col-md-9 container__col-sm-12 container__col-12">
             @if(auth()->check())
-            <a href="/profile/{{ Auth::user()->username }}/post/create">
+            <a href="/@/{{ Auth::user()->username }}/post/create">
             <div class="write">
                 <svg class="write__user">
                     <use xlink:href="icons/sprite.svg#icon-book"></use>

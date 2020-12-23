@@ -25,9 +25,9 @@ class BlogUpdateRequest extends FormRequest
     {
         $post = $this->route('post');
         return [
-            'title' => 'required|unique:posts,title,'.$post->id,
-            'content' => 'required',
-            'category' => 'required|exists:categories,id',
+            'form.title' => 'required|unique:posts,title,'.$post->id,
+            'form.content' => 'required',
+            'form.category' => 'required|exists:categories,id',
         ];
     }
 
@@ -39,9 +39,13 @@ class BlogUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Title is required.',
-            'content.required' => 'Content is required.',
-            'category.required' => 'Category is required.',
+            'form.title.required' => 'Title is required.',
+            'form.title.unique' => 'Title already exist',
+
+            'form.content.required' => 'Content is required.',
+
+            'form.category.required' => 'Category is required.',
+            'form.category.exists' => 'Category not exist'
         ];
     }
 }

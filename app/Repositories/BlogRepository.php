@@ -56,20 +56,23 @@ class BlogRepository implements BlogRepositoryInterface
 
     public function create($request)
     {
-        $featured = $request['featured'];
-        $featured_new_name = time().$featured->getClientOriginalName();
-        $featured->move('storage/uploads/posts', $featured_new_name);
+        $post = $this->post;
 
-        $post = $this->post->create([
-            'title' => $request['title'],
-            'content' => $request['content'],
-            'featured' => 'uploads/posts/'.$featured_new_name,
-            'category_id' => $request['category'],
-            'slug' => Str::slug($request['title'], '-'),
-            'user_id' => Auth::id(),
-            'created_at' => Carbon::now(),
-            'published_at' => Carbon::now()
-        ]);
+        if($request['featured']) {
+            $featured = $request['featured'];
+            $new_name = time().'.' . explode('/', explode(':', substr($featured, 0, strpos($featured, ';')))[1])[1];
+            \Image::make($featured)->save(public_path('/storage/uploads/posts/').$new_name);
+            $post->featured = 'uploads/posts/'.$new_name;
+        }
+
+        $post->title = $request['title'];
+        $post->content = $request['content'];
+        $post->category_id = $request['category'];
+        $post->slug = Str::slug($request['title'], '-');
+        $post->user_id = Auth::id();
+        $post->created_at = Carbon::now();
+        $post->published_at = Carbon::now();
+        $post->save();
 
         $post->tags()->attach($request['tags']);
 
@@ -78,15 +81,14 @@ class BlogRepository implements BlogRepositoryInterface
 
     public function update($request, $post)
     {
-        if($request->hasFile('featured'))
-        {
+        if($request['featured']) {
             $featured = $request['featured'];
-            $featured_new_name = time().$featured->getClientOriginalName();
-            $featured->move('storage/uploads/posts', $featured_new_name);
+            $new_name = time().'.' . explode('/', explode(':', substr($featured, 0, strpos($featured, ';')))[1])[1];
+            \Image::make($featured)->save(public_path('/storage/uploads/posts/').$new_name);
             if($post->featured != 'uploads/posts/default_featured.png'){
                 $post->deleteFeatured();
             }
-            $post->featured = 'uploads/posts/'.$featured_new_name;
+            $post->featured = 'uploads/posts/'.$new_name;
         }
 
         $post->title = $request['title'];
@@ -94,7 +96,6 @@ class BlogRepository implements BlogRepositoryInterface
         $post->category_id = $request['category'];
         $post->slug = Str::slug($request['title'], '-');
         $post->updated_at = Carbon::now();
-
         $post->save();
 
         $post->tags()->sync($request['tags']);

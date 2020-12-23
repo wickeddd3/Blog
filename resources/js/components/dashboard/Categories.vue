@@ -16,7 +16,7 @@
                             {{ category.posts_count }}
                         </div>
                         <div class="categories__content-item categories__edit">
-                            <a :href="`/dashboard/categories/${category.id}/edit`">
+                            <a :href="`/admin/panel/categories/${category.id}/edit`">
                                 <i class="fa fa-edit fa-fw"></i>
                             </a>
                         </div>

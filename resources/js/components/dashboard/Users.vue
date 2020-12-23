@@ -14,7 +14,7 @@
                         <div class="users__content-item users__role">{{ user.role }}</div>
                         <div class="users__content-item users__date">{{ publishedDate(user.verified_at) }}</div>
                         <div class="users__content-item users__edit">
-                            <a :href="`/dashboard/users/${user.id}/edit`" v-if="user.role != 'administrator'">
+                            <a :href="`/admin/panel/users/${user.id}/edit`" v-if="user.role != 'administrator'">
                                 <i class="fa fa-edit fa-fw"></i>
                             </a>
                         </div>

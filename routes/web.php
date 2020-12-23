@@ -7,47 +7,52 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', 'FrontendController@index')->name('frontend.index');
 Route::get('/posts', 'BlogsController@index');
 Route::post('/posts', 'BlogsController@store');
+Route::patch('/posts/{post}', 'BlogsController@update');
 Route::get('/posts/{category}', 'BlogsController@index');
-Route::get('/posts/{category}/{post}', 'BlogsController@show');
-Route::get('/posts/{category}/{post}/edit', 'BlogsController@edit');
-Route::put('/posts/{category}/{post}/update', 'BlogsController@update');
-Route::get('/profile/{username}/post/create', 'BlogsController@create');
+Route::get('/{category}/{post}', 'BlogsController@show');
+Route::get('/{category}/{post}/edit', 'BlogsController@edit');
+Route::get('/@/{username}/post/create', 'BlogsController@create');
 Route::get('/search', 'BlogsController@search');
 
 // Post Comment Routes
-Route::post('/posts/{category}/{post}/comments', 'CommentsController@store');
-Route::get('/posts/{category}/{post}/comments', 'CommentsController@show');
+Route::post('/{category}/{post}/comments', 'CommentsController@store');
+Route::get('/{category}/{post}/comments', 'CommentsController@show');
 Route::patch('/comments/{comment}', 'CommentsController@update');
 Route::delete('/comments/{comment}', 'CommentsController@destroy');
 
 // Post Action Routes
-Route::post('/posts/{category}/{post}/bookmarks', 'PostBookmarksController@bookmark');
-Route::delete('/posts/{category}/{post}/bookmarks', 'PostBookmarksController@unbookmark');
-Route::post('/posts/{category}/{post}/likes', 'LikesController@like');
-Route::delete('/posts/{category}/{post}/likes', 'LikesController@unlike');
+Route::post('/{category}/{post}/bookmarks', 'PostBookmarksController@bookmark');
+Route::delete('/{category}/{post}/bookmarks', 'PostBookmarksController@unbookmark');
+Route::post('/{category}/{post}/likes', 'LikesController@like');
+Route::delete('/{category}/{post}/likes', 'LikesController@unlike');
 
 // Profile
-Route::get('/profile/{user}/posts', 'ProfilesController@posts');
-Route::get('/profile/{user}', 'ProfilesController@profile');
-Route::get('/profile/{user}/@/edit', 'ProfilesController@edit');
-Route::put('/profile/{user}/@/update', 'ProfilesController@update');
-Route::post('/profile/{user}/followers', 'UserFollowersController@index');
-Route::delete('/profile/{user}/followers', 'UserFollowersController@destroy');
-Route::get('/profile/{user}/all/notifications', 'ProfilesController@notifications');
-Route::post('/profile/{user}/all/notifications/read', 'ProfilesController@markAsRead');
+Route::get('/@/{username}/profile/posts', 'ProfilesController@posts');
+Route::get('/@/{username}/profile', 'ProfilesController@index');
+Route::get('/@/{username}/profile/edit', 'ProfilesController@edit');
+Route::put('/@/{username}/profile/update', 'ProfilesController@update');
+Route::get('/@/{username}/profile/notifications', 'ProfilesController@notifications');
+Route::post('/@/{username}/profile/notifications', 'ProfilesController@markAsRead');
+
+// Profile Action Routes
+Route::post('/@/{user}/profile/followers', 'UserFollowersController@index');
+Route::delete('/@/{user}/profile/followers', 'UserFollowersController@destroy');
+
+
+Route::get('/posts/{id}/trash', 'PostsController@trash')->name('posts.trash');
+Route::get('/posts/{id}/restore', 'PostsController@restore')->name('posts.restore');
+Route::get('/posts/{id}/publish', 'PostsController@publish')->name('posts.publish');
+
 
 // Auth Routes
 Auth::routes(['verify' => true]);
 
 // Admin Dashboard Routes
-Route::prefix('dashboard')->middleware('can:dashboard-access')->group(function () {
+Route::prefix('admin/panel')->middleware('can:dashboard-access')->group(function () {
     Route::name('dashboard.')->group(function () {
-        Route::get('/', 'DashboardController@index')->name('index');
+        Route::get('/dashboard', 'DashboardController@index')->name('index');
         // Posts Routes
         Route::resource('posts', PostsController::Class);
-        Route::get('/posts/{id}/trash', 'PostsController@trash')->name('posts.trash');
-        Route::get('/posts/{id}/restore', 'PostsController@restore')->name('posts.restore');
-        Route::get('/posts/{id}/publish', 'PostsController@publish')->name('posts.publish');
         Route::get('/posts/{id}/feature', 'PostsController@feature')->name('posts.feature');
         Route::get('/posts/{id}/unfeature', 'PostsController@unfeature')->name('posts.unfeature');
         // Categories Routes
@@ -56,8 +61,5 @@ Route::prefix('dashboard')->middleware('can:dashboard-access')->group(function (
         Route::resource('tags', TagsController::class);
         // Users Routes
         Route::resource('users', UsersController::class)->except('destroy');
-        // Profiles Routes
-        Route::get('/profile', 'ProfilesController@index')->name('profile');
-        Route::post('/profile', 'ProfilesController@update')->name('profile.store');
     });
 });

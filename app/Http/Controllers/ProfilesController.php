@@ -18,11 +18,9 @@ class ProfilesController extends Controller
         $this->profileRepository = $profileRepository;
     }
 
-    public function index()
+    public function index(User $username)
     {
-        $authUser = $this->profileRepository->authUser();
-
-        return view('dashboard.profile.index')->with('profile', $authUser);
+        return view('profile.index')->with('profile', $username);
     }
 
     public function update(ProfileUpdateRequest $request)
@@ -32,9 +30,9 @@ class ProfilesController extends Controller
         return redirect()->back();
     }
 
-    public function posts($user)
+    public function posts($username)
     {
-        $posts = $this->profileRepository->filter($user, request()->query('filter'));
+        $posts = $this->profileRepository->filter($username, request()->query('filter'));
 
         if(request()->wantsJson()) {
             return response()->json([
@@ -43,17 +41,12 @@ class ProfilesController extends Controller
         }
     }
 
-    public function profile(User $user)
+    public function edit(User $username)
     {
-        return view('profile.index')->with('profile', $user);
+        return view('profile.edit')->with('profile', $username);
     }
 
-    public function edit(User $user)
-    {
-        return view('profile.edit')->with('profile', $user);
-    }
-
-    public function notifications($user)
+    public function notifications($username)
     {
         $notifications = $this->profileRepository->notifications();
 
@@ -66,9 +59,9 @@ class ProfilesController extends Controller
         return view('profile.notification.index');
     }
 
-    public function markAsRead($user, Request $request)
+    public function markAsRead($username, Request $request)
     {
-        return $this->profileRepository->markAsRead($user, $request);
+        return $this->profileRepository->markAsRead($username, $request);
     }
 
 }

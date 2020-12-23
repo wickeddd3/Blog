@@ -23,16 +23,11 @@
                         </div>
                         <div class="posts__content-item posts__date">{{ publishedDate(post.published_at) }}</div>
                         <div class="posts__content-item posts__featured">
-                            <a class="btn btn--primary" :href="`/dashboard/post/${post.id}/unfeature`" v-if="post.featured_at">
+                            <a class="btn btn--primary" :href="`/admin/panel/posts/${post.id}/unfeature`" v-if="post.featured_at">
                                 <i class="fas fa-star fa-fw"></i>
                             </a>
-                            <a class="btn btn--primary" :href="`/dashboard/posts/${post.id}/feature`" v-else>
+                            <a class="btn btn--primary" :href="`/admin/panel/posts/${post.id}/feature`" v-else>
                                 <i class="far fa-star fa-fw"></i>
-                            </a>
-                        </div>
-                        <div class="posts__content-item posts__edit">
-                            <a :href="`/dashboard/posts/${post.id}/edit`">
-                                <i class="fa fa-edit fa-fw"></i>
                             </a>
                         </div>
                     </div>

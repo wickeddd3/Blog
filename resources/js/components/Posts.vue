@@ -8,7 +8,7 @@
                         :src="`/storage/${post.author.profile.avatar}`"
                         :alt="`/storage/${post.author.profile.avatar}`">
                     <div class="media__author--details">
-                        <a class="media__author--name" :href="'/profile/'+post.author.username">
+                        <a class="media__author--name" :href="`/@/${post.author.username}/profile`">
                             {{ post.author.full_name }}
                         </a>
                         <p class="media__author--date">

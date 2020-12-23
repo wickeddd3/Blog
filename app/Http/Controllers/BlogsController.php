@@ -29,15 +29,13 @@ class BlogsController extends Controller
                 'posts' => $posts
             ]);
         }
-
-        return view('blogs.index');
     }
 
     public function store(BlogStoreRequest $request)
     {
-        $this->blogRepository->create($request);
+        $this->blogRepository->create($request->form);
 
-        return redirect()->back();
+        return response()->json(['success' => 'Saved']);
     }
 
     public function show(Category $category, Post $post)
@@ -56,16 +54,22 @@ class BlogsController extends Controller
     {
         $this->authorize('update', $post);
 
-        return view('blogs.edit')->with('post', $post)->with('categories', Category::all())->with('tags', Tag::all());
+        if(request()->wantsJson()) {
+            return response()->json([
+                'post' => $post
+            ]);
+        }
+
+        return view('blogs.edit');
     }
 
-    public function update(Category $category, Post $post, BlogUpdateRequest $request)
+    public function update(Post $post, BlogUpdateRequest $request)
     {
         $this->authorize('update', $post);
 
-        $this->blogRepository->update($request, $post);
+        $this->blogRepository->update($request->form, $post);
 
-        return redirect('/posts/'.$post->category->slug.'/'.$post->slug);
+        return response()->json(['success' => 'Updated']);
     }
 
     public function search()

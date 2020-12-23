@@ -50,14 +50,14 @@ class ProfileRepository implements ProfileRepositoryInterface
         $user->save();
     }
 
-    public function filter($user, $filter)
+    public function filter($username, $filter)
     {
-        $posts = $this->post->userPosts($user);
+        $posts = $this->post->userPosts($username);
 
         switch($filter)
         {
             case "posts":
-                $posts = $this->post->userPosts($user);
+                $posts = $this->post->userPosts($username);
             break;
             case "likes":
                 $posts = $this->post->likedPosts();
@@ -77,7 +77,7 @@ class ProfileRepository implements ProfileRepositoryInterface
         return Auth::user()->notifications;
     }
 
-    public function markAsRead($user, $request)
+    public function markAsRead($username, $request)
     {
         Auth::user()->unreadNotifications->where('id', $request->notificationId)->markAsRead();
     }

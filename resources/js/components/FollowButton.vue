@@ -23,7 +23,7 @@ export default {
         follow() {
             let url;
             (location.pathname == '/')
-                ? url = `/profile/${this.blogger.username}/followers`
+                ? url = `/@/${this.blogger.username}/profile/followers`
                 : url = `${location.pathname}/followers`;
             axios[(this.activeButton ? 'delete' : 'post')](url)
             .then((response) => {

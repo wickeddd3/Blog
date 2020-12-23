@@ -6,7 +6,6 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Blog</title>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
         <script>
             window.App = {!! json_encode([
                 //    'csrfToken' => csrf_token(),

@@ -16,7 +16,7 @@
                             {{ tag.posts_count }}
                         </div>
                         <div class="tags__content-item tags__edit">
-                            <a :href="`/dashboard/tags/${tag.id}/edit`">
+                            <a :href="`/admin/panel/tags/${tag.id}/edit`">
                                 <i class="fa fa-edit fa-fw"></i>
                             </a>
                         </div>
