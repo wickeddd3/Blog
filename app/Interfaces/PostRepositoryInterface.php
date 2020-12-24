@@ -6,12 +6,6 @@ interface PostRepositoryInterface
 {
     public function all(string $search);
 
-    public function create(object $request);
-
-    public function find(int $id);
-
-    public function update(object $request, int $id);
-
     public function publish(int $id);
 
     public function feature(int $id);

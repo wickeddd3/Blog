@@ -2375,7 +2375,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     VueEditor: vue2_editor__WEBPACK_IMPORTED_MODULE_0__["VueEditor"],
     ErrorMessage: _ErrorMessage__WEBPACK_IMPORTED_MODULE_1__["default"],
-    SuccessMassage: _SuccessMessage__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SuccessMessage: _SuccessMessage__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -2525,7 +2525,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     VueEditor: vue2_editor__WEBPACK_IMPORTED_MODULE_0__["VueEditor"],
     ErrorMessage: _ErrorMessage__WEBPACK_IMPORTED_MODULE_1__["default"],
-    SuccessMassage: _SuccessMessage__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SuccessMessage: _SuccessMessage__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -3528,6 +3528,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dashboard_LoadMore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/dashboard/LoadMore */ "./resources/js/components/dashboard/LoadMore.vue");
 /* harmony import */ var _mixins_stringTransform__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../mixins/stringTransform */ "./resources/js/mixins/stringTransform.js");
 /* harmony import */ var _mixins_dateFormat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../mixins/dateFormat */ "./resources/js/mixins/dateFormat.js");
+/* harmony import */ var _components_SuccessMessage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/SuccessMessage */ "./resources/js/components/SuccessMessage.vue");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3585,14 +3586,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -3600,7 +3594,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     SearchBar: _components_SearchBar__WEBPACK_IMPORTED_MODULE_0__["default"],
-    LoadMore: _components_dashboard_LoadMore__WEBPACK_IMPORTED_MODULE_1__["default"]
+    LoadMore: _components_dashboard_LoadMore__WEBPACK_IMPORTED_MODULE_1__["default"],
+    SuccessMessage: _components_SuccessMessage__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   mixins: [_mixins_stringTransform__WEBPACK_IMPORTED_MODULE_2__["default"], _mixins_dateFormat__WEBPACK_IMPORTED_MODULE_3__["default"]],
   data: function data() {
@@ -3609,7 +3604,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       dataSet: false,
       loading: false,
       posts_count: 0,
-      search: ''
+      search: '',
+      success: false
     };
   },
   created: function created() {
@@ -3650,6 +3646,26 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _this.loading = false;
       })["catch"](function (error) {
         _this.loading = false;
+      });
+    },
+    feature: function feature(post) {
+      var _this2 = this;
+
+      axios.post('/admin/panel/posts/feature', {
+        id: post.id
+      }).then(function (response) {
+        Vue.set(post, 'featured_at', true);
+        _this2.success = "".concat(post.title, " is successfully featured !");
+      });
+    },
+    unfeature: function unfeature(post) {
+      var _this3 = this;
+
+      axios.post('/admin/panel/posts/unfeature', {
+        id: post.id
+      }).then(function (response) {
+        Vue.set(post, 'featured_at', false);
+        _this3.success = "".concat(post.title, " is successfully unfeatured !");
       });
     }
   }
@@ -57182,9 +57198,9 @@ var render = function() {
         [
           _c("h1", { staticClass: "addpost__title" }, [_vm._v("Add New Post")]),
           _vm._v(" "),
-          _c("ErrorMessage", { attrs: { errors: _vm.errors } }),
+          _c("error-message", { attrs: { errors: _vm.errors } }),
           _vm._v(" "),
-          _c("SuccessMassage", {
+          _c("success-message", {
             directives: [
               {
                 name: "show",
@@ -57449,9 +57465,9 @@ var render = function() {
         [
           _c("h1", { staticClass: "addpost__title" }, [_vm._v("Edit Post")]),
           _vm._v(" "),
-          _c("ErrorMessage", { attrs: { errors: _vm.errors } }),
+          _c("error-message", { attrs: { errors: _vm.errors } }),
           _vm._v(" "),
-          _c("SuccessMassage", {
+          _c("success-message", {
             directives: [
               {
                 name: "show",
@@ -58801,134 +58817,157 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "posts" }, [
-    _c(
-      "div",
-      { staticClass: "posts__header" },
-      [_c("search-bar", { on: { filter: _vm.filter } })],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "posts__body" },
-      [
-        _vm.all_posts.length > 0
-          ? [
-              _vm._l(_vm.all_posts, function(post) {
-                return [
-                  _c("div", { key: post.id, staticClass: "posts__item" }, [
-                    _c("div", { staticClass: "posts__content" }, [
-                      _c(
-                        "div",
-                        { staticClass: "posts__content-item posts__title" },
-                        [_vm._v(_vm._s(_vm.limitContent(post.title, 50)))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "posts__content-item posts__category" },
-                        [_vm._v(_vm._s(post.category.name))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "posts__content-item posts__details" },
-                        [
-                          _c("span", [
-                            _c("i", { staticClass: "far fa-comments fa-fw" }),
-                            _vm._v(
-                              " " +
-                                _vm._s(post.comments_count) +
-                                "\n                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("span", [
-                            _c("i", { staticClass: "far fa-thumbs-up fa-fw" }),
-                            _vm._v(
-                              " " +
-                                _vm._s(post.likesCount) +
-                                "\n                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("span", [
-                            _c("i", { staticClass: "far fa-eye fa-fw" }),
-                            _vm._v(
-                              " " +
-                                _vm._s(post.views_count) +
-                                "\n                            "
-                            )
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "posts__content-item posts__date" },
-                        [_vm._v(_vm._s(_vm.publishedDate(post.published_at)))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "posts__content-item posts__featured" },
-                        [
-                          post.featured_at
-                            ? _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn--primary",
-                                  attrs: {
-                                    href:
-                                      "/admin/panel/posts/" +
-                                      post.id +
-                                      "/unfeature"
-                                  }
-                                },
-                                [_c("i", { staticClass: "fas fa-star fa-fw" })]
-                              )
-                            : _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn--primary",
-                                  attrs: {
-                                    href:
-                                      "/admin/panel/posts/" +
-                                      post.id +
-                                      "/feature"
-                                  }
-                                },
-                                [_c("i", { staticClass: "far fa-star fa-fw" })]
-                              )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div")
-                  ])
-                ]
-              })
-            ]
-          : [_vm._m(0)]
-      ],
-      2
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "posts__footer" }, [
+  return _c(
+    "div",
+    { staticClass: "posts" },
+    [
+      _c("success-message", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.success,
+            expression: "success"
+          }
+        ],
+        attrs: { message: _vm.success }
+      }),
+      _vm._v(" "),
       _c(
         "div",
-        { staticClass: "center" },
-        [
-          _c("load-more", {
-            attrs: { dataSet: _vm.dataSet, loading: _vm.loading },
-            on: { changed: _vm.fetch }
-          })
-        ],
+        { staticClass: "posts__header" },
+        [_c("search-bar", { on: { filter: _vm.filter } })],
         1
-      )
-    ])
-  ])
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "posts__body" },
+        [
+          _vm.all_posts.length > 0
+            ? [
+                _vm._l(_vm.all_posts, function(post) {
+                  return [
+                    _c("div", { key: post.id, staticClass: "posts__item" }, [
+                      _c("div", { staticClass: "posts__content" }, [
+                        _c(
+                          "div",
+                          { staticClass: "posts__content-item posts__title" },
+                          [_vm._v(_vm._s(_vm.limitContent(post.title, 50)))]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "posts__content-item posts__category"
+                          },
+                          [_vm._v(_vm._s(post.category.name))]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "posts__content-item posts__details" },
+                          [
+                            _c("span", [
+                              _c("i", { staticClass: "far fa-comments fa-fw" }),
+                              _vm._v(" " + _vm._s(post.comments_count) + " ")
+                            ]),
+                            _vm._v(" "),
+                            _c("span", [
+                              _c("i", {
+                                staticClass: "far fa-thumbs-up fa-fw"
+                              }),
+                              _vm._v(" " + _vm._s(post.likesCount) + " ")
+                            ]),
+                            _vm._v(" "),
+                            _c("span", [
+                              _c("i", { staticClass: "far fa-eye fa-fw" }),
+                              _vm._v(" " + _vm._s(post.views_count) + " ")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "posts__content-item posts__date" },
+                          [_vm._v(_vm._s(_vm.publishedDate(post.published_at)))]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "posts__content-item posts__featured"
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: post.featured_at,
+                                    expression: "post.featured_at"
+                                  }
+                                ],
+                                staticClass: "btn btn--primary",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.unfeature(post)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fas fa-star fa-fw" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: !post.featured_at,
+                                    expression: "!post.featured_at"
+                                  }
+                                ],
+                                staticClass: "btn btn--primary",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.feature(post)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "far fa-star fa-fw" })]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ]
+                })
+              ]
+            : [_vm._m(0)]
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "posts__footer" }, [
+        _c(
+          "div",
+          { staticClass: "center" },
+          [
+            _c("load-more", {
+              attrs: { dataSet: _vm.dataSet, loading: _vm.loading },
+              on: { changed: _vm.fetch }
+            })
+          ],
+          1
+        )
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {

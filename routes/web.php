@@ -45,16 +45,19 @@ Route::get('/posts/{id}/publish', 'PostsController@publish')->name('posts.publis
 
 
 // Auth Routes
-Auth::routes(['verify' => true]);
+Auth::routes();
+Route::get('account/email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('account/email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::get('account/email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 // Admin Dashboard Routes
 Route::prefix('admin/panel')->middleware('can:dashboard-access')->group(function () {
     Route::name('dashboard.')->group(function () {
         Route::get('/dashboard', 'DashboardController@index')->name('index');
         // Posts Routes
-        Route::resource('posts', PostsController::Class);
-        Route::get('/posts/{id}/feature', 'PostsController@feature')->name('posts.feature');
-        Route::get('/posts/{id}/unfeature', 'PostsController@unfeature')->name('posts.unfeature');
+        Route::resource('posts', PostsController::Class)->only(['index', 'destroy']);
+        Route::post('/posts/feature', 'PostsController@feature')->name('posts.feature');
+        Route::post('/posts/unfeature', 'PostsController@unfeature')->name('posts.unfeature');
         // Categories Routes
         Route::resource('categories', CategoriesController::class);
         // Tags Routes

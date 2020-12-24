@@ -7,6 +7,7 @@ use App\Http\Requests\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Interfaces\PostRepositoryInterface;
+use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
@@ -21,42 +22,15 @@ class PostsController extends Controller
 
     public function index()
     {
-        $result = $this->postRepository->all(request()->query('search'));
+        $posts = $this->postRepository->all(request()->query('search'));
 
         if(request()->wantsJson()) {
             return response()->json([
-                'posts' => $result['posts'],
-                'posts_count' => $result['posts_count']
+                'posts' => $posts
             ]);
         }
 
         return view('dashboard.post.index');
-    }
-
-    public function create()
-    {
-        return view('dashboard.post.create')->with('categories', Category::all())->with('tags', Tag::all());
-    }
-
-    public function store(PostStoreRequest $request)
-    {
-        $this->postRepository->create($request->form);
-
-        return "saved";
-    }
-
-    public function edit($id)
-    {
-        $post = $this->postRepository->find($id);
-
-        return view('dashboard.post.edit')->with('post', $post)->with('categories', Category::all())->with('tags', Tag::all());
-    }
-
-    public function update(PostUpdateRequest $request, $id)
-    {
-        $this->postRepository->update($request, $id);
-
-        return redirect()->back();
     }
 
     public function publish($id)
@@ -66,18 +40,18 @@ class PostsController extends Controller
         return redirect()->back();
     }
 
-    public function feature($id)
+    public function feature(Request $request)
     {
-        $this->postRepository->feature($id);
+        $this->postRepository->feature($request->id);
 
-        return redirect()->back();
+        return response()->json(['success' => 'featured']);
     }
 
-    public function unfeature($id)
+    public function unfeature(Request $request)
     {
-        $this->postRepository->unfeature($id);
+        $this->postRepository->unfeature($request->id);
 
-        return redirect()->back();
+        return response()->json(['success' => 'unfeatured']);
     }
 
     public function trash($id)

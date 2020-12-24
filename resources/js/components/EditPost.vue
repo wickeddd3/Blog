@@ -3,8 +3,8 @@
     <div class="container__col-xl-9 container__col-12">
         <div class="addpost__card">
             <h1 class="addpost__title">Edit Post</h1>
-            <ErrorMessage :errors="errors" />
-            <SuccessMassage :message="success" v-show="!errors && success" />
+            <error-message :errors="errors"></error-message>
+            <success-message :message="success" v-show="!errors && success"></success-message>
             <div class="addpost__item">
                 <input type="text" v-model="form.title" class="addpost__input" placeholder="TITLE" autofocus>
             </div>
@@ -56,13 +56,13 @@
 <script>
 import { VueEditor } from "vue2-editor";
 import ErrorMessage from './ErrorMessage';
-import SuccessMassage from './SuccessMessage';
+import SuccessMessage from './SuccessMessage';
 
 export default {
     components: {
         VueEditor,
         ErrorMessage,
-        SuccessMassage
+        SuccessMessage
     },
 
     data() {

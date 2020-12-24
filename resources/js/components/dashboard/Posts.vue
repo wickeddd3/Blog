@@ -1,5 +1,6 @@
 <template>
 <div class="posts">
+    <success-message :message="success" v-show="success"></success-message>
     <div class="posts__header">
         <search-bar @filter="filter"></search-bar>
     </div>
@@ -11,28 +12,19 @@
                         <div class="posts__content-item posts__title">{{ limitContent(post.title, 50) }}</div>
                         <div class="posts__content-item posts__category">{{ post.category.name }}</div>
                         <div class="posts__content-item posts__details">
-                            <span>
-                                <i class="far fa-comments fa-fw"></i> {{ post.comments_count }}
-                            </span>
-                            <span>
-                                <i class="far fa-thumbs-up fa-fw"></i> {{ post.likesCount }}
-                            </span>
-                            <span>
-                                <i class="far fa-eye fa-fw"></i> {{ post.views_count }}
-                            </span>
+                            <span> <i class="far fa-comments fa-fw"></i> {{ post.comments_count }} </span>
+                            <span> <i class="far fa-thumbs-up fa-fw"></i> {{ post.likesCount }} </span>
+                            <span> <i class="far fa-eye fa-fw"></i> {{ post.views_count }} </span>
                         </div>
                         <div class="posts__content-item posts__date">{{ publishedDate(post.published_at) }}</div>
                         <div class="posts__content-item posts__featured">
-                            <a class="btn btn--primary" :href="`/admin/panel/posts/${post.id}/unfeature`" v-if="post.featured_at">
+                            <button class="btn btn--primary" @click="unfeature(post)" v-show="post.featured_at">
                                 <i class="fas fa-star fa-fw"></i>
-                            </a>
-                            <a class="btn btn--primary" :href="`/admin/panel/posts/${post.id}/feature`" v-else>
+                            </button>
+                            <button class="btn btn--primary" @click="feature(post)" v-show="!post.featured_at">
                                 <i class="far fa-star fa-fw"></i>
-                            </a>
+                            </button>
                         </div>
-                    </div>
-                    <div>
-
                     </div>
                 </div>
             </template>
@@ -56,11 +48,13 @@ import SearchBar from '../../components/SearchBar'
 import LoadMore from '../../components/dashboard/LoadMore'
 import stringTransform from '../../mixins/stringTransform'
 import dateFormat from '../../mixins/dateFormat'
+import SuccessMessage from '../../components/SuccessMessage'
 
 export default {
     components: {
         SearchBar,
         LoadMore,
+        SuccessMessage
     },
 
     mixins:[
@@ -74,7 +68,8 @@ export default {
             dataSet:false,
             loading:false,
             posts_count:0,
-            search:''
+            search:'',
+            success:false
         }
     },
 
@@ -114,6 +109,20 @@ export default {
                     this.loading = false;
                 })
         },
+        feature(post) {
+            axios.post('/admin/panel/posts/feature',{ id: post.id})
+                .then(response => {
+                    Vue.set(post, 'featured_at', true)
+                    this.success = `${post.title} is successfully featured !`;
+                })
+        },
+        unfeature(post) {
+            axios.post('/admin/panel/posts/unfeature',{ id: post.id})
+                .then(response => {
+                    Vue.set(post, 'featured_at', false)
+                    this.success = `${post.title} is successfully unfeatured !`;
+                })
+        }
     }
 }
 </script>
