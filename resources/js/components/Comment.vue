@@ -1,8 +1,8 @@
 <template>
 <div class="comment">
     <div class="comment__left">
-        <img :src="'/storage/'+data.owner.profile.avatar"
-                :alt="'/storage/'+data.owner.profile.avatar"
+        <img :src="'/storage/'+data.owner.avatar"
+                :alt="'/storage/'+data.owner.avatar"
                 class="comment__author-img">
     </div>
     <div class="comment__right">

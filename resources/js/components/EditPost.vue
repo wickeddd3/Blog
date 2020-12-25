@@ -90,13 +90,13 @@ export default {
 
     methods: {
         fetchCategories() {
-            axios.get('/admin/panel/categories')
+            axios.get('/dashboard/categories')
                 .then((response) => {
                     this.categories = response.data.categories.data;
                 })
         },
         fetchTags() {
-            axios.get('/admin/panel/tags')
+            axios.get('/dashboard/tags')
                 .then((response) => {
                     this.tags = response.data.tags.data;
                 })

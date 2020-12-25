@@ -10,8 +10,8 @@
                     <div class="card__content">
                         <div class="card__header">
                             <img class="card__img"
-                                src="{{ asset('/storage/'.$blogger->profile->avatar) }}"
-                                alt="{{ asset('/storage/'.$blogger->profile->avatar) }}">
+                                src="{{ asset('/storage/'.$blogger->avatar) }}"
+                                alt="{{ asset('/storage/'.$blogger->avatar) }}">
                         </div>
                         <div class="card__body">
                             <h2 class="heading-secondary">{{ $blogger->full_name }}</h2>
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="card__footer">
-                        @if(Auth::check() && Auth::id() !== $blogger->id)
+                        @if(Auth::check() && Auth::id() !== $blogger->id && Auth::user()->email_verified_at)
                             <follow-button :blogger="{{ json_encode($blogger) }}"></follow-button>
                         @endif
                     </div>

@@ -38,7 +38,7 @@ class BlogsController extends Controller
         return response()->json(['success' => 'Saved']);
     }
 
-    public function show(Category $category, Post $post)
+    public function show($category, Post $post)
     {
         $this->blogRepository->view($post);
 
@@ -47,10 +47,10 @@ class BlogsController extends Controller
 
     public function create()
     {
-        return view('blogs.create')->with('categories', Category::all())->with('tags', Tag::all());
+        return view('blogs.create');
     }
 
-    public function edit(Category $category, Post $post)
+    public function edit($category, Post $post)
     {
         $this->authorize('update', $post);
 

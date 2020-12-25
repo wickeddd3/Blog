@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         bookmark() {
-            axios[(this.activeButton ? 'delete' : 'post')](`/${this.post.category.slug}/${this.post.slug}/bookmarks`)
+            axios[(this.activeButton ? 'delete' : 'post')](`/posts/${this.post.category.slug}/${this.post.slug}/bookmarks`)
             .then((response) => {
                 this.activeButton = !this.activeButton;
             });

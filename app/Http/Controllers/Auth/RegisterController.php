@@ -67,21 +67,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'role' => 'subscriber',
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        ]);
-
-        $user->profile()->create([
-            'user_id' => $user->id,
-            'avatar' => 'uploads/avatars/default_avatar.png',
             'created_at' => Carbon::now()
         ]);
-
-        return $user;
     }
 }

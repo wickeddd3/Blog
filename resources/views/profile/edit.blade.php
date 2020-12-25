@@ -29,13 +29,13 @@
                     <option value="administrator" @if($profile->role === "administrator") selected @endif> Administrator </option>
                     <option value="subscriber" @if($profile->role === "subscriber") selected @endif> Subscriber </option>
                     <option value="editor" @if($profile->role === "editor") selected @endif> Editor </option>
-                    <option value="author" @if($profile->role === "author") selected @endif> Author </option>
-                    <option value="contributor" @if($profile->role === "contributor") selected @endif> Contributor </option>
+                    <option value="author" @if($profile->role === "writer") selected @endif> Writer </option>
+                    <option value="contributor" @if($profile->role === "moderator") selected @endif> Moderator </option>
                 </select>
             </div>
             <div class="editprofile__item">
                 <label for="avatar" class="editprofile__label">Current Avatar</label>
-                <img src="{{ asset('/storage/'.$profile->profile->avatar) }}" alt="" class="editprofile__img">
+                <img src="{{ asset('/storage/'.$profile->avatar) }}" alt="" class="editprofile__img">
             </div>
             <div class="editprofile__item">
                 <label for="avatar" class="editprofile__label">New Avatar</label>
@@ -43,7 +43,7 @@
             </div>
             <div class="editprofile__item">
                 <label for="bio" class="editprofile__label">Bio</label>
-                <textarea name="bio" id="bio" cols="5" rows="5" class="editprofile__textarea">{{ $profile->profile->bio }}</textarea>
+                <textarea name="bio" id="bio" cols="5" rows="5" class="editprofile__textarea">{{ $profile->bio }}</textarea>
             </div>
             <button type="submit" class="btn btn--primary editprofile__btn">Update Profile</button>
         </form>

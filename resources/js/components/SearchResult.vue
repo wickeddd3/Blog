@@ -20,8 +20,8 @@
                 <div class="media__header">
                     <div class="media__author">
                         <img class="media__author--avatar"
-                            :src="`/storage/${post.author.profile.avatar}`"
-                            :alt="`/storage/${post.author.profile.avatar}`">
+                            :src="`/storage/${post.author.avatar}`"
+                            :alt="`/storage/${post.author.avatar}`">
                         <div class="media__author--details">
                             <a class="media__author--name" :href="'/profile/'+post.author.username">
                                 {{ post.author.full_name }}
@@ -42,7 +42,7 @@
                         <a class="heading-title" :href="post.path">{{ post.title }}</a>
                         <p class="paragraph" v-html="limitContent(post.content, 300)"></p>
                     </div>
-                    <img class="media__img" :src="'/storage/'+post.featured" :alt="'/storage/'+post.featured">
+                    <img class="media__img" :src="'/storage/'+post.featured" :alt="'/storage/'+post.featured" v-if="post.featured">
                 </div>
                 <div class="media__footer">
                     <div class="m-r-1">

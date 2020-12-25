@@ -44,18 +44,13 @@ class UserRepository implements UserRepositoryInterface
             $avatar = 'uploads/avatars/'.$avatar_new_name;
         }
 
-        $user = $this->model->create([
+        $this->model->create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
-            'created_at' => Carbon::now()
-        ]);
-
-        $user->profile()->create([
-            'user_id' => $user->id,
             'avatar' => $avatar,
             'created_at' => Carbon::now()
         ]);
@@ -75,11 +70,11 @@ class UserRepository implements UserRepositoryInterface
             $avatar = $request->avatar;
             $avatar_new_name = time().$avatar->getClientOriginalName();
             $avatar->move('storage/uploads/avatars', $avatar_new_name);
-            if($user->profile->avatar != 'uploads/avatars/default_avatar.png'){
+            if($user->avatar != 'uploads/avatars/default_avatar.png'){
                 $user->deleteAvatar();
             }
             $avatar = 'uploads/avatars/'.$avatar_new_name;
-            $user->profile->avatar = $avatar;
+            $user->avatar = $avatar;
             $user->push();
         }
 

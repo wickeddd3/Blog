@@ -12,8 +12,8 @@
             <div class="container__col-xl-10 container__col-12">
                 <div class="post">
                     <div class="post__author">
-                        <img src="{{ asset('/storage/'.$post->author->profile->avatar) }}"
-                            alt="{{ asset('/storage/'.$post->author->profile->avatar) }}"
+                        <img src="{{ asset('/storage/'.$post->author->avatar) }}"
+                            alt="{{ asset('/storage/'.$post->author->avatar) }}"
                             class="post__avatar">
                         <div class="post__author-details">
                             <div class="post__author-name">
@@ -28,9 +28,11 @@
                         </div>
                     </div>
                     <div class="post__featured">
+                        @if($post->featured)
                         <img src="{{ asset('/storage/'.$post->featured) }}"
                             alt="{{ asset('/storage/'.$post->featured) }}"
                             class="post__img">
+                        @endif
                     </div>
                     <div class="post__title">
                         <span class="heading-title--large">{{ $post->title }}</span>
@@ -40,7 +42,7 @@
                         @if(auth()->id() === $post->user_id && isset(auth()->user()->email_verified_at))
                             <span>
                                 <a class="post__title-option"
-                                    href="/{{ $post->category->slug }}/{{ $post->slug }}/edit">
+                                    href="/posts/{{ $post->category->slug }}/{{ $post->slug }}/edit">
                                     <i class="fa fa-edit post__title-icon"></i>
                                 </a>
                             </span>
@@ -78,9 +80,7 @@
                         </div>
                     </div>
                     <div class="post__body">
-                        <div class="post__content">
-                            {!! $post->content !!}
-                        </div>
+                        <div class="post__content">{!! $post->content !!}</div>
                     </div>
                     <div class="post__footer">
                         <h2 class="post__footer-title m-b-2">

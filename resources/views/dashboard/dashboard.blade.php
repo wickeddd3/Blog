@@ -75,7 +75,7 @@
             <p class="paragraph m-t-1">Share your insights and ideas to everyone around the world.</p>
             <p class="paragraph m-t-1">Create your new post today, click create new post.</p>
             <p class="m-t-2">
-                <a class="btn btn--primary heading-secondary" href="{{ route('dashboard.posts.create') }}" role="button">Create new post</a>
+                <a class="btn btn--primary heading-secondary" href="/@/{{ Auth::user()->username }}/post/create" role="button">Create new post</a>
             </p>
         </div>
     </div>

@@ -24,7 +24,7 @@ class Post extends BaseModel
 
     public function path()
     {
-        return "/{$this->category->slug}/{$this->slug}";
+        return "/posts/{$this->category->slug}/{$this->slug}";
     }
 
     public function getPathAttribute()

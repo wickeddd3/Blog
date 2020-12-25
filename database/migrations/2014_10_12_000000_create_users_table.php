@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->default('subscriber');
+            $table->text('bio')->nullable();
+            $table->string('avatar')->default('uploads/avatars/default_avatar.png');
             $table->rememberToken();
             $table->timestamp('created_at', 0)->nullable();
             $table->timestamp('updated_at', 0)->nullable();

@@ -110,14 +110,14 @@ export default {
                 })
         },
         feature(post) {
-            axios.post('/admin/panel/posts/feature',{ id: post.id})
+            axios.post('/dashboard/posts/feature',{ id: post.id})
                 .then(response => {
                     Vue.set(post, 'featured_at', true)
                     this.success = `${post.title} is successfully featured !`;
                 })
         },
         unfeature(post) {
-            axios.post('/admin/panel/posts/unfeature',{ id: post.id})
+            axios.post('/dashboard/posts/unfeature',{ id: post.id})
                 .then(response => {
                     Vue.set(post, 'featured_at', false)
                     this.success = `${post.title} is successfully unfeatured !`;

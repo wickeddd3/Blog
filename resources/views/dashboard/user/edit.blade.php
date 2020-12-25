@@ -53,8 +53,8 @@
                     <option value="administrator" @if($user->role === "administrator") selected @endif> Administrator </option>
                     <option value="subscriber" @if($user->role === "subscriber") selected @endif> Subscriber </option>
                     <option value="editor" @if($user->role === "editor") selected @endif> Editor </option>
-                    <option value="author" @if($user->role === "author") selected @endif> Author </option>
-                    <option value="contributor" @if($user->role === "contributor") selected @endif> Contributor </option>
+                    <option value="author" @if($user->role === "writer") selected @endif> Writer </option>
+                    <option value="contributor" @if($user->role === "moderator") selected @endif> Moderator </option>
                 </select>
                 @error('role')
                     <span class="edituser__error" role="alert">{{ $message }}</span>

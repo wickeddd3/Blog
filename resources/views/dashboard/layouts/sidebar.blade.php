@@ -7,31 +7,31 @@
         </div>
         <div class="sidebar__list">
             <div class="sidebar__item">
-                <a href="/admin/panel/dashboard" class="sidebar__link">
+                <a href="/dashboard" class="sidebar__link">
                     <i class="fa fa-tachometer-alt sidebar__icon"></i>
                     <span class="sidebar__name">Dashboard</span>
                 </a>
             </div>
             <div class="sidebar__item">
-                <a href="/admin/panel/posts" class="sidebar__link">
+                <a href="/dashboard/posts" class="sidebar__link">
                     <i class="fa fa-book sidebar__icon"></i>
                     <span class="sidebar__name">Posts</span>
                 </a>
             </div>
             <div class="sidebar__item">
-                <a href="/admin/panel/categories" class="sidebar__link">
+                <a href="/dashboard/categories" class="sidebar__link">
                     <i class="fa fa-archive sidebar__icon"></i>
                     <span class="sidebar__name">Categories</span>
                 </a>
             </div>
             <div class="sidebar__item">
-                <a href="/admin/panel/tags" class="sidebar__link">
+                <a href="/dashboard/tags" class="sidebar__link">
                     <i class="fa fa-tags sidebar__icon"></i>
                     <span class="sidebar__name">Tags</span>
                 </a>
             </div>
             <div class="sidebar__item">
-                <a href="/admin/panel/users" class="sidebar__link">
+                <a href="/dashboard/users" class="sidebar__link">
                     <i class="fa fa-users sidebar__icon"></i>
                     <span class="sidebar__name">Users</span>
                 </a>
@@ -49,8 +49,8 @@
     </div>
     <div class="sidebar__bottom">
         <div class="sidebar__authuser">
-            <img src="{{ asset('/storage/'.Auth::user()->profile->avatar) }}"
-                 alt="{{ asset('/storage/'.Auth::user()->profile->avatar) }}"
+            <img src="{{ asset('/storage/'.Auth::user()->avatar) }}"
+                 alt="{{ asset('/storage/'.Auth::user()->avatar) }}"
                  class="sidebar__authuser-img">
             <span class="sidebar__authuser-name">
                 {{ Auth::user()->full_name }}

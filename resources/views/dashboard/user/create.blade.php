@@ -52,8 +52,8 @@
                     <option value="administrator" selected>Administrator</option>
                     <option value="subscriber">Subscriber</option>
                     <option value="editor">Editor</option>
-                    <option value="author">Author</option>
-                    <option value="contributor">Contributor</option>
+                    <option value="writer">Writer</option>
+                    <option value="moderator">Moderator</option>
                 </select>
                 @error('role')
                     <span class="adduser__error" role="alert">{{ $message }}</span>

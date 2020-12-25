@@ -16,13 +16,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            CategoriesTableSeeder::class,
-            UsersTableSeeder::class,
+            UserTableSeeder::class,
+            CategoryTableSeeder::class,
+            TagTableSeeder::class,
         ]);
 
         factory(User::class, 9)->create();
-        factory(Category::class, 10)->create();
-        factory(Tag::class, 20)->create();
         factory(Post::class, 100)->create();
 
         // Get all tags

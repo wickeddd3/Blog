@@ -26,17 +26,17 @@ class ProfileRepository implements ProfileRepositoryInterface
             $avatar = $request->avatar;
             $avatar_new_name = time().$avatar->getClientOriginalName();
             $avatar->move('storage/uploads/avatars', $avatar_new_name);
-            if($user->profile->avatar != 'uploads/avatars/default_avatar.png'){
+            if($user->avatar != 'uploads/avatars/default_avatar.png'){
                 $user->deleteAvatar();
             }
             $avatar = 'uploads/avatars/'.$avatar_new_name;
-            $user->profile->avatar = $avatar;
+            $user->avatar = $avatar;
             $user->push();
         }
 
         if($request->has('bio'))
         {
-            $user->profile->bio = $request->bio;
+            $user->bio = $request->bio;
             $user->push();
         }
 

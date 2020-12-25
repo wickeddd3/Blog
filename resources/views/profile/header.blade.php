@@ -1,8 +1,8 @@
 <div class="profile__header" id="profile__header">
     <div class="profile__header-header">
         <img class="profile__header-img"
-             src="{{ asset('/storage/'.$profile->profile->avatar) }}"
-             alt="{{ asset('/storage/'.$profile->profile->avatar) }}">
+             src="{{ asset('/storage/'.$profile->avatar) }}"
+             alt="{{ asset('/storage/'.$profile->avatar) }}">
     </div>
     <div class="profile__header-body">
         <h2 class="profile__name">{{ $profile->full_name }}</h2>
@@ -24,7 +24,7 @@
         @endif
     </div>
     <div class="profile__header-footer">
-        <p class="paragraph">{{ $profile->profile->bio }}</p>
+        <p class="paragraph">{{ $profile->bio }}</p>
         <div class="profile__details">
             <div class="profile__details-item">
                 Followers {{ $profile->followers->count() }}

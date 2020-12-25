@@ -16,10 +16,10 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'role', 'username', 'email', 'password',
+        'first_name', 'last_name', 'role', 'avatar', 'bio', 'username', 'email', 'password',
     ];
 
-    protected $with = ['profile', 'bookmarks', 'likes', 'followers', 'following'];
+    protected $with = ['bookmarks', 'likes', 'followers', 'following'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -59,11 +59,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->first_name.' '.$this->last_name;
     }
 
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
-    }
-
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -81,7 +76,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function deleteAvatar()
     {
-        $imagePath = public_path().'/storage/'.$this->profile->avatar;
+        $imagePath = public_path().'/storage/'.$this->avatar;
         unlink($imagePath);
     }
 
