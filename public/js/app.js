@@ -2366,6 +2366,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2384,11 +2394,13 @@ __webpack_require__.r(__webpack_exports__);
         content: "",
         featured: "",
         category: "",
-        tags: []
+        tags: [],
+        published: false
       },
       errors: false,
       success: false,
-      loading: false
+      loading: false,
+      loading_message: ""
     };
   },
   created: function created() {
@@ -2425,10 +2437,12 @@ __webpack_require__.r(__webpack_exports__);
 
       reader.readAsDataURL(file);
     },
-    save: function save() {
+    save: function save(publish) {
       var _this3 = this;
 
       this.loading = true;
+      this.form.published = publish;
+      this.loading_message = publish ? 'Publishing. . .' : 'Saving as draft. . .';
       axios.post('/posts', {
         form: this.form
       }).then(function (response) {
@@ -2437,7 +2451,7 @@ __webpack_require__.r(__webpack_exports__);
         });
         _this3.form.tags = [];
         _this3.errors = false;
-        _this3.success = "Post created and published successfully !";
+        _this3.success = "Post ".concat(publish ? 'published' : 'drafted', " successfully !");
         _this3.loading = false;
       })["catch"](function (error) {
         _this3.errors = error.response.data.errors;
@@ -57185,7 +57199,25 @@ var render = function() {
         "div",
         { staticClass: "addpost__card" },
         [
-          _c("h1", { staticClass: "addpost__title" }, [_vm._v("Add New Post")]),
+          _c("h1", { staticClass: "addpost__title" }, [
+            _c("span", [_vm._v("Add New Post")]),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.loading,
+                    expression: "loading"
+                  }
+                ],
+                staticClass: "paragraph"
+              },
+              [_vm._v(_vm._s(_vm.loading_message))]
+            )
+          ]),
           _vm._v(" "),
           _c("error-message", { attrs: { errors: _vm.errors } }),
           _vm._v(" "),
@@ -57410,15 +57442,28 @@ var render = function() {
             staticClass: "btn btn--primary addpost__btn",
             class: { "btn--disabled": _vm.loading },
             attrs: { type: "submit", disabled: _vm.loading },
-            on: { click: _vm.save }
+            on: {
+              click: function($event) {
+                return _vm.save(true)
+              }
+            }
           },
-          [
-            _vm._v(
-              "\n                    " +
-                _vm._s(_vm.loading ? "Saving. . ." : "Publish") +
-                "\n            "
-            )
-          ]
+          [_vm._v("\n                    Publish\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn--light addpost__btn",
+            class: { "btn--disabled": _vm.loading },
+            attrs: { type: "submit", disabled: _vm.loading },
+            on: {
+              click: function($event) {
+                return _vm.save(false)
+              }
+            }
+          },
+          [_vm._v("\n                    Save as Draft\n            ")]
         )
       ])
     ])

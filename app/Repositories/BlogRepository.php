@@ -54,7 +54,7 @@ class BlogRepository implements BlogRepositoryInterface
         $post->increment('views_count');
     }
 
-    public function create($request)
+    public function store($request)
     {
         $post = $this->post;
 
@@ -65,13 +65,16 @@ class BlogRepository implements BlogRepositoryInterface
             $post->featured = 'uploads/posts/'.$new_name;
         }
 
+        if($request['published']) {
+            $post->published_at = Carbon::now();
+        }
+
         $post->title = $request['title'];
         $post->content = $request['content'];
         $post->category_id = $request['category'];
         $post->slug = Str::slug($request['title'], '-');
         $post->user_id = Auth::id();
         $post->created_at = Carbon::now();
-        $post->published_at = Carbon::now();
         $post->save();
 
         $post->tags()->attach($request['tags']);

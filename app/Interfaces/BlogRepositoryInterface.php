@@ -8,7 +8,7 @@ interface BlogRepositoryInterface
 
     public function view(object $post);
 
-    public function create(object $request);
+    public function store(object $request);
 
     public function update(object $request, $post);
 

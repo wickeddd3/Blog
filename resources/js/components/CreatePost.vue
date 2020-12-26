@@ -2,7 +2,10 @@
 <div class="container__row">
     <div class="container__col-xl-9 container__col-12">
         <div class="addpost__card">
-            <h1 class="addpost__title">Add New Post</h1>
+            <h1 class="addpost__title">
+                <span>Add New Post</span>
+                <span class="paragraph" v-show="loading">{{ loading_message }}</span>
+            </h1>
             <error-message :errors="errors"></error-message>
             <success-message :message="success" v-show="!errors && success"></success-message>
             <div class="addpost__item">
@@ -45,8 +48,15 @@
                     class="btn btn--primary addpost__btn"
                     :class="{'btn--disabled':loading}"
                     :disabled="loading"
-                    @click="save">
-                    {{ loading ? 'Saving. . .' : 'Publish' }}
+                    @click="save(true)">
+                    Publish
+            </button>
+            <button type="submit"
+                    class="btn btn--light addpost__btn"
+                    :class="{'btn--disabled':loading}"
+                    :disabled="loading"
+                    @click="save(false)">
+                    Save as Draft
             </button>
         </div>
     </div>
@@ -74,11 +84,13 @@ export default {
                 content:"",
                 featured:"",
                 category:"",
-                tags:[]
+                tags:[],
+                published:false
             },
             errors:false,
             success:false,
-            loading:false
+            loading:false,
+            loading_message:""
         };
     },
 
@@ -114,21 +126,23 @@ export default {
             };
             reader.readAsDataURL(file);
         },
-        save() {
+        save(publish) {
             this.loading = true;
+            this.form.published = publish;
+            this.loading_message = (publish) ? 'Publishing. . .' : 'Saving as draft. . .';
             axios.post('/posts', {form:this.form})
                 .then(response => {
                     Object.keys(this.form).forEach(key => this.form[key] = "");
                     this.form.tags = [];
                     this.errors = false;
-                    this.success = "Post created and published successfully !";
+                    this.success = `Post ${(publish) ? 'published' : 'drafted'} successfully !`;
                     this.loading = false;
                 })
                 .catch(error => {
                     this.errors = error.response.data.errors;
                     this.loading = false;
                 })
-        }
+        },
     }
 }
 </script>

@@ -33,7 +33,7 @@ class BlogsController extends Controller
 
     public function store(BlogStoreRequest $request)
     {
-        $this->blogRepository->create($request->form);
+        $this->blogRepository->store($request->form);
 
         return response()->json(['success' => 'Saved']);
     }

@@ -12,6 +12,9 @@
         font-size: 2.5rem;
         font-weight: 300;
         margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
     }
 
     &__item {

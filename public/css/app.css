@@ -168,6 +168,11 @@ ol {
   background-color: #3762ff;
 }
 
+.btn--light {
+  background-color: #fff;
+  color: #000;
+}
+
 .btn--disabled {
   opacity: 0.6;
 }
@@ -2146,6 +2151,9 @@ ol {
   font-size: 2.5rem;
   font-weight: 300;
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .addpost__item {
