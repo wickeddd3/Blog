@@ -6,7 +6,7 @@ interface ProfileRepositoryInterface
 {
     public function update(object $request);
 
-    public function filter(string $user, string $filter);
+    public function filter(object $user, string $filter);
 
     public function notifications();
 

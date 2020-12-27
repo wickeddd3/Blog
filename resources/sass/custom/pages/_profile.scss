@@ -77,4 +77,25 @@
             padding: .5rem;
         }
     }
+
+    &__sidesection {
+        width: 100%;
+        background-color: $white;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        border-radius: 1rem;
+        margin-top: 1rem;
+        padding: 1rem;
+
+        &-item {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 1rem;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
 }

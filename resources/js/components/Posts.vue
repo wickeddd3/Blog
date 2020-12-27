@@ -1,7 +1,7 @@
 <template>
 <div>
     <template v-if="all_posts.length > 0">
-        <div class="media" v-for="(post, index) in all_posts" :key="index">
+        <div class="media" v-for="post in all_posts" :key="post.id">
             <div class="media__header">
                 <div class="media__author">
                     <img class="media__author--avatar"

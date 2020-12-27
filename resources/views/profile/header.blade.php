@@ -1,4 +1,4 @@
-<div class="profile__header" id="profile__header">
+<div class="profile__header">
     <div class="profile__header-header">
         <img class="profile__header-img"
              src="{{ asset('/storage/'.$profile->avatar) }}"

@@ -1,0 +1,40 @@
+.panel {
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    padding: 1rem 2rem;
+    border: 1px solid #e6ebee;
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    &__details {
+
+    }
+
+    &__date {
+        font-size: 1.4rem;
+        margin-right: 1rem;
+    }
+
+    &__title {
+        font-size: 1.7rem;
+        font-weight: 400;
+    }
+
+    &__option {
+
+    }
+
+    &__btn {
+        border-radius: 50%;
+    }
+
+    &__icon {
+        color: $black;
+        font-size: 1.5rem
+    }
+}

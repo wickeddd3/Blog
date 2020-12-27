@@ -17,6 +17,11 @@ trait FilteredPosts
         return $query->published()->where('comments_count', '>', 0)->orderBy('comments_count', 'desc');
     }
 
+    public function scopeFeaturedPosts($query)
+    {
+        return $query->published()->where('featured_at', '!=', null)->orderBy('featured_at', 'desc');
+    }
+
     public function scopeBookmarkedPosts($query)
     {
         return $query->published()->whereHas('bookmarks', function($query) {
@@ -31,16 +36,19 @@ trait FilteredPosts
         });
     }
 
-    public function scopeUserPosts($query, $username)
+    public function scopeUserPosts($query, $user)
     {
-        $user = User::where('username', $username)->firstOrFail();
-
         return $query->published()->where('user_id', $user->id);
     }
 
-    public function scopeFeaturedPosts($query)
+    public function scopeDraftedPosts($query, $user)
     {
-        return $query->published()->where('featured_at', '!=', null)->orderBy('featured_at', 'desc');
+        return $query->drafted()->where('user_id', $user->id);
+    }
+
+    public function scopeTrashedPosts($query, $user)
+    {
+        return $query->onlyTrashed()->where('user_id', $user->id);
     }
 
     public function scopeArchive($query)

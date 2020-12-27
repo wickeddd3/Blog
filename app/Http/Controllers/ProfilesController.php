@@ -30,7 +30,7 @@ class ProfilesController extends Controller
         return redirect()->back();
     }
 
-    public function posts($username)
+    public function posts(User $username)
     {
         $posts = $this->profileRepository->filter($username, request()->query('filter'));
 

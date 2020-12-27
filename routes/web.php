@@ -40,9 +40,9 @@ Route::post('/@/{username}/profile/notifications', 'ProfilesController@markAsRea
 Route::post('/@/{user}/profile/followers', 'UserFollowersController@index');
 Route::delete('/@/{user}/profile/followers', 'UserFollowersController@destroy');
 
-Route::get('/posts/{id}/trash', 'PostsController@trash')->name('posts.trash');
-Route::get('/posts/{id}/restore', 'PostsController@restore')->name('posts.restore');
-Route::get('/posts/{id}/publish', 'PostsController@publish')->name('posts.publish');
+// Route::get('/posts/{id}/trash', 'PostsController@trash')->name('posts.trash');
+// Route::get('/posts/{id}/restore', 'PostsController@restore')->name('posts.restore');
+// Route::get('/posts/{id}/publish', 'PostsController@publish')->name('posts.publish');
 
 // Auth Routes
 Auth::routes(['verify' => true]);

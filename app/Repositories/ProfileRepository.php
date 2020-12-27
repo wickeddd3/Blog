@@ -50,21 +50,30 @@ class ProfileRepository implements ProfileRepositoryInterface
         $user->save();
     }
 
-    public function filter($username, $filter)
+    public function filter($user, $filter)
     {
-        $posts = $this->post->userPosts($username);
+        $posts = $this->post->userPosts($user);
 
         switch($filter)
         {
             case "posts":
-                $posts = $this->post->userPosts($username);
-            break;
+                $posts = $this->post->userPosts($user);
+                break;
             case "likes":
                 $posts = $this->post->likedPosts();
-            break;
+                break;
             case "bookmarks":
                 $posts = $this->post->bookmarkedPosts();
-            break;
+                break;
+            case "published":
+                $posts = $this->post->userPosts($user);
+                break;
+            case "drafted":
+                $posts = $this->post->draftedPosts($user);
+                break;
+            case "trashed":
+                $posts = $this->post->trashedPosts($user);
+                break;
         }
 
         $posts = $posts->paginate(8);
