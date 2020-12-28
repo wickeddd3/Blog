@@ -64,4 +64,32 @@ class ProfilesController extends Controller
         return $this->profileRepository->markAsRead($username, $request);
     }
 
+    public function publish($username, Request $request)
+    {
+        $this->profileRepository->publish($request->id);
+
+        return response()->json(['success' => 'Post published successfully']);
+    }
+
+    public function trash($username, Request $request)
+    {
+        $this->profileRepository->trash($request->id);
+
+        return response()->json(['success' => 'Post trashed successfully']);
+    }
+
+    public function restore($username, Request $request)
+    {
+        $this->profileRepository->restore($request->id);
+
+        return response()->json(['success' => 'Post restored successfully']);
+    }
+
+    public function delete($username, Request $request)
+    {
+        $this->profileRepository->delete($request->id);
+
+        return response()->json(['success' => 'Post deleted successfully']);
+    }
+
 }

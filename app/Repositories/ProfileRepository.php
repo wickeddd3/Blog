@@ -76,7 +76,7 @@ class ProfileRepository implements ProfileRepositoryInterface
                 break;
         }
 
-        $posts = $posts->paginate(8);
+        $posts = $posts->paginate(10);
 
         return $posts;
     }
@@ -89,6 +89,38 @@ class ProfileRepository implements ProfileRepositoryInterface
     public function markAsRead($username, $request)
     {
         Auth::user()->unreadNotifications->where('id', $request->notificationId)->markAsRead();
+    }
+
+    public function publish($id)
+    {
+        $post = $this->post->drafted()->where('id', $id)->first();
+
+        $post->update(['published_at' => Carbon::now()]);
+    }
+
+    public function trash($id)
+    {
+        $post = $this->post->withTrashed()->where('id', $id)->first();
+
+        $post->delete();
+    }
+
+    public function restore($id)
+    {
+        $post = $this->post->onlyTrashed()->where('id', $id)->first();
+
+        $post->restore();
+    }
+
+    public function delete($id)
+    {
+        $post = $this->post->onlyTrashed()->where('id', $id)->first();
+
+        if($post->trashed()) {
+            $post->forceDelete();
+            if($post->featured) { $post->deleteFeatured(); }
+            $post->deleteTags();
+        }
     }
 
 }

@@ -5,16 +5,28 @@
             <div class="panel__item">
                 <h5 class="panel__title">{{ post.title }}</h5>
                 <div class="panel__option">
-                    <button class="btn panel__btn m-r-1" title="Publish" v-if="active_tab == 'drafted'">
+                    <button class="btn panel__btn m-r-1"
+                            title="Publish"
+                            @click="publishPost(post)"
+                            v-if="active_tab == 'drafted'">
                         <i class="far fa-save panel__icon"></i>
                     </button>
-                    <button class="btn panel__btn m-r-1" title="Trash" v-if="active_tab == 'published'">
+                    <button class="btn panel__btn m-r-1"
+                            title="Trash"
+                            @click="trashPost(post)"
+                            v-if="active_tab == 'published'">
                         <i class="far fa-trash-alt panel__icon"></i>
                     </button>
-                    <button class="btn panel__btn m-r-1" title="Restore" v-if="active_tab == 'trashed'">
+                    <button class="btn panel__btn m-r-1"
+                            title="Restore"
+                            @click="restorePost(post)"
+                            v-if="active_tab == 'trashed'">
                         <i class="fa fa-trash-restore panel__icon"></i>
                     </button>
-                    <button class="btn panel__btn" title="Delete" v-if="active_tab == 'trashed'">
+                    <button class="btn panel__btn"
+                            title="Delete"
+                            @click="deletePost(post)"
+                            v-if="active_tab == 'trashed'">
                         <i class="fa fa-trash panel__icon"></i>
                     </button>
                 </div>
@@ -93,6 +105,46 @@ export default {
                     this.loading = false;
                 })
         },
+        publishPost(post) {
+            axios.post(`${location.pathname}/publish`,{ id: post.id})
+                .then(response => {
+                    this.all_posts.splice(this.all_posts.indexOf(post), 1);
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
+        trashPost(post) {
+            axios.post(`${location.pathname}/trash`,{ id: post.id})
+                .then(response => {
+                    this.all_posts.splice(this.all_posts.indexOf(post), 1);
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
+        restorePost(post) {
+            axios.post(`${location.pathname}/restore`,{ id: post.id})
+                .then(response => {
+                    this.all_posts.splice(this.all_posts.indexOf(post), 1);
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
+        deletePost(post) {
+            axios.post(`${location.pathname}/delete`,{ id: post.id})
+                .then(response => {
+                    this.all_posts.splice(this.all_posts.indexOf(post), 1);
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
     }
 }
 </script>

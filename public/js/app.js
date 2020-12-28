@@ -2863,6 +2863,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2910,6 +2922,58 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _this.loading = false;
       })["catch"](function (error) {
         _this.loading = false;
+      });
+    },
+    publishPost: function publishPost(post) {
+      var _this2 = this;
+
+      axios.post("".concat(location.pathname, "/publish"), {
+        id: post.id
+      }).then(function (response) {
+        _this2.all_posts.splice(_this2.all_posts.indexOf(post), 1);
+
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    trashPost: function trashPost(post) {
+      var _this3 = this;
+
+      axios.post("".concat(location.pathname, "/trash"), {
+        id: post.id
+      }).then(function (response) {
+        _this3.all_posts.splice(_this3.all_posts.indexOf(post), 1);
+
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    restorePost: function restorePost(post) {
+      var _this4 = this;
+
+      axios.post("".concat(location.pathname, "/restore"), {
+        id: post.id
+      }).then(function (response) {
+        _this4.all_posts.splice(_this4.all_posts.indexOf(post), 1);
+
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    deletePost: function deletePost(post) {
+      var _this5 = this;
+
+      axios.post("".concat(location.pathname, "/delete"), {
+        id: post.id
+      }).then(function (response) {
+        _this5.all_posts.splice(_this5.all_posts.indexOf(post), 1);
+
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   }
@@ -58073,7 +58137,12 @@ var render = function() {
                           "button",
                           {
                             staticClass: "btn panel__btn m-r-1",
-                            attrs: { title: "Publish" }
+                            attrs: { title: "Publish" },
+                            on: {
+                              click: function($event) {
+                                return _vm.publishPost(post)
+                              }
+                            }
                           },
                           [_c("i", { staticClass: "far fa-save panel__icon" })]
                         )
@@ -58084,7 +58153,12 @@ var render = function() {
                           "button",
                           {
                             staticClass: "btn panel__btn m-r-1",
-                            attrs: { title: "Trash" }
+                            attrs: { title: "Trash" },
+                            on: {
+                              click: function($event) {
+                                return _vm.trashPost(post)
+                              }
+                            }
                           },
                           [
                             _c("i", {
@@ -58099,7 +58173,12 @@ var render = function() {
                           "button",
                           {
                             staticClass: "btn panel__btn m-r-1",
-                            attrs: { title: "Restore" }
+                            attrs: { title: "Restore" },
+                            on: {
+                              click: function($event) {
+                                return _vm.restorePost(post)
+                              }
+                            }
                           },
                           [
                             _c("i", {
@@ -58114,7 +58193,12 @@ var render = function() {
                           "button",
                           {
                             staticClass: "btn panel__btn",
-                            attrs: { title: "Delete" }
+                            attrs: { title: "Delete" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deletePost(post)
+                              }
+                            }
                           },
                           [_c("i", { staticClass: "fa fa-trash panel__icon" })]
                         )
