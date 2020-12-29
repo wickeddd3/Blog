@@ -9,21 +9,21 @@ use App\Interfaces\TagRepositoryInterface;
 
 class TagRepository implements TagRepositoryInterface
 {
-    protected $model;
+    protected $tag;
 
     public function __construct(Tag $tag)
     {
-        $this->model = $tag;
+        $this->tag = $tag;
     }
 
     public function all($search)
     {
-        $tags = $this->model->latest();
+        $tags = $this->tag->latest();
         $tags_count = $tags->count();
         $tags = $tags->paginate(10);
 
         if($search) {
-            $tags = $this->model->where('name', 'LIKE', "%{$search}%");
+            $tags = $this->tag->where('name', 'LIKE', "%{$search}%");
             $tags_count = $tags->count();
             $tags = $tags->paginate(10);
             $tags->appends(['search' => $search]);
@@ -36,7 +36,7 @@ class TagRepository implements TagRepositoryInterface
     {
         $request->filled('slug') ? $slug = $request->slug : $slug = Str::slug($request->name, '-');
 
-        $this->model->create([
+        $this->tag->create([
             'name' => $request->name,
             'slug' => $slug,
             'description' => $request->description,
@@ -46,7 +46,7 @@ class TagRepository implements TagRepositoryInterface
 
     public function find($id)
     {
-        return $this->model->findOrFail($id);
+        return $this->tag->findOrFail($id);
     }
 
     public function update($request, $id)
@@ -64,7 +64,14 @@ class TagRepository implements TagRepositoryInterface
 
     public function delete($id)
     {
-        $this->find($id)->delete();
+        $tag = $this->find($id);
+
+        if($tag->postsCount == 0) {
+            $tag->delete();
+            return response()->json(['success' => 'Tag successfully deleted'], 200);
+        }
+
+        return response()->json(['error' => 'Error deleting tag'], 422);
     }
 
 }

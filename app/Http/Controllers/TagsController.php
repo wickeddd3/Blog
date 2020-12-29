@@ -53,8 +53,6 @@ class TagsController extends Controller
 
     public function destroy($id)
     {
-        $this->tagRepository->delete($id);
-
-        return redirect()->back();
+        return $this->tagRepository->delete($id);
     }
 }

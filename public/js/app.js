@@ -3620,13 +3620,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _this.loading = false;
       });
     },
-    deleteItem: function deleteItem(id) {
-      axios["delete"]("".concat(location.pathname, "/").concat(id)).then(function (res) {
-        console.log(res);
+    deleteItem: function deleteItem(category) {
+      var _this2 = this;
+
+      axios["delete"]("".concat(location.pathname, "/").concat(category.id)).then(function (response) {
+        console.log(response.data.success);
+
+        _this2.all_categories.splice(_this2.all_categories.indexOf(category), 1);
       })["catch"](function (error) {
         console.log(error);
       });
-      location.reload();
     }
   }
 });
@@ -3985,13 +3988,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _this.loading = false;
       });
     },
-    deleteItem: function deleteItem(id) {
-      axios["delete"]("".concat(location.pathname, "/").concat(id)).then(function (res) {
-        console.log(res);
+    deleteItem: function deleteItem(tag) {
+      var _this2 = this;
+
+      axios["delete"]("".concat(location.pathname, "/").concat(tag.id)).then(function (response) {
+        console.log(response.data.success);
+
+        _this2.all_tags.splice(_this2.all_tags.indexOf(tag), 1);
       })["catch"](function (error) {
         console.log(error);
       });
-      location.reload();
     }
   }
 });
@@ -59070,7 +59076,7 @@ var render = function() {
                               {
                                 attrs: {
                                   href:
-                                    "/admin/panel/categories/" +
+                                    "/dashboard/categories/" +
                                     category.id +
                                     "/edit"
                                 }
@@ -59092,7 +59098,7 @@ var render = function() {
                               {
                                 on: {
                                   click: function($event) {
-                                    return _vm.deleteItem(category.id)
+                                    return _vm.deleteItem(category)
                                   }
                                 }
                               },
@@ -59442,7 +59448,7 @@ var render = function() {
                             "a",
                             {
                               attrs: {
-                                href: "/admin/panel/tags/" + tag.id + "/edit"
+                                href: "/dashboard/tags/" + tag.id + "/edit"
                               }
                             },
                             [_c("i", { staticClass: "fa fa-edit fa-fw" })]
@@ -59459,7 +59465,7 @@ var render = function() {
                             {
                               on: {
                                 click: function($event) {
-                                  return _vm.deleteItem(tag.id)
+                                  return _vm.deleteItem(tag)
                                 }
                               }
                             },

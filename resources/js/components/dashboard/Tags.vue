@@ -16,12 +16,12 @@
                             {{ tag.posts_count }}
                         </div>
                         <div class="tags__content-item tags__edit">
-                            <a :href="`/admin/panel/tags/${tag.id}/edit`">
+                            <a :href="`/dashboard/tags/${tag.id}/edit`">
                                 <i class="fa fa-edit fa-fw"></i>
                             </a>
                         </div>
                         <div class="tags__content-item tags__trash">
-                             <a @click="deleteItem(tag.id)">
+                             <a @click="deleteItem(tag)">
                                 <i class="fa fa-trash fa-fw"></i>
                             </a>
                         </div>
@@ -100,15 +100,15 @@ export default {
                     this.loading = false;
                 })
         },
-        deleteItem(id) {
-            axios.delete(`${location.pathname}/${id}`)
-                .then((res) => {
-                    console.log(res)
+        deleteItem(tag) {
+            axios.delete(`${location.pathname}/${tag.id}`)
+                .then(response => {
+                    console.log(response.data.success)
+                    this.all_tags.splice(this.all_tags.indexOf(tag), 1);
                 })
                 .catch((error) => {
                     console.log(error)
                 });
-            location.reload();
         }
     }
 }

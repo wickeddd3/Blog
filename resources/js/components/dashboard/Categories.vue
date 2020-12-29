@@ -16,12 +16,12 @@
                             {{ category.posts_count }}
                         </div>
                         <div class="categories__content-item categories__edit">
-                            <a :href="`/admin/panel/categories/${category.id}/edit`">
+                            <a :href="`/dashboard/categories/${category.id}/edit`">
                                 <i class="fa fa-edit fa-fw"></i>
                             </a>
                         </div>
                         <div class="categories__content-item categories__trash">
-                            <a @click="deleteItem(category.id)">
+                            <a @click="deleteItem(category)">
                                 <i class="fa fa-trash fa-fw"></i>
                             </a>
                         </div>
@@ -100,15 +100,15 @@ export default {
                     this.loading = false;
                 })
         },
-        deleteItem(id) {
-            axios.delete(`${location.pathname}/${id}`)
-                .then((res) => {
-                    console.log(res)
+        deleteItem(category) {
+            axios.delete(`${location.pathname}/${category.id}`)
+                .then(response => {
+                    console.log(response.data.success)
+                    this.all_categories.splice(this.all_categories.indexOf(category), 1);
                 })
-                .catch((error) => {
+                .catch(error => {
                     console.log(error)
                 });
-            location.reload();
         }
     }
 }

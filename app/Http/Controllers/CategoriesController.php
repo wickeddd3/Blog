@@ -54,8 +54,6 @@ class CategoriesController extends Controller
 
     public function destroy($id)
     {
-        $this->categoryRepository->delete($id);
-
-        return redirect()->back();
+        return $this->categoryRepository->delete($id);
     }
 }
