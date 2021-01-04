@@ -57,11 +57,21 @@ Assuming you have already installed latest php, composer, node.js, npm, and git 
    ```sh
    php artisan key:generate
    ```
-7. Run locally
+7. Database Migration
+   ```sh
+   php artisan migrate --seed
+
+   // --seed command will generate dummy data on your database
+   ```
+8. Link storage to public directory
+   ```sh
+   php artisan storage:link
+   ```
+9. Run locally
    ```sh
    php artisan serve
    ```
-8. Compile assets
+10. Compile assets
    ```sh
    npm run watch
    ```
