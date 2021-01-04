@@ -55,7 +55,7 @@ Assuming you have already installed latest php, composer, node.js, npm, and git 
    as mail host.
 6. Generate APP_KEY
    ```sh
-   php artisan key generate
+   php artisan key:generate
    ```
 7. Run locally
    ```sh
