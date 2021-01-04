@@ -67,7 +67,7 @@ Assuming you have already installed latest php, composer, node.js, npm, and git 
    ```
 
 <!-- CONTRIBUTING -->
-## Contributing
+### Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -80,6 +80,6 @@ Contributions are what make the open source community such an amazing place to b
 <!-- CONTACT -->
 ### Contact
 
-Philip - [https://www.linkedin.com/in/philip-andrew-pablo-501203180/](LinkedInProfile)
+Philip - [https://www.linkedin.com/in/philip-andrew-pablo-501203180/](https://www.linkedin.com/in/philip-andrew-pablo-501203180/)
 
 Project Link: [https://github.com/wickeddd3](https://github.com/wickeddd3)
