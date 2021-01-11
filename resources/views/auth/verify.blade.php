@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Verify E-Mail Address
+@endsection
+
 @section('content')
 <div class="container--fluid">
     <div class="container__row center">

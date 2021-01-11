@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+{{ $profile->first_name.' '.$profile->last_name }}
+@endsection
+
 @section('content')
 <profile-view inline-template>
 <div class="profile">

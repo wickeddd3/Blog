@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Login
+@endsection
+
 @section('content')
 <div class="container--fluid center">
     <div class="container__row center">

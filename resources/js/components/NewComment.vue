@@ -16,7 +16,9 @@
                 <i class="fa fa-paper-plane comment__box-icon"></i>
             </button>
         </div>
-        <p class="heading-secondary center" v-else>You must <a href="/email/verify">&nbsp;verify&nbsp;</a> your email to share your comments.</p>
+        <p class="heading-secondary center" v-else>
+            You must <a href="/email/verify">&nbsp;verify&nbsp;</a> your email to share your comments.
+        </p>
     </template>
     <template v-else>
         <p class="heading-secondary center m-t-3">Please &nbsp;<a href="/login" class="text-primary"> sign in &nbsp;</a> or &nbsp;<a href="/register" class="text-primary">create an account &nbsp;</a> to share your comments.</p>

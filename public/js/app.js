@@ -3016,6 +3016,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -58332,11 +58334,11 @@ var render = function() {
                   )
                 ])
               : _c("p", { staticClass: "heading-secondary center" }, [
-                  _vm._v("You must "),
+                  _vm._v("\n            You must "),
                   _c("a", { attrs: { href: "/email/verify" } }, [
                     _vm._v(" verify ")
                   ]),
-                  _vm._v(" your email to share your comments.")
+                  _vm._v(" your email to share your comments.\n        ")
                 ])
           ]
         : [_vm._m(0)]

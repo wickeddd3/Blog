@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+{{ $post->title }}
+@endsection
+
 @section('content')
 <post-view initial-comments-count="{{ $post->comments_count }}"
            initial-likes-count="{{ $post->likes_count }}"
@@ -35,7 +39,7 @@
                         @endif
                     </div>
                     <div class="post__title">
-                        <span class="heading-title--large">{{ $post->title }}</span>
+                        <h1 class="heading-title--large">{{ $post->title }}</h1>
                         @if($post->updated_at)
                             <span class="heading-tertiary m-l-1">(Edited)</span>
                         @endif

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Search Blogs
+@endsection
+
 @section('content')
 <search-post-view inline-template>
 <div class="container">

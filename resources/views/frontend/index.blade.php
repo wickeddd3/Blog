@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Blog
+@endsection
+
 @section('content')
 <frontend-view inline-template>
 <div class="container__fluid home">
