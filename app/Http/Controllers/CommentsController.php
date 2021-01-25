@@ -20,17 +20,12 @@ class CommentsController extends Controller
         $this->commentRepository = $commentRepository;
     }
 
-    public function index()
-    {
-        return view('dashboard.comment.index');
-    }
-
     public function store(Category $category, Post $post, CommentStoreRequest $request)
     {
         $comment = $this->commentRepository->create($request, $post);
 
         if(request()->expectsJson()) {
-            return $comment->load('owner.profile');
+            return $comment->load('owner');
         }
 
     }

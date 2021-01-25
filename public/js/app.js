@@ -3036,7 +3036,7 @@ __webpack_require__.r(__webpack_exports__);
     addComment: function addComment() {
       var _this = this;
 
-      axios.post(location.pathname + '/comments', {
+      axios.post("".concat(location.pathname, "/comments"), {
         message: this.message
       }).then(function (_ref) {
         var data = _ref.data;
@@ -57335,31 +57335,24 @@ var render = function() {
       _vm.items.length > 0
         ? _c(
             "div",
-            [
-              _vm._l(_vm.items, function(comment, index) {
-                return _c(
-                  "div",
-                  { key: comment.id },
-                  [
-                    _c("comment", {
-                      attrs: { data: comment },
-                      on: {
-                        deleted: function($event) {
-                          return _vm.remove(index)
-                        }
+            _vm._l(_vm.items, function(comment, index) {
+              return _c(
+                "div",
+                { key: comment.id },
+                [
+                  _c("comment", {
+                    attrs: { data: comment },
+                    on: {
+                      deleted: function($event) {
+                        return _vm.remove(index)
                       }
-                    })
-                  ],
-                  1
-                )
-              }),
-              _vm._v(" "),
-              _c("load-more", {
-                attrs: { dataSet: _vm.dataSet },
-                on: { changed: _vm.fetch }
-              })
-            ],
-            2
+                    }
+                  })
+                ],
+                1
+              )
+            }),
+            0
           )
         : _c("p", { staticClass: "heading-secondary center" }, [
             _vm._v("No comments yet.")

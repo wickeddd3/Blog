@@ -4,7 +4,7 @@
         <div v-for="(comment, index) in items" :key="comment.id">
             <comment :data="comment" @deleted="remove(index)"></comment>
         </div>
-        <load-more :dataSet="dataSet" @changed="fetch"></load-more>
+        <!-- <load-more :dataSet="dataSet" @changed="fetch"></load-more> -->
     </div>
     <p class="heading-secondary center" v-else>No comments yet.</p>
     <new-comment @created="add"></new-comment>

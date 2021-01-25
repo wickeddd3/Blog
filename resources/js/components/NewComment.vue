@@ -45,7 +45,7 @@ export default {
 
     methods: {
         addComment() {
-            axios.post(location.pathname + '/comments', { message: this.message })
+            axios.post(`${location.pathname}/comments`, { message: this.message })
                  .then(({data}) => {
                     this.message = ''
                     this.$emit('created', data);
