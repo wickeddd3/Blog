@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.13.0",
-        "moment": "^2.25.3",
+        "moment": "^2.29.2",
         "vue2-editor": "^2.10.2"
     }
 }
